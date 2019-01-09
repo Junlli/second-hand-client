@@ -1,0 +1,88 @@
+.box {
+  height: 100%;
+  .bg {
+    background: url("~@/assets/img/login/bg.jpg") no-repeat center;
+    height: 100%;
+    background-size: cover;
+    opacity: .8;
+  }
+  .login-box {
+    width: 420px;
+    height: 320px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 0 100px;
+    background-color: #fff;
+    .error-msg {
+      position: absolute;
+      left: 100px;
+      top: 56px;
+      width: 222px;
+      background: #ffebeb;
+      color: #e4393c;
+      border: 1px solid #faccc6;
+      padding: 3px 10px 3px 10px;
+      line-height: 15px;
+      height: auto;
+      margin: 20px 0;
+    }
+    .login-title {
+      font-size: 30px;
+      margin: 30px 0;
+      text-align: center;
+      font-family: '隶书';
+    }
+    .login-button {
+      display: block;
+      width: 240px;
+      height: 40px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px auto;
+      background-color: #1c84c6;
+      color: #fff;
+      outline: none;
+      border: 1px solid #1c84c6;
+    }
+    .form {
+      position: relative;
+      margin: 0 auto 30px;
+      height: 30px;
+      width: 240px;
+      .login-label {
+        display: block;
+        height: 30px;
+        width: 240px;
+        text-indent: 30px;
+        font-size: 16px;
+        border-radius: 5px;
+        outline: none;
+        border: 1px solid #9A9497;
+      }
+      .login-form-account, .login-form-pwd {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 5px;
+        top: 5px;
+      }
+    }
+    .register{
+      display: block;
+      text-decoration: none;
+      margin-top: -20px;
+      color: #0000ee;
+      font-size: 14px;
+    }
+  }
+}
+
+

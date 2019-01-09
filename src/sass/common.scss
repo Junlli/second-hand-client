@@ -1,0 +1,73 @@
+.header {
+  height: 50px;
+  width: 100%;
+  background: #446267;
+  position: fixed;
+  top: 0;
+  left: 0;
+  line-height: 50px;
+  position: relative;
+  .w {
+    width: 1200px;
+    margin: 0 auto;
+    h1 {
+      float: left;
+      width: 150px;
+      height: 50px;
+      .logo {
+        display: block;
+        text-decoration: none;
+        color: #fff;
+        text-align: center;
+        font-size: 30px;
+        font-family: '隶书';
+        font-weight: 700;
+      }
+    }
+    .search {
+      float: left;
+      width: 268px;
+      height: 50px;
+      .search-filed {
+        display: inline-block;
+        vertical-align: middle;
+        width: 184px;
+        height: 34px;
+        box-sizing: border-box;
+        outline: none;
+        border-radius: 3px 0 0 3px;
+        border: none;
+        padding-left: 10px;
+        font-size: 16px;
+      }
+      .search-btn {
+        display: inline-block;
+        vertical-align: middle;
+        box-sizing: border-box;
+        width: 64px;
+        height: 34px;
+        border-radius: 0 3px 3px 0;
+        border: none;
+        background: #909399;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    }
+    .release {
+      float: right;
+      margin: 4px 52px 0 0;
+      font-size: 16px;
+    }
+  }
+}
+.footer {
+  width: 100%;
+  height: 200px;
+  margin-top: 20px;
+  background-color: pink;
+  .w {
+    width: 1200px;
+    margin: 0 auto;
+  }
+}

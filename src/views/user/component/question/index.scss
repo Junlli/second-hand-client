@@ -1,0 +1,18 @@
+.question {
+  background: #fff;
+  margin-top: 20px;
+  padding: 40px 60px 20px 60px;
+  .question-form{
+    width: 800px;
+    margin: 0 auto;
+    .ivu-form-item-label{
+      font-size: 16px;
+    }
+    .ivu-radio-wrapper{
+      font-size: 16px;
+    }
+    .submit {
+      text-align: center;
+    }
+  }
+}

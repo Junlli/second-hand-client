@@ -1,0 +1,63 @@
+<template>
+  <div class="bg clearfix">
+    <home-header></home-header>
+    <div class="type-page">
+      <div class="top">
+        <div id="user_photo" class="pull-left">
+          <img id="origin_ph" src="https://www.youzixy.com/Uploads/heads/default4.png" alt="头像">
+          <img data-toggle="modal" data-target="#myModal" id="change_ph" src="https://www.youzixy.com/Public/images/icon/mkhead_hover.png" alt="头像" style="display: block;">
+        </div>
+        <div id="user_msg">
+          <div class="name">junlli</div>
+          <p class="has_sell">共有<span class="all">0</span>件商品，已卖出<span>0</span>件商品</p>
+          <ul class="seller_attr">
+            <li>学校：&nbsp;&nbsp;<span>广西师范大学</span></li>
+            <li>认证：&nbsp;&nbsp;<span>
+                未认证            </span></li>
+          </ul>
+        </div>
+      </div>
+      <Menu
+        mode="horizontal"
+        theme="light"
+        :active-name="this.$route.path.slice(1)"
+      >
+        <MenuItem name="user" to="/user">
+          <Icon type="ios-paper" />
+          个人资料
+        </MenuItem>
+        <MenuItem name="user/sale" to="/user/sale">
+          <Icon type="ios-people" />
+          我发布的商品
+        </MenuItem>
+        <MenuItem name="user/buy" to="/user/buy">
+          <Icon type="ios-people" />
+          我购买的商品
+        </MenuItem>
+        <MenuItem name="4">
+        <Icon type="ios-construct" />
+        我的收藏
+        </MenuItem>
+        <MenuItem name="5">
+          <Icon type="ios-construct" />
+          消息中心
+        </MenuItem>
+        <MenuItem name="6">
+          <Icon type="ios-construct" />
+          认证信息
+        </MenuItem>
+        <MenuItem name="user/question" to="/user/question">
+          <Icon type="ios-construct" />
+          问题反馈
+        </MenuItem>
+      </Menu>
+      <router-view></router-view>
+    </div>
+  </div>
+
+</template>
+
+<script src="./index.js"></script>
+<style lang="scss" scoped>
+  @import "index";
+</style>

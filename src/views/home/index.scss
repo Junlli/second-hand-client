@@ -37,6 +37,9 @@
         font-size: 14px;
       }
     }
+    .ivu-row {
+      float: left;
+    }
     .sidebar {
       width: 180px;
       margin-top: 20px;
@@ -84,7 +87,7 @@
         //margin: 0 0 0 30px;
         position: relative;
         float: left;
-        margin-left: 30px;
+        margin-left: 20px;
         z-index: 1;
         .class-bg-layer {
           //transform: translateY(-10px);

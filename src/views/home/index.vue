@@ -1,17 +1,6 @@
 <template>
   <div class="bg">
-    <div class="header">
-      <div class="w">
-        <h1>
-          <a href="javascript:void(0)" class="logo">校乐购</a>
-        </h1>
-        <form class="search">
-          <input type="text" placeholder="搜索" class="search-filed">
-          <button type="submit" class="search-btn">搜索</button>
-        </form>
-        <el-button type="info" class="release">发布商品</el-button>
-      </div>
-    </div>
+    <home-header></home-header>
     <div class="type-page clearfix">
       <div class="banner clearfix">
         <div class="swiper-container">
@@ -40,36 +29,44 @@
           <router-link to="/register" class="register">免费注册</router-link>
         </div>
       </div>
-      <div class="sidebar">
-        <ul class="item-box">
-          <li
-            v-for="(item, index) of items"
-            :key="index"
-            class="first-item"
-            @mouseenter="showItem(index)"
-            @mouseleave="hideItem"
-            @click="clickHandle(index)"
-            :class="{'cur': index === second, 'click': index === current}"
-          >
-            {{ item.title }}
-          </li>
-        </ul>
-        <div
-          class="second-items"
-          v-for="(item, index) of secondItems"
-          @mouseleave="hideSecondItems"
-        >
-          <ul>
-            <li
-              class="second-item"
-              v-for="(child, cindex) of item.childList"
-              v-show="secondCurrent === index+1"
-            >
-              {{child.title}}
-            </li>
-          </ul>
-        </div>
-      </div>
+      <Row>
+        <Col span="8">
+          <Menu :theme="theme2">
+            <Submenu name="1">
+              <template slot="title">
+                <Icon type="ios-paper" />
+                二手书
+              </template>
+              <MenuItem name="1-1">文章管理</MenuItem>
+              <MenuItem name="1-2">评论管理</MenuItem>
+              <MenuItem name="1-3">举报管理</MenuItem>
+            </Submenu>
+            <Submenu name="2">
+              <template slot="title">
+                <Icon type="ios-people" />
+                用户管理
+              </template>
+              <MenuItem name="2-1">新增用户</MenuItem>
+              <MenuItem name="2-2">活跃用户</MenuItem>
+            </Submenu>
+            <Submenu name="3">
+              <template slot="title">
+                <Icon type="ios-stats" />
+                统计分析
+              </template>
+              <MenuGroup title="使用">
+                <MenuItem name="3-1">新增和启动</MenuItem>
+                <MenuItem name="3-2">活跃分析</MenuItem>
+                <MenuItem name="3-3">时段分析</MenuItem>
+              </MenuGroup>
+              <MenuGroup title="留存">
+                <MenuItem name="3-4">用户留存</MenuItem>
+                <MenuItem name="3-5">流失用户</MenuItem>
+              </MenuGroup>
+            </Submenu>
+          </Menu>
+        </Col>
+      </Row>
       <div class="main">
         <div
           class="class-item"

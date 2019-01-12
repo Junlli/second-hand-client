@@ -1,0 +1,35 @@
+#my_info{
+  background: #fff;
+  margin-top: 20px;
+  padding: 40px 60px 20px 60px;
+  li {
+    list-style: none;
+  }
+  h2 {
+    border-bottom:  1px solid #00AC90;
+    font: 20px "Microsoft YaHei";
+    color: #00AC90;
+    padding-bottom: 7px;
+    width: 480px;
+    margin: 20px;
+  }
+  .infos{
+    color: #444;
+    font: 14px "Microsoft YaHei";
+    margin: 10px 0px 0px 20px;
+    li{
+      display: inline-block;
+      zoom: 1;
+      *display: inline;
+      width: 60px;
+      text-align:  left;
+      line-height: 30px;
+      vertical-align: middle;
+    }
+    .right_info{
+      display: inline;
+      text-align:  left;
+      margin-left:  30px;
+    }
+  }
+}

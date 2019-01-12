@@ -1,4 +1,5 @@
 import Swiper from 'swiper'
+import HomeHeader from '@/components/header/index.vue'
 export default {
   data () {
     return {
@@ -7,6 +8,7 @@ export default {
       current: 0, // 一级分类当前索引
       secondCurrent: 0, // 二级分类当前索引
       show: false,
+      theme2: 'dark',
       items: [
         {title: '全部分类'},
         {title: '二手书'},
@@ -33,6 +35,9 @@ export default {
         ]
       }]
     }
+  },
+  components: {
+    HomeHeader
   },
   methods: {
     showItem (index) {

@@ -20,6 +20,9 @@
       }
       .el-select {
         margin-right: 20px;
+        .el-input {
+          width: 250px;
+        }
       }
       .el-textarea {
         width: 600px;

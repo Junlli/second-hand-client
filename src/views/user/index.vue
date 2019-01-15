@@ -34,7 +34,7 @@
           <Icon type="ios-people" />
           我购买的商品
         </MenuItem>
-        <MenuItem name="4">
+        <MenuItem name="user/collection" to="/user/collection">
         <Icon type="ios-construct" />
         我的收藏
         </MenuItem>
@@ -42,7 +42,7 @@
           <Icon type="ios-construct" />
           消息中心
         </MenuItem>
-        <MenuItem name="6">
+        <MenuItem name="user/identify" to="/user/identify">
           <Icon type="ios-construct" />
           认证信息
         </MenuItem>

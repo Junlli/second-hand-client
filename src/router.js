@@ -69,6 +69,20 @@ export default new Router({
           component: resolve => {
             require(['./views/user/component/question/index.vue'], resolve)
           }
+        },
+        {
+          path: 'collection',
+          name: 'collection',
+          component: resolve => {
+            require(['./views/user/component/collection/index.vue'], resolve)
+          }
+        },
+        {
+          path: 'identify',
+          name: 'identify',
+          component: resolve => {
+            require(['./views/user/component/identify/index.vue'], resolve)
+          }
         }
       ]
     }

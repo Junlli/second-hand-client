@@ -14,8 +14,18 @@
         <TabPane label="下架商品">
           <Table highlight-row ref="currentRowTable" :columns="columns2" :data="data2"></Table>
         </TabPane>
-        <TabPane label="成功的订单">成功的订单</TabPane>
-        <TabPane label="关闭的订单">关闭的订单</TabPane>
+        <TabPane label="未发货">
+          <Table highlight-row ref="currentRowTable" :columns="columns3" :data="data3"></Table>
+        </TabPane>
+        <TabPane label="已发货">
+          <Table highlight-row ref="currentRowTable" :columns="columns4" :data="data4"></Table>
+        </TabPane>
+        <TabPane label="成功的订单">
+          <Table highlight-row ref="currentRowTable" :columns="columns5" :data="data5"></Table>
+        </TabPane>
+        <TabPane label="关闭的订单">
+          <Table highlight-row ref="currentRowTable" :columns="columns6" :data="data6"></Table>
+        </TabPane>
       </Tabs>
     </div>
   </div>

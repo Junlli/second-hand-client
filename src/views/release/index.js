@@ -40,7 +40,10 @@ export default {
       return isJPG && isLt2M
     },
     handleRemove (file, fileList) {
-      console.log(file, fileList)
+      this.imgCount--
+      if (this.imgCount < 4) {
+        this.isShow = false
+      }
     },
     handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url
@@ -50,6 +53,8 @@ export default {
       this.imgCount++
       if (this.imgCount === 4) {
         this.isShow = true
+      } else {
+        this.isShow = false
       }
     }
   }

@@ -1,0 +1,51 @@
+.collection {
+  margin-top: 20px;
+  .hide {
+    display: none;
+  }
+  .uncollect {
+    text-align: center;
+    padding: 50px 0;
+    background: #fff;
+    .uncollect-letter {
+      display: inline-block;
+      font-size: 20px;
+      margin: 0 auto;
+    }
+    .ivu-btn-success {
+      margin: 0 0 5px 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  }
+  .favor-box {
+    height: 140px;
+    margin-top: 20px;
+    position: relative;
+    background: #fff;
+    .photo {
+      width: 140px;
+      height: 140px;
+      float: left;
+    }
+    .title {
+      float: left;
+      margin: 20px;
+      font-size: 24px;
+      color: rgb(58,58,58);
+    }
+    .status {
+      position: absolute;
+      left: 160px;
+      bottom: 20px;
+      color: #859aff;
+    }
+    .ivu-btn-warning {
+      float: right;
+      height: 40px;
+      width: 120px;
+      font-size: 16px;
+      margin: 50px 50px 0 0;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.footer {
+  margin-top: 20px;
+  height: 120px;
+  background: #446267;
+  .w {
+    width: 1200px;
+    margin: 0 auto;
+    .contact {
+      width: 400px;
+      margin: 0 auto;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 20px;
+      .title {
+        color: #999;
+      }
+      a {
+        margin-right: 20px;
+        .iconfont {
+          color: #999;
+          font-size: 40px;
+        }
+      }
+      .api {
+        width: 150px;
+        height: 150px;
+        img {
+          width: 150px;
+          height: 146px;
+          border: none;
+        }
+      }
+    }
+  }
+}

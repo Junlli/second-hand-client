@@ -1,4 +1,6 @@
 import HomeHeader from '@/components/header/index.vue'
+import HomeFooter from '@/components/footer/index.vue'
+
 export default {
   data () {
     return {
@@ -18,7 +20,8 @@ export default {
     }
   },
   components: {
-    HomeHeader
+    HomeHeader,
+    HomeFooter
   },
   methods: {
     onSubmit () {

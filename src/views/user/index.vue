@@ -8,13 +8,14 @@
           <img data-toggle="modal" data-target="#myModal" id="change_ph" src="https://www.youzixy.com/Public/images/icon/mkhead_hover.png" alt="头像" style="display: block;">
         </div>
         <div id="user_msg">
-          <div class="name">junlli</div>
+          <div class="name">{{userInfo.u_name || userInfo.u_account}}</div>
           <p class="has_sell">共有<span class="all">0</span>件商品，已卖出<span>0</span>件商品</p>
           <ul class="seller_attr">
-            <li>学校：&nbsp;&nbsp;<span>广西师范大学</span></li>
+            <li>学校：&nbsp;&nbsp;<span>{{userInfo.u_school}}</span></li>
             <li>认证：&nbsp;&nbsp;<span>
                 未认证            </span></li>
           </ul>
+          <Button type="primary" @click="edit(userInfo._id)">编辑个人信息</Button>
         </div>
       </div>
       <Menu
@@ -53,8 +54,8 @@
       </Menu>
       <router-view></router-view>
     </div>
+    <home-footer></home-footer>
   </div>
-
 </template>
 
 <script src="./index.js"></script>

@@ -1,0 +1,46 @@
+.bg {
+  background: rgb(227, 238, 236);
+  .main {
+    width: 1200px;
+    margin: 20px auto 0;
+    background: #fff;
+    .write {
+      .write-title {
+        border-bottom: 1px solid #ccc;
+        padding-top: 10px;
+        h2 {
+          font-size: 22px;
+          margin: 10px 0 10px 20px;
+        }
+      }
+      .ivu-form {
+        width: 500px;
+        margin: 20px auto;
+        .ivu-form-item {
+          .ivu-form-item-label {
+            font-size: 16px;
+          }
+          .ivu-input {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    .confirm {
+      border-bottom: 1px solid #ccc;
+      padding-top: 10px;
+      h2 {
+        font-size: 22px;
+        margin: 10px 0 10px 20px;
+      }
+      .ivu-btn {
+        margin: 40px 0 20px 1000px;
+      }
+    }
+  }
+}
+.item-title {
+  display: inline-block;
+  width: 120px;
+  text-align: right;
+}

@@ -3,9 +3,9 @@
     <div id="account_info">
       <h2>账户信息</h2>
       <ul class="infos">
-        <li>账号</li>
+        <li>用户名</li>
         <li class="right_info">
-          <span>junlli</span>
+          <span>{{ userInfo.u_name || userInfo.u_account }}</span>
         </li>
       </ul>
     </div>
@@ -14,18 +14,20 @@
       <ul class="infos">
         <li>学校</li>
         <li class="right_info">
-          <span id="school_span">广西师范大学</span>
+          <span id="school_span">{{ userInfo.u_school }}</span>
         </li>
       </ul>
       <ul class="infos">
         <li>邮箱</li>
         <li class="right_info">
-          <span id="qq_span">279110089@qq.com</span>
+          <span id="qq_span">{{ userInfo.u_mail }}</span>
         </li>
       </ul>
     </div>
   </div>
 </template>
+
+<script src="./index.js"></script>
 
 <style lang="scss" scoped>
   @import "./index";

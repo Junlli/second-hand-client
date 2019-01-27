@@ -8,16 +8,30 @@
         <svg class="login-form-account icon" aria-hidden="true">
           <use xlink:href="#icon-yonghu"></use>
         </svg>
-        <input type="text" placeholder="用户名或邮箱" class="login-label" v-model="user">
+        <input
+          type="text"
+          placeholder="用户名或邮箱"
+          class="login-label"
+          v-model="apiData.u_account"
+        >
       </div>
       <div class="form">
         <svg class="login-form-account icon" aria-hidden="true">
           <use xlink:href="#icon-mima1"></use>
         </svg>
-        <input type="password " placeholder="密码" class="login-label" v-model="pwd">
+        <input
+          type="password"
+          placeholder="密码"
+          class="login-label"
+          v-model="apiData.u_password"
+          @keyup.enter="login"
+        >
       </div>
       <router-link to="register" class="register">注册</router-link>
-      <button class="login-button" @click="login">登录</button>
+      <button
+        class="login-button"
+        @click="login"
+      >登录</button>
     </div>
   </div>
 </template>

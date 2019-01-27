@@ -14,6 +14,9 @@ import 'swiper/dist/js/swiper.min.js'
 // 引入iview
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
+// axios
+import api from './utils/api'
+import SERVER from './utils/api/config'
 
 Vue.config.productionTip = false
 
@@ -26,6 +29,13 @@ Vue.use(ElementUI)
  * iview
  */
 Vue.use(iView)
+
+/**
+ * axios
+ * @type {AxiosStatic}
+ */
+Vue.prototype.$api = api
+Vue.prototype.$SERVER = SERVER
 
 new Vue({
   router,

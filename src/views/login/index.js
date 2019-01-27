@@ -1,28 +1,54 @@
+import {mapState, mapGetters, mapMutations} from 'vuex'
+
 export default {
   data () {
     return {
       errorMsg: '',
       isError: false,
-      user: '',
-      pwd: ''
+      apiData: {
+        u_account: '',
+        u_password: ''
+      }
     }
   },
+  computed: {
+    ...mapState([]),
+    ...mapGetters([])
+  },
   methods: {
-    login () {
-      // 验证账号密码是否为空
-      if (this.user === '' && this.pwd === '') {
-        this.errorMsg = '请输入账号和密码'
-        this.isError = true
-      } else if (this.user === '') {
-        this.errorMsg = '请输入账号'
-        this.isError = true
-      } else if (this.pwd === '') {
-        this.errorMsg = '请输入密码'
-        this.isError = true
-      } else if (this.user !== '123' || this.pwd !== '123') {
-        this.errorMsg = '请输入正确的账号和密码'
-        this.isError = true
-      }
+    ...mapMutations(['setUserInfo']),
+    login() {
+      // this.$api(this.$SERVER.GET_QUIT)
+      //   .then(data => {
+      //     if (data.state) {
+      //       this.$api.post(this.$SERVER.POST_LOGIN, this.apiData)
+      //         .then(data => {
+      //           if (!data.state) {
+      //             this.$message.error('账号或密码错误')
+      //             return
+      //           }
+      //           if (data.data) {
+      //             this.setUserInfo(data.data)
+      //             this.$router.push('/')
+      //           } else {
+      //             this.$message.error('账号或密码错误')
+      //           }
+      //         })
+      //     }
+      //   })
+      this.$api.post(this.$SERVER.POST_LOGIN, this.apiData)
+        .then(data => {
+          if (!data.state) {
+            this.$message.error('账号或密码错误')
+            return
+          }
+          if (data.data) {
+            this.setUserInfo(data.data)
+            this.$router.push('/')
+          } else {
+            this.$message.error('账号或密码错误')
+          }
+        })
     }
   }
 }

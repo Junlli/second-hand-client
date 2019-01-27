@@ -1,0 +1,144 @@
+.detail-page {
+  background: #e3eeec;
+  .main {
+    width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    .detail {
+      background: #fff;
+      .picture {
+        width: 450px;
+        float: left;
+        .img-list {
+          margin-top: 10px;
+          height: 75px;
+          list-style: none;
+          text-align: center;
+          .active {
+            border-color: #f60;
+          }
+          li {
+            margin: 0 18px;
+            width: 75px;
+            height: 75px;
+            float: left;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            border: 2px solid #666;
+            .pic {
+              width: 71px;
+              height: 71px;
+              border: 0;
+            }
+          }
+        }
+      }
+      .info {
+        float: left;
+        margin-left: 60px;
+        span {
+          margin-left: 20px;
+          font-size: 24px;
+        }
+        li {
+          margin-bottom: 20px;
+          .ivu-rate {
+            margin: -5px 0 0 20px;
+          }
+          .rate {
+            margin-left: -5px;
+            font-size: 16px;
+          }
+        }
+        .title {
+          font-weight: 400;
+          height: 36px;
+          font-size: 20px;
+          color: rgb(58,58,58);
+          width: 100%;
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          word-break: break-all;
+          word-wrap: break-word;
+          border-style: solid solid none;
+          border-width: 0px 0px 0 4px;
+          padding-left: 8px;
+          border-color: #d7eaec;
+        }
+        .price {
+          font-size: 28px;
+          overflow: hidden;
+          font-weight: bold;
+          .jiage {
+            color: #FF0036;
+          }
+        }
+        .user {
+          a {
+            color: #515a6e;
+          }
+        }
+        .ivu-btn {
+          width: 140px;
+          height: 50px;
+          font-size: 18px;
+          margin: 20px 30px 0 0;
+        }
+        .ivu-icon-md-heart {
+          color: #ccc;
+          font-size: 24px;
+        }
+        .changeColor {
+          color: #f40;
+        }
+      }
+    }
+    .description {
+      .description-title {
+        border-bottom: #11cd6e solid 1px;
+        span {
+          line-height: 40px;
+          border-bottom: #11cd6e solid 4px;
+          display: inline-block;
+          padding: 0 15px;
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+      .description-body {
+        padding: 15px;
+        overflow: hidden;
+        p {
+          text-indent: 2em;
+          color: #999;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+.iconfont {
+  font-size: 28px;
+}
+//联系方式
+.ivu-modal-content {
+  .ivu-modal-header {
+    p {
+      font-size: 18px;
+      height: 25px;
+    }
+  }
+  .connect {
+    width: 200px;
+    margin: 0 auto;
+    text-align: left;
+    span {
+      font-size: 20px;
+      margin-left: 20px;
+    }
+  }
+}

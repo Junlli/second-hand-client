@@ -22,7 +22,6 @@
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        background-color: pink;
         margin: 20px auto;
         .profile-photo {
           width: 100px;
@@ -34,6 +33,18 @@
         color: #0000ee;
         display: block;
         margin-top: 20px;
+        font-size: 14px;
+      }
+      .account {
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .personal {
+        display: block;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+      .quit {
         font-size: 14px;
       }
     }
@@ -84,11 +95,10 @@
     .main {
       float: left;
       .class-item{
-        //margin: 0 0 0 30px;
         position: relative;
         float: left;
-        margin-left: 20px;
         z-index: 1;
+        margin: 0 0 20px 20px;
         .class-bg-layer {
           //transform: translateY(-10px);
           background-color: #fff;
@@ -170,6 +180,9 @@
       .move-up {
         transform: translateY(-10px);
         transition: all .5s ease;
+      }
+      .ivu-page {
+        text-align: center;
       }
     }
   }

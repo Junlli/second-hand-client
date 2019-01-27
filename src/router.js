@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
+import api from '@/utils/api'
+import SERVER from '@/utils/api/config'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  base: process.env.BASE_URL,
+  // base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -85,6 +88,45 @@ export default new Router({
           }
         }
       ]
+    },
+    {
+      path: '/detail',
+      name: 'detail',
+      component: resolve => {
+        require(['./views/detail/index.vue'], resolve)
+      }
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: resolve => {
+        require(['./views/order/index.vue'], resolve)
+      }
+    },
+    {
+      path: '/userDetail',
+      name: 'userDetail',
+      component: resolve => {
+        require(['./views/edit/index.vue'], resolve)
+      }
     }
   ]
 })
+
+// router.beforeEach((to, from, next) => {
+//   // 如果是登陆页面 && 用户信息为空{}
+//   if (to.name !== 'login' && Object.keys(store.state.userInfo).length === 0) {
+//     api(SERVER.GET_ISLOGIN)
+//       .then(data => {
+//         return data.state ? api(SERVER.GET_CURRENTUSERINFO) : next({name: 'login'})
+//       })
+//       .then(data => {
+//         store.commit('setUserInfo', data.data)
+//         next()
+//       })
+//       .catch(data => next({name: 'login'})
+//       )
+//   } else {
+//     next()
+//   }
+// })

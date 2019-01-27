@@ -1,5 +1,8 @@
 import Swiper from 'swiper'
 import HomeHeader from '@/components/header/index.vue'
+import HomeFooter from '@/components/footer/index.vue'
+import { mapState, mapGetters, mapMutations } from 'vuex'
+
 export default {
   data () {
     return {
@@ -33,13 +36,20 @@ export default {
           { title: '人文社科' },
           { title: '心理百科' }
         ]
-      }]
+      }],
+      unLogin: true
     }
   },
   components: {
-    HomeHeader
+    HomeHeader,
+    HomeFooter
+  },
+  computed: {
+    ...mapState(['userInfo']),
+    ...mapGetters([])
   },
   methods: {
+    ...mapMutations([]),
     showItem (index) {
       this.second = index
       this.secondCurrent = index
@@ -59,12 +69,19 @@ export default {
     },
     moveDown () {
       this.show = false
+    },
+    quit () {
+      this.$api(this.$SERVER.GET_QUIT)
+        .then(data => {
+          this.unLogin = true
+          this.$router.push('/')
+        })
     }
   },
   mounted () {
     var mySwiper = new Swiper('.swiper-container', {
-      autoplay:true,
-      loop:true,
+      autoplay: true,
+      loop: true,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'
@@ -73,5 +90,8 @@ export default {
         el: '.swiper-pagination'
       }
     })
+    if (this.userInfo !== null) {
+      this.unLogin = false
+    }
   }
 }

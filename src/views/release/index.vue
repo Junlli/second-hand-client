@@ -70,6 +70,7 @@
         </el-form-item>
       </el-form>
     </div>
+    <home-footer></home-footer>
   </div>
 </template>
 

@@ -24,6 +24,15 @@
         font-weight: 700;
       }
     }
+    .home {
+      display: inline-block;
+      float: left;
+      font-size: 18px;
+      color: #fff;
+      line-height: 50px;
+      margin-top: 2px;
+      cursor: pointer;
+    }
     .search {
       float: right;
       width: 268px;
@@ -53,6 +62,23 @@
         color: #fff;
         font-size: 16px;
         cursor: pointer;
+      }
+    }
+    .login-box {
+      float: right;
+      margin-right: 30px;
+      li {
+        float: left;
+        .headpic {
+          width: 40px;
+          height: 40px;
+          border-radius: 20px;
+          margin-top: 5px;
+        }
+        .quit {
+          margin-left: 10px;
+          color: rgb(220,220,220);
+        }
       }
     }
     .release {

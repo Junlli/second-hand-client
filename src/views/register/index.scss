@@ -8,7 +8,7 @@
   }
   .register-box {
     width: 420px;
-    height: 610px;
+    height: 630px;
     box-sizing: border-box;
     border-radius: 4px;
     box-shadow: 0 0 4px rgba(0,0,0,0.5);
@@ -72,12 +72,15 @@
         }
       }
     }
-    .login {
-      display: block;
+    .login, .home {
+      display: inline-block;
       text-decoration: none;
       margin: -20px 0 0 10px;
       color: #0000ee;
       font-size: 14px;
+    }
+    .home {
+      margin-left: 10px;
     }
     .el-dialog__body {
       padding: 0;

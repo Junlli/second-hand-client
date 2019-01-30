@@ -6,7 +6,7 @@ import SERVER from '@/utils/api/config'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   // base: process.env.BASE_URL,
   routes: [
@@ -113,20 +113,4 @@ export default new Router({
   ]
 })
 
-// router.beforeEach((to, from, next) => {
-//   // 如果是登陆页面 && 用户信息为空{}
-//   if (to.name !== 'login' && Object.keys(store.state.userInfo).length === 0) {
-//     api(SERVER.GET_ISLOGIN)
-//       .then(data => {
-//         return data.state ? api(SERVER.GET_CURRENTUSERINFO) : next({name: 'login'})
-//       })
-//       .then(data => {
-//         store.commit('setUserInfo', data.data)
-//         next()
-//       })
-//       .catch(data => next({name: 'login'})
-//       )
-//   } else {
-//     next()
-//   }
-// })
+export default router

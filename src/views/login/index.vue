@@ -28,10 +28,13 @@
         >
       </div>
       <router-link to="register" class="register">注册</router-link>
-      <button
-        class="login-button"
-        @click="login"
-      >登录</button>
+      <router-link to="/" class="home">返回首页</router-link>
+      <a href="/">
+        <button
+          class="login-button"
+          @click="login"
+        >登录</button>
+      </a>
     </div>
   </div>
 </template>

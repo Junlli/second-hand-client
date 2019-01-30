@@ -70,6 +70,7 @@
         </el-form-item>
       </el-form>
       <router-link to="login" class="login">登录</router-link>
+      <router-link to="/" class="home">返回首页</router-link>
       <button class="register-button" @click="register">注册</button>
       <el-dialog
         title="注册成功！"

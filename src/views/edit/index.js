@@ -15,7 +15,8 @@ export default {
         u_mail: '',
         u_province: '',
         u_city: '',
-        u_school: ''
+        u_school: '',
+        u_password: ''
       },
       schoolList: []
     }
@@ -41,15 +42,39 @@ export default {
       this.$router.push('/user')
     },
     save () {
+      this.apiData.u_password = ''
       this.$api.post(this.$SERVER.POST_UPUSERINFO, { ...this.apiData, id: this.userInfo._id })
-        .then(data => this.thenSubmit('修改'))
+        .then(data =>
+          this.$api(this.$SERVER.GET_USERINFO, {
+            params: {id: this.userInfo._id}
+          })
+            .then(data => this.thenSubmit('修改')))
     },
     thenSubmit (str) {
       this.$message.success(str + '成功')
       this.$router.push('/user')
+    },
+    getUserInfo () {
+      this.$api(this.$SERVER.GET_USERINFO, {
+        params: { id: this.id }
+      }).then (data => {
+        let info = data.data
+        console.log(info)
+        info.u_password = ''
+        this.apiData = info
+      })
     }
   },
-  mounted () {
-    this.apiData = this.userInfo
+  created () {
+    this.$route
+  },
+  watch: {
+    $route: {
+      handler () {
+        this.id = this.userInfo._id
+        this.getUserInfo()
+      },
+      immediate: true
+    }
   }
 }

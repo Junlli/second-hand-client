@@ -37,6 +37,10 @@ export default {
           { title: '心理百科' }
         ]
       }],
+      apiData: {
+        u_avatar: '',
+        u_name: ''
+      },
       unLogin: true
     }
   },
@@ -76,6 +80,32 @@ export default {
           this.unLogin = true
           this.$router.push('/')
         })
+    },
+    getUserInfo () {
+      this.$api(this.$SERVER.GET_USERINFO, {
+        params: { id: this.id }
+      }).then (data => {
+        let info = data.data
+        info.u_password = ''
+        this.apiData = info
+      })
+    }
+  },
+  created () {
+    this.$route
+  },
+  watch: {
+    $route: {
+      handler () {
+        this.$api(this.$SERVER.GET_ISLOGIN)
+          .then(data => {
+            if (data.state === true) {
+              this.id = this.userInfo._id
+              this.getUserInfo()
+            }
+          })
+      },
+      immediate: true
     }
   },
   mounted () {
@@ -90,8 +120,12 @@ export default {
         el: '.swiper-pagination'
       }
     })
-    if (this.userInfo !== null) {
-      this.unLogin = false
-    }
+    this.$api(this.$SERVER.GET_ISLOGIN)
+      .then(data => {
+        console.log(data.state)
+        if (data.state === true) {
+          this.unLogin = false
+        }
+      })
   }
 }

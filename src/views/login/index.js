@@ -1,6 +1,7 @@
 import {mapState, mapGetters, mapMutations} from 'vuex'
 
 export default {
+  name: 'login',
   data () {
     return {
       errorMsg: '',
@@ -17,25 +18,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setUserInfo']),
-    login() {
-      // this.$api(this.$SERVER.GET_QUIT)
-      //   .then(data => {
-      //     if (data.state) {
-      //       this.$api.post(this.$SERVER.POST_LOGIN, this.apiData)
-      //         .then(data => {
-      //           if (!data.state) {
-      //             this.$message.error('账号或密码错误')
-      //             return
-      //           }
-      //           if (data.data) {
-      //             this.setUserInfo(data.data)
-      //             this.$router.push('/')
-      //           } else {
-      //             this.$message.error('账号或密码错误')
-      //           }
-      //         })
-      //     }
-      //   })
+    login () {
       this.$api.post(this.$SERVER.POST_LOGIN, this.apiData)
         .then(data => {
           if (!data.state) {
@@ -44,7 +27,6 @@ export default {
           }
           if (data.data) {
             this.setUserInfo(data.data)
-            this.$router.push('/')
           } else {
             this.$message.error('账号或密码错误')
           }

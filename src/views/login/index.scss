@@ -75,12 +75,15 @@
         top: 5px;
       }
     }
-    .register{
-      display: block;
+    .register, .home{
+      display: inline-block;
       text-decoration: none;
       margin-top: -20px;
       color: #0000ee;
       font-size: 14px;
+    }
+    .home {
+      margin-left: 10px;
     }
   }
 }

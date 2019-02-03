@@ -27,6 +27,7 @@ export default {
           }
           if (data.data) {
             this.setUserInfo(data.data)
+            this.$router.push('/')
           } else {
             this.$message.error('账号或密码错误')
           }

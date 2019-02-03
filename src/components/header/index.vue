@@ -7,24 +7,32 @@
       <router-link to="/">
         <div class="home">首页</div>
       </router-link>
-      <router-link to="/release">
-        <el-button type="info" class="release">发布商品</el-button>
-      </router-link>
-      <ul class="nav navbar-nav navbar-right login-box" v-if="userInfo !== undefined">
+      <el-button type="info" class="release" @click="handleRelease">发布商品</el-button>
+      <Modal v-model="login" width="360">
+        <p slot="header" style="color:#f60;text-align:center">
+          <Icon type="ios-information-circle"></Icon>
+          <span>您还未登录</span>
+        </p>
+        <div class="toLogin">
+          <Button type="primary" @click="handleLogin">请先登录</Button>
+        </div>
+        <div slot="footer">
+        </div>
+      </Modal>
+      <ul class="login-box" v-if="userInfo.u_avatar">
         <li>
-          <a class="headpic-link" target="_blank" href="/user">
+          <a class="headpic-link" target="_blank" @click="toUser">
             <img class="headpic" :src="$SERVER.FILEURL + userInfo.u_avatar">
           </a>
         </li>
         <li>
-          <a class="quit">退出</a>
+          <a class="quit" @click="handleQuit()">退出</a>
         </li>
       </ul>
       <form class="search">
         <input type="text" placeholder="搜索" class="search-filed">
         <button type="submit" class="search-btn">搜索</button>
       </form>
-
     </div>
   </div>
 </template>

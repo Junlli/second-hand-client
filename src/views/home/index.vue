@@ -19,7 +19,7 @@
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
         </div>
-        <div class="login-box" v-if="unLogin">
+        <div class="login-box" v-if="!userInfo.u_avatar">
           <div class="profile">
             <img src="~@/assets/img/home/profile.jpg" alt="登录头像" class="profile-photo">
           </div>
@@ -28,11 +28,11 @@
           </router-link>
           <router-link to="/register" class="register">免费注册</router-link>
         </div>
-        <div class="login-box" v-if="unLogin === false">
+        <div class="login-box" v-else>
           <div class="profile">
-            <img :src="$SERVER.FILEURL + apiData.u_avatar" alt="登录头像" class="profile-photo">
+            <img :src="$SERVER.FILEURL + userInfo.u_avatar" alt="登录头像" class="profile-photo">
           </div>
-          <span class="account">{{ apiData.u_name }}</span>
+          <span class="account">{{ userInfo.u_name }}</span>
           <router-link to="/user" class="personal">个人中心</router-link>
           <div class="quit" @click="quit">退出</div>
         </div>

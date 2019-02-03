@@ -7,21 +7,21 @@
       </div>
       <el-form :model="userInfo" label-width="80px">
         <el-form-item label="用户名">
-          <el-input v-model="apiData.u_name"></el-input>
+          <el-input v-model="userInfo.u_name"></el-input>
         </el-form-item>
         <el-form-item label="邮箱">
-          <el-input v-model="apiData.u_mail"></el-input>
+          <el-input v-model="userInfo.u_mail"></el-input>
         </el-form-item>
         <el-form-item label="省市">
           <province
-            :province="apiData.u_province"
+            :province="userInfo.u_province"
             :provinces="provinceList"
             @change="setCityList"
             style="width:130px"
           >
           </province>
           <el-select
-            v-model="apiData.u_city"
+            v-model="userInfo.u_city"
             style="width:130px"
             placeholder="请选择城市"
             class="selectCity">
@@ -37,7 +37,7 @@
         <el-form-item label="学校">
           <school
             @list="getSchoolList"
-            :school="apiData.u_school"
+            :school="userInfo.u_school"
             :schools="schoolList"
             @change="setSchool"
           ></school>

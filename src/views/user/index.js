@@ -18,7 +18,8 @@ export default {
         u_mail: '',
         u_name: '',
         u_school: ''
-      }
+      },
+      unLogin: false
     }
   },
   components: {
@@ -30,7 +31,7 @@ export default {
     ...mapGetters([])
   },
   methods: {
-    ...mapMutations([]),
+    ...mapMutations(['setUserInfo']),
     edit () {
       this.$router.push('/userDetail')
     },
@@ -42,9 +43,15 @@ export default {
     },
     handleAvatarSuccess (res, file) {
       this.imageUrl = res.data.url
-      this.apiData.u_avatar = this.imageUrl
-      this.apiData.u_password = ''
-      this.$api.post(this.$SERVER.POST_UPUSERINFO, { ...this.apiData, id: this.userInfo._id })
+      this.userInfo.u_avatar = this.imageUrl
+      this.userInfo.u_password = ''
+      this.$api.post(this.$SERVER.POST_UPUSERINFO, { ...this.userInfo, id: this.userInfo._id })
+        .then(data => {
+          // this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+          //   .then(data => {
+          //     this.setUserInfo(data.data)
+          //   })
+        })
     },
     beforeAvatarUpload (file) {
       const isJPG = file.type === 'image/jpeg'
@@ -57,26 +64,23 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isJPG && isLt2M
-    },
-    getUserInfo () {
-      this.$api(this.$SERVER.GET_USERINFO, {
-        params: { id: this.id }
-      }).then (data => {
-        let info = data.data
-        console.log(info)
-        info.u_password = ''
-        this.apiData = info
-      })
     }
   },
   created () {
-    this.$route
+  },
+  mounted () {
+    this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+      .then(data => {
+        this.setUserInfo(data.data)
+      })
   },
   watch: {
     $route: {
       handler () {
-        this.id = this.userInfo._id
-        this.getUserInfo()
+        this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+          .then(data => {
+            this.setUserInfo(data.data)
+          })
       },
       immediate: true
     }

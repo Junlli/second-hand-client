@@ -1,11 +1,11 @@
 <template>
   <div class="bg clearfix">
-    <home-header></home-header>
+    <home-header :unLogin="unLogin"></home-header>
     <div class="type-page">
       <div class="top">
         <div id="user_photo" class="pull-left" @mouseenter="handleMouseOver"
              @mouseleave="handleMouseLeave">
-          <img id="origin_ph" :src="$SERVER.FILEURL + apiData.u_avatar" alt="头像" >
+          <img id="origin_ph" :src="$SERVER.FILEURL + userInfo.u_avatar" alt="头像" >
           <el-upload
             :action="$SERVER.URL + $SERVER.PATH + $SERVER.POST_UPIMG"
             :show-file-list="false"
@@ -21,10 +21,10 @@
           </el-upload>
         </div>
         <div id="user_msg">
-          <div class="name">{{apiData.u_name}}</div>
+          <div class="name">{{userInfo.u_name}}</div>
           <p class="has_sell">共有<span class="all">0</span>件商品，已卖出<span>0</span>件商品</p>
           <ul class="seller_attr">
-            <li>学校：&nbsp;&nbsp;<span>{{apiData.u_school}}</span></li>
+            <li>学校：&nbsp;&nbsp;<span>{{userInfo.u_school}}</span></li>
             <li>认证：&nbsp;&nbsp;<span>未认证</span></li>
           </ul>
           <Button type="primary" @click="edit()">编辑个人信息</Button>

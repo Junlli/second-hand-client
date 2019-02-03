@@ -50,8 +50,8 @@
             <el-option label="区域二" value="beijing"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="交易地点">
-          <el-input v-model="form.name" placeholder="宿舍、教学楼、食堂等"></el-input>
+        <el-form-item label="库存">
+          <el-input v-model="form.name" placeholder="请输入商品库存"></el-input>
         </el-form-item>
         <el-form-item label="价格">
           <el-input v-model="form.name" placeholder="请输入价格（最多两位小数）"></el-input>

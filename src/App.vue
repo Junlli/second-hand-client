@@ -18,18 +18,21 @@ html, body, #app {
 import {mapState, mapGetters, mapMutations} from 'vuex'
 export default {
   name: 'App',
+  computed: {
+    ...mapState(['userInfo'])
+  },
   methods: {
     ...mapMutations(['setUserInfo']),
-    getUserInfo () {
+    getUserInfo(){
       this.$api(this.$SERVER.GET_ISLOGIN)
-        .then(data =>
+        .then( data =>
           data.state && this.$api(this.$SERVER.GET_CURRENTUSERINFO)
         )
-        .then(data => this.setUserInfo(data.data))
+        .then( data => this.setUserInfo(data.data))
     }
   },
   created () {
-    this.getUserInfo()
+    // this.getUserInfo()
   }
 }
 </script>

@@ -4,7 +4,7 @@ import HomeFooter from '@/components/footer/index.vue'
 import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
-  data () {
+  data() {
     return {
       isShow: false,
       second: null,
@@ -28,20 +28,19 @@ export default {
           {title: '心理百科'}
         ]
       },
-      {
-        childList: [
-          { title: '教材1' },
-          { title: '小说文学' },
-          { title: '名人传记' },
-          { title: '人文社科' },
-          { title: '心理百科' }
-        ]
-      }],
+        {
+          childList: [
+            {title: '教材1'},
+            {title: '小说文学'},
+            {title: '名人传记'},
+            {title: '人文社科'},
+            {title: '心理百科'}
+          ]
+        }],
       apiData: {
         u_avatar: '',
         u_name: ''
       },
-      unLogin: true
     }
   },
   components: {
@@ -53,62 +52,41 @@ export default {
     ...mapGetters([])
   },
   methods: {
-    ...mapMutations([]),
-    showItem (index) {
+    ...mapMutations(['setUserInfo']),
+    showItem(index) {
       this.second = index
       this.secondCurrent = index
     },
-    hideItem () {
+    hideItem() {
       this.second = null
     },
-    clickHandle (index) {
+    clickHandle(index) {
       this.current = index
     },
-    hideSecondItems () {
+    hideSecondItems() {
       this.secondCurrent = null
     },
     // 动画
-    moveUp () {
+    moveUp() {
       this.show = true
     },
-    moveDown () {
+    moveDown() {
       this.show = false
     },
-    quit () {
+    quit() {
       this.$api(this.$SERVER.GET_QUIT)
-        .then(data => {
-          this.unLogin = true
-          this.$router.push('/')
-        })
+        .then(data => this.setUserInfo())
     },
-    getUserInfo () {
-      this.$api(this.$SERVER.GET_USERINFO, {
-        params: { id: this.id }
-      }).then (data => {
-        let info = data.data
-        info.u_password = ''
-        this.apiData = info
-      })
+    getUserInfo() {
+      this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+        .then(data => this.setUserInfo(data.data))
+    },
+    isLogin() {
+      this.$api(this.$SERVER.GET_ISLOGIN)
+        .then(data => data.state && this.getUserInfo())
     }
   },
-  created () {
-    this.$route
-  },
-  watch: {
-    $route: {
-      handler () {
-        this.$api(this.$SERVER.GET_ISLOGIN)
-          .then(data => {
-            if (data.state === true) {
-              this.id = this.userInfo._id
-              this.getUserInfo()
-            }
-          })
-      },
-      immediate: true
-    }
-  },
-  mounted () {
+  mounted() {
     var mySwiper = new Swiper('.swiper-container', {
       autoplay: true,
       loop: true,
@@ -120,12 +98,13 @@ export default {
         el: '.swiper-pagination'
       }
     })
-    this.$api(this.$SERVER.GET_ISLOGIN)
-      .then(data => {
-        console.log(data.state)
-        if (data.state === true) {
-          this.unLogin = false
-        }
-      })
+  },
+  watch: {
+    $route: {
+      handler () {
+        this.isLogin()
+      },
+      immediate: true
+    }
   }
-}
+};

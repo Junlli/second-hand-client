@@ -120,6 +120,9 @@ export default {
     },
     cancel () {
       this.modal = false
+    },
+    toDetail () {
+      this.$router.push('/detail')
     }
   }
 }

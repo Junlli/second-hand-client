@@ -21,7 +21,8 @@
       <div class="confirm">
         <h2>确认订单信息</h2>
         <Table highlight-row ref="currentRowTable" :columns="columns4" :data="data4"></Table>
-        <Button type="primary" size="large" @click="submit">提交订单</Button>
+        <Button type="primary" size="large" @click="submit" class="submit">提交订单</Button>
+        <Button class="cancel" size="large" @click="toDetail">取消</Button>
         <Modal v-model="modal" width="360">
           <p slot="header" style="text-align:center">
             <span>确认订单</span>

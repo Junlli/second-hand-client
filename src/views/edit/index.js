@@ -32,49 +32,35 @@ export default {
     ...mapGetters([''])
   },
   methods: {
+    ...mapMutations(['setUserInfo']),
     getSchoolList (data) {
       this.schoolList = data
     },
     setSchool (val) {
-      this.apiData.u_school = val
+      this.userInfo.u_school = val
     },
     cancel () {
       this.$router.push('/user')
     },
     save () {
-      this.apiData.u_password = ''
-      this.$api.post(this.$SERVER.POST_UPUSERINFO, { ...this.apiData, id: this.userInfo._id })
-        .then(data =>
-          this.$api(this.$SERVER.GET_USERINFO, {
-            params: {id: this.userInfo._id}
-          })
-            .then(data => this.thenSubmit('修改')))
+      this.userInfo.u_password = ''
+      console.log(this.userInfo._id)
+      this.$api.post(this.$SERVER.POST_UPUSERINFO, { ...this.userInfo, id: this.userInfo._id })
+        .then(data => this.thenSubmit('修改'))
     },
     thenSubmit (str) {
       this.$message.success(str + '成功')
       this.$router.push('/user')
-    },
-    getUserInfo () {
-      this.$api(this.$SERVER.GET_USERINFO, {
-        params: { id: this.id }
-      }).then (data => {
-        let info = data.data
-        console.log(info)
-        info.u_password = ''
-        this.apiData = info
-      })
     }
-  },
-  created () {
-    this.$route
   },
   watch: {
     $route: {
       handler () {
-        this.id = this.userInfo._id
-        this.getUserInfo()
-      },
-      immediate: true
+        this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+          .then(data => {
+            this.setUserInfo(data.data)
+          })
+      }
     }
   }
 }

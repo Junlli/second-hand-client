@@ -5,7 +5,7 @@
       <ul class="infos">
         <li>用户名</li>
         <li class="right_info">
-          <span>{{ apiData.u_name}}</span>
+          <span>{{ userInfo.u_name}}</span>
         </li>
       </ul>
     </div>
@@ -14,13 +14,13 @@
       <ul class="infos">
         <li>学校</li>
         <li class="right_info">
-          <span id="school_span">{{ apiData.u_school }}</span>
+          <span id="school_span">{{ userInfo.u_school }}</span>
         </li>
       </ul>
       <ul class="infos">
         <li>邮箱</li>
         <li class="right_info">
-          <span id="qq_span">{{ apiData.u_mail }}</span>
+          <span id="qq_span">{{ userInfo.u_mail }}</span>
         </li>
       </ul>
     </div>

@@ -35,9 +35,10 @@
               <i class="iconfont">&#xe676;</i>
               <span>清华大学</span>
             </li>
-            <li class="location">
-              <i class="iconfont">&#xe61f;</i>
-              <span>教学楼</span>
+            <li class="inventory">
+              <i class="iconfont">&#xe677;</i>
+              <InputNumber :max="10" :min="1" v-model="inventory" size="large"></InputNumber>
+              <span class="inventory-num">(库存n件)</span>
             </li>
             <li class="identify">
               <i class="iconfont">&#xe6ac;</i>

@@ -9,7 +9,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setUserInfo (state, payload) {
-      state.userInfo = payload
+      state.userInfo = payload == null ? {} : payload
     }
   },
   actions: {

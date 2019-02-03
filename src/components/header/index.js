@@ -1,20 +1,39 @@
 import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
+  props: ['unLogin'],
   data () {
     return {
-      isLogin: false // 是否显示头像
+      login: false
     }
   },
   computed: {
     ...mapState(['userInfo'])
   },
-  mounted () {
-    this.$api(this.$SERVER.GET_ISLOGIN)
-      .then(data => {
-        if (data !== null) {
-          this.isLogin = true
-        }
-      })
+  methods: {
+    ...mapMutations(['setUserInfo']),
+    handleQuit () {
+      this.$api(this.$SERVER.GET_QUIT)
+        .then (data => {
+          // this.$emit(`update:${dataName}`, newValue)
+          this.setUserInfo()
+          this.$router.push('/')
+        })
+    },
+    // 点击头像进入个人中心
+    toUser () {
+      this.$router.push('/user')
+    },
+    handleRelease () {
+      if (this.userInfo.u_avatar) {
+        this.$router.push('/release')
+      } else {
+        this.login = true
+      }
+    },
+    handleLogin () {
+      this.login = false
+      this.$router.push('/login')
+    }
   }
 }

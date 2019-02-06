@@ -18,7 +18,9 @@ export default {
         u_school: '',
         u_introduce: '',
         u_province: '',
-        u_city: ''
+        u_city: '',
+        u_qq: '',
+        u_wx: ''
       },
       schoolList: [],
       centerDialogVisible: false

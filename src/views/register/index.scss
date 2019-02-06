@@ -8,7 +8,7 @@
   }
   .register-box {
     width: 420px;
-    height: 630px;
+    height: 600px;
     box-sizing: border-box;
     border-radius: 4px;
     box-shadow: 0 0 4px rgba(0,0,0,0.5);
@@ -35,7 +35,7 @@
     }
     .register-title {
       font-size: 30px;
-      margin: 20px 0;
+      margin: 14px 0;
       text-align: center;
       font-family: '隶书';
     }
@@ -52,6 +52,9 @@
       outline: none;
       border: 1px solid #1c84c6;
     }
+    .el-form-item {
+      margin-bottom: 14px;
+    }
     .el-form-item__content {
       position: relative;
       .register-form-account {
@@ -63,7 +66,7 @@
         z-index: 999;
       }
       .el-input__inner {
-        padding: 0 40px;
+        //padding: 0 40px;
         font-size: 18px;
       }
       .selectCity {

@@ -4,49 +4,60 @@
     <div class="main">
       <div class="detail clearfix">
         <div class="picture">
-          <pic-zoom :url=smallImgs[isShow].imgUrl :scale="2"></pic-zoom>
+          <div class="bigImg">
+            <pic-zoom
+              v-if="commidityInfo"
+              :url="$SERVER.FILEURL + commidityInfo.c_images[isShow]"
+              :scale="2"
+            ></pic-zoom>
+          </div>
           <ul class="img-list">
             <li
               class="small-img"
               @click="handleClick(index)"
               :class="{active: isShow === index}"
-              v-for="(item, index) of smallImgs"
+              v-for="(item, index) of commidityInfo.c_images"
             >
-              <img :src= item.imgUrl alt="" class="pic">
+              <img :src="$SERVER.FILEURL + item" alt="" class="pic">
             </li>
           </ul>
         </div>
         <div class="info">
           <ul>
-            <li class="title">我是商品哇哈哈哈哈哈哈哈哈嗝哈</li>
+            <li class="title">{{ commidityInfo.c_title }}</li>
             <li class="price">
               <i class="iconfont">&#xe616;</i>
-              <span class="jiage">12元</span>
+              <span class="jiage">{{ commidityInfo.c_price/100 }}元</span>
             </li>
             <li class="user">
               <a href="#">
                 <i class="iconfont">&#xe600;</i>
-                <span class="username">Junlli</span>
-                <Rate v-model="value" count="1" />
-                <span class="rate">5.0</span>
+                <span class="username">{{ commidityInfo.u_name }}</span>
+                <!--<Rate v-model="value" count="1" />-->
+                <div class="rate">
+                  <svg class="register-form-account" aria-hidden="true">
+                    <use xlink:href="#icon-icon-test"></use>
+                  </svg>
+                  <span class="rate-num">5.0</span>
+                </div>
               </a>
             </li>
             <li class="school">
               <i class="iconfont">&#xe676;</i>
-              <span>清华大学</span>
+              <span>{{ commidityInfo.u_school }}</span>
             </li>
             <li class="inventory">
               <i class="iconfont">&#xe677;</i>
-              <InputNumber :max="10" :min="1" v-model="inventory" size="large"></InputNumber>
-              <span class="inventory-num">(库存n件)</span>
+              <el-input-number v-model="inventory" :min="1" :max="commidityInfo.c_num" label="描述文字"></el-input-number>
+              <span class="inventory-num">(库存{{ commidityInfo.c_num }}件)</span>
             </li>
-            <li class="identify">
-              <i class="iconfont">&#xe6ac;</i>
-              <span>未认证</span>
-            </li>
+            <!--<li class="identify">-->
+              <!--<i class="iconfont">&#xe6ac;</i>-->
+              <!--<span>未认证</span>-->
+            <!--</li>-->
             <li class="datetime">
               <i class="iconfont">&#xe672;</i>
-              <span>2019-1-16 8:39</span>
+              <span>{{ commidityInfo.create_date }}</span>
             </li>
           </ul>
           <router-link to="/order">

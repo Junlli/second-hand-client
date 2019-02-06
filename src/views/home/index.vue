@@ -1,3 +1,4 @@
+<script src="index.js"></script>
 <template>
   <div class="bg">
     <home-header></home-header>
@@ -39,59 +40,24 @@
       </div>
       <Row>
         <Col span="8">
-          <Menu :theme="theme2">
-            <Submenu name="1">
+          <Menu
+            width="200px"
+            :theme="theme2"
+            v-for="(item, index) in typeList"
+          >
+            <Submenu :name= index>
               <template slot="title">
-                <Icon type="ios-book-outline" />
-                二手书
+                <!--<Icon type="ios-book-outline" />-->
+                {{ item.t_name }}
               </template>
-              <MenuItem name="1-1">全部</MenuItem>
-              <MenuItem name="1-2">考试教材</MenuItem>
-              <MenuItem name="1-3">小说文学</MenuItem>
-              <MenuItem name="1-4">名人传记</MenuItem>
-              <MenuItem name="1-5">人文社科</MenuItem>
-              <MenuItem name="1-6">心理百科</MenuItem>
-              <MenuItem name="1-7">成功励志</MenuItem>
-            </Submenu>
-            <Submenu name="2">
-              <template slot="title">
-                <i class="iconfont">&#xe60c;</i>
-                服饰衣物
-              </template>
-              <MenuItem name="2-1">男装</MenuItem>
-              <MenuItem name="2-2">女装</MenuItem>
-              <MenuItem name="2-3">鞋类</MenuItem>
-              <MenuItem name="2-4">配饰</MenuItem>
-            </Submenu>
-            <Submenu name="3">
-              <template slot="title">
-                <i class="iconfont">&#xe60e;</i>
-                生活用品
-              </template>
-              <MenuItem name="3-1">厨具</MenuItem>
-              <MenuItem name="3-2">收纳用品</MenuItem>
-              <MenuItem name="3-3">清洁工具</MenuItem>
-              <MenuItem name="3-4">其他</MenuItem>
-            </Submenu>
-            <Submenu name="4">
-              <template slot="title">
-                <i class="iconfont">&#xe627;</i>
-                美妆护肤
-              </template>
-              <MenuItem name="4-1">护肤品</MenuItem>
-              <MenuItem name="4-2">化妆品</MenuItem>
-              <MenuItem name="4-3">洗发护发</MenuItem>
-            </Submenu>
-            <Submenu name="5">
-              <template slot="title">
-                <i class="iconfont">&#xe601;</i>
-                家用电器
-              </template>
-              <MenuItem name="5-1">吹风筒</MenuItem>
-              <MenuItem name="5-2">洗衣机</MenuItem>
-              <MenuItem name="5-3">厨房电器</MenuItem>
-              <MenuItem name="5-4">电热壶</MenuItem>
-              <MenuItem name="5-5">其他</MenuItem>
+              <MenuItem
+                :name=index
+                v-for="(type, index) in item.t_types"
+                :key="index"
+                @click.native="showCommidity(item.t_name, type)"
+              >
+                {{type}}
+              </MenuItem>
             </Submenu>
           </Menu>
         </Col>
@@ -100,80 +66,40 @@
         <div class="clearfix">
           <div
             class="class-item"
-            @mouseenter="moveUp"
-            @mouseleave="moveDown"
-            :class="{'move-up': show}"
+            @mouseenter="moveUp(index)"
+            @mouseleave="moveDown(index)"
+            v-for="(item, index) in dataList.list"
+            :class="{'move-up': index === show}"
+            @click="toCommidityDetail(item._id)"
           >
             <div class="class-bg-layer"></div>
             <div class="class-item-bg">
-              <a target="_blank" href="/sale/9" class="class-img">
-                <img class="img-responsive" src="https://www.youzixy.com/Uploads/salebuy/2016-01-13/thumb_5695e0a4885a1.jpg" alt="36码mm猛戳啦！" data-original="/Uploads/salebuy/2016-01-13/thumb_5695e0a4885a1.jpg" style="display: block;">
+              <a class="class-img">
+                <img class="img-responsive" :src="$SERVER.FILEURL + item.c_images[0]" alt="36码mm猛戳啦！" data-original="/Uploads/salebuy/2016-01-13/thumb_5695e0a4885a1.jpg" style="display: block;">
               </a>
               <div class="pricehot clearfix">
-                <span class="price">￥&nbsp;<span>25</span></span>
+                <span class="price">￥&nbsp;<span>{{item.c_price/100}}</span></span>
                 <span class="hot">点击数&nbsp;<span>1639</span></span>
               </div>
-              <a target="_blank" href="/sale/9" class="title">36码mm猛戳啦!</a>
+              <a class="title">{{ item.c_title }}</a>
               <div class="some  clearfix">
-                <span class="school">桂林电子科技大学</span>
-                <span class="renzheng">未认证</span>
-              </div>
-            </div>
-          </div>
-          <div class="class-item">
-            <div class="class-bg-layer"></div>
-            <div class="class-item-bg">
-              <a target="_blank" href="/sale/9" class="class-img">
-                <img class="img-responsive" src="https://www.youzixy.com/Uploads/salebuy/2016-01-13/thumb_5695e0a4885a1.jpg" alt="36码mm猛戳啦！" data-original="/Uploads/salebuy/2016-01-13/thumb_5695e0a4885a1.jpg" style="display: block;">
-              </a>
-              <div class="pricehot clearfix">
-                <span class="price">￥&nbsp;<span>25</span></span>
-                <span class="hot">点击数&nbsp;<span>1639</span></span>
-              </div>
-              <a target="_blank" href="/sale/9" class="title">36码mm猛戳啦!</a>
-              <div class="some  clearfix">
-                <span class="school">桂林电子科技大学</span>
-                <span class="renzheng">未认证</span>
-              </div>
-            </div>
-          </div>
-          <div class="class-item">
-            <div class="class-bg-layer"></div>
-            <div class="class-item-bg">
-              <a target="_blank" href="/sale/9" class="class-img">
-                <img class="img-responsive" src="https://www.youzixy.com/Uploads/salebuy/2016-01-13/thumb_5695e0a4885a1.jpg" alt="36码mm猛戳啦！" data-original="/Uploads/salebuy/2016-01-13/thumb_5695e0a4885a1.jpg" style="display: block;">
-              </a>
-              <div class="pricehot clearfix">
-                <span class="price">￥&nbsp;<span>25</span></span>
-                <span class="hot">点击数&nbsp;<span>1639</span></span>
-              </div>
-              <a target="_blank" href="/sale/9" class="title">36码mm猛戳啦!</a>
-              <div class="some  clearfix">
-                <span class="school">桂林电子科技大学</span>
-                <span class="renzheng">未认证</span>
-              </div>
-            </div>
-          </div>
-          <div class="class-item">
-            <div class="class-bg-layer"></div>
-            <div class="class-item-bg">
-              <a target="_blank" href="/sale/9" class="class-img">
-                <img class="img-responsive" src="https://www.youzixy.com/Uploads/salebuy/2016-01-13/thumb_5695e0a4885a1.jpg" alt="36码mm猛戳啦！" data-original="/Uploads/salebuy/2016-01-13/thumb_5695e0a4885a1.jpg" style="display: block;">
-              </a>
-              <div class="pricehot clearfix">
-                <span class="price">￥&nbsp;<span>25</span></span>
-                <span class="hot">点击数&nbsp;<span>1639</span></span>
-              </div>
-              <a target="_blank" href="/sale/9" class="title">36码mm猛戳啦!</a>
-              <div class="some  clearfix">
-                <span class="school">桂林电子科技大学</span>
-                <span class="renzheng">未认证</span>
+                <span class="school">{{ item.u_school }}</span>
+                <span class="user">{{ item.u_name }}</span>
               </div>
             </div>
           </div>
         </div>
         <div>
-          <Page :total="100" show-elevator />
+          <Page
+            v-if="dataList.count > getApiData.pageSize"
+            @on-page-size-change="handleSizeChange"
+            @on-change="handlePage"
+            :page-size="getApiData.pageSize"
+            :total="dataList.count"
+            :current="getApiData.pageIndex"
+            show-elevator
+            show-total
+          />
         </div>
       </div>
     </div>

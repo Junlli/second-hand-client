@@ -29,6 +29,14 @@
           <a class="quit" @click="handleQuit()">退出</a>
         </li>
       </ul>
+      <ul class="unLogin" v-if="!userInfo.u_avatar">
+        <router-link to="/login">
+          <a class="login">登录</a>
+        </router-link>
+        <router-link to="/register">
+          <a class="register">注册</a>
+        </router-link>
+      </ul>
       <form class="search">
         <input type="text" placeholder="搜索" class="search-filed">
         <button type="submit" class="search-btn">搜索</button>

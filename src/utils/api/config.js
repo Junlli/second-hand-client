@@ -17,6 +17,17 @@ export default {
   GET_USERLIST: 'user/list',//查询用户列表
   GET_USERINFO: 'user/info', // 用户信息
   POST_UPUSERINFO: 'user/upInfo',//更新用户信息
-  // 管理员
-  GET_SYSFIST: 'sys/list' // 管理员列表
+
+  //商品分类
+  GET_TYPELIST: 'type/list',//分类列表
+  POST_TYPEADD: 'type/add',//添加分类
+  GET_TYPEINFO: 'type/info',//分类详情
+  POST_TYPEUPINFO: 'type/upInfo',//分类更新
+  GET_TYPEDEL: 'type/del',//分类删除
+  //商品管理
+  GET_COMMODITYLIST: 'commodity/list',//商品列表
+  POST_COMMODITYADD: 'commodity/add',//添加商品
+  GET_COMMODITYINFO: 'commodity/info',//商品详情
+  POST_COMMODITYUPINFO: 'commodity/upInfo',//商品更新
+  GET_COMMODITYDEL: 'commodity/del',//商品删除
 }

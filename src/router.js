@@ -90,7 +90,7 @@ const router = new Router({
       ]
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       name: 'detail',
       component: resolve => {
         require(['./views/detail/index.vue'], resolve)

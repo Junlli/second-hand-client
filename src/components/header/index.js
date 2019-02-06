@@ -15,7 +15,7 @@ export default {
     handleQuit () {
       this.$api(this.$SERVER.GET_QUIT)
         .then (data => {
-          // this.$emit(`update:${dataName}`, newValue)
+          console.log(data)
           this.setUserInfo()
           this.$router.push('/')
         })
@@ -34,6 +34,17 @@ export default {
     handleLogin () {
       this.login = false
       this.$router.push('/login')
+    },
+    getUserInfo () {
+      this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+        .then(data => this.setUserInfo(data.data))
+    },
+    isLogin () {
+      this.$api(this.$SERVER.GET_ISLOGIN)
+        .then(data => data.state && this.getUserInfo())
     }
+  },
+  created () {
+    this.isLogin()
   }
 }

@@ -1,16 +1,24 @@
 import HomeHeader from '@/components/header/index.vue'
 import HomeFooter from '@/components/footer/index.vue'
+import {mapState, mapGetters, mapMutations} from 'vuex'
+import { newJson } from '@/utils/js/index'
 
 export default {
   data () {
     return {
-      form: {
-        name: '',
-        region: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+      c_type: [],
+      c_type2: [],
+      apiData: {
+        u_id: '',
+        c_title: '',
+        c_type: '',
+        c_type2: '',
+        c_images: [],
+        c_price: '',
+        c_address: '',
+        c_detail: '',
+        c_num: 1,
+        c_state: 1,
       },
       imageUrl: '',
       dialogImageUrl: '',
@@ -23,10 +31,10 @@ export default {
     HomeHeader,
     HomeFooter
   },
+  computed: {
+    ...mapState(['userInfo'])
+  },
   methods: {
-    onSubmit () {
-      console.log('submit!')
-    },
     handleAvatarSuccess (res, file) {
       this.imageUrl = URL.createObjectURL(file.raw)
     },
@@ -49,15 +57,56 @@ export default {
       }
     },
     handlePictureCardPreview (file) {
-      this.dialogImageUrl = file.url
+      this.dialogImageUrl = this.$SERVER.FILEURL + file.response.data.url
       this.dialogVisible = true
     },
-    handleSuccess () {
+    handleSuccess (response) {
+      this.apiData.c_images.push(response.data.url)
       this.imgCount++
       if (this.imgCount === 4) {
         this.isShow = true
       } else {
         this.isShow = false
+      }
+    },
+    getTypeList () {
+      this.$api(this.$SERVER.GET_TYPELIST)
+        .then(data => {
+          this.c_type = data.data.list
+          console.log(this.c_type)
+          this.getType2()
+        })
+    },
+    getType2 () {
+      let c_type = this.apiData.c_type
+      if (c_type == '') {
+        this.c_type2 = []
+        return
+      }
+      this.c_type2 = this.c_type.find( obj => obj.t_name == c_type).t_types
+    },
+    // 发布商品
+    onSubmit () {
+      this.addInfo()
+    },
+    addInfo () {
+      let apiData = newJson(this.apiData)
+      apiData.c_price *= 100
+      this.$api.post(this.$SERVER.POST_COMMODITYADD, apiData)
+        .then( data => data.state ? this.thenSubmit('新增') : this.$message.error(data.mes))
+    },
+    thenSubmit (str) {
+      this.$message.success(str + '成功')
+      this.$router.push('/user')
+    }
+  },
+  created () {
+    this.getTypeList()
+  },
+  watch: {
+    $route: {
+      handler () {
+        this.apiData.u_id = this.userInfo._id
       }
     }
   }

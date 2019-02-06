@@ -6,33 +6,18 @@
       <div class="error-msg" v-show="isError">{{errorMsg}}</div>
       <el-form :model="apiData">
         <el-form-item>
-          <svg class="register-form-account" aria-hidden="true">
-            <use xlink:href="#icon-yonghu"></use>
-          </svg>
           <el-input v-model="apiData.u_account" placeholder="账号"></el-input>
         </el-form-item>
         <el-form-item>
-          <svg class="register-form-account" aria-hidden="true">
-            <use xlink:href="#icon-mima1"></use>
-          </svg>
           <el-input v-model="apiData.u_password" placeholder="密码" type="password"></el-input>
         </el-form-item>
         <el-form-item>
-          <svg class="register-form-account" aria-hidden="true">
-            <use xlink:href="#icon-mima1"></use>
-          </svg>
           <el-input v-model="apiData.u_confirmpwd" placeholder="确认密码" type="password"></el-input>
         </el-form-item>
         <el-form-item>
-          <svg class="register-form-account" aria-hidden="true">
-            <use xlink:href="#icon-yonghu"></use>
-          </svg>
           <el-input v-model="apiData.u_name" placeholder="用户名"></el-input>
         </el-form-item>
         <el-form-item>
-          <svg class="register-form-account" aria-hidden="true">
-            <use xlink:href="#icon-youxiang"></use>
-          </svg>
           <el-input v-model="apiData.u_mail" placeholder="邮箱"></el-input>
         </el-form-item>
         <el-form-item>
@@ -58,15 +43,15 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <svg class="register-form-account" aria-hidden="true">
-            <use xlink:href="#icon-xuexiao"></use>
-          </svg>
           <school
           @list="getSchoolList"
           :school="apiData.u_school"
           :schools="schoolList"
           @change="setSchool"
           ></school>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="apiData.u_tel" placeholder="电话号码"></el-input>
         </el-form-item>
       </el-form>
       <router-link to="login" class="login">登录</router-link>

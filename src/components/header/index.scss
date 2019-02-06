@@ -81,6 +81,14 @@
         }
       }
     }
+    .unLogin {
+      float: right;
+      .login, .register {
+        color: #fff;
+        font-size: 14px;
+        margin-right: 20px;
+      }
+    }
     .release {
       float: right;
       margin: 4px 52px 0 0;

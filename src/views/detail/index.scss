@@ -10,6 +10,10 @@
       .picture {
         width: 450px;
         float: left;
+       .bigImg {
+         width: 450px;
+         height: 450px;
+       }
         .img-list {
           margin-top: 10px;
           height: 75px;
@@ -39,18 +43,11 @@
         float: left;
         margin-left: 60px;
         span {
-          margin-left: 20px;
           font-size: 24px;
+          margin-left: 20px;
         }
         li {
           margin-bottom: 20px;
-          .ivu-rate {
-            margin: -5px 0 0 20px;
-          }
-          .rate {
-            margin-left: -5px;
-            font-size: 16px;
-          }
         }
         .title {
           font-weight: 400;
@@ -80,12 +77,26 @@
         .user {
           a {
             color: #515a6e;
+            .rate {
+              font-size: 16px;
+              display: inline-block;
+              height: 28px;
+              line-height: 28px;
+              .register-form-account {
+                width: 20px;
+                height: 18px;
+                margin-left: 20px;
+              }
+              .rate-num {
+                font-size: 18px;
+                margin-left: 0;
+              }
+            }
           }
         }
         .inventory {
-          .ivu-input-number {
+          .el-input-number {
             margin-left: 20px;
-            margin-bottom: 10px;
           }
           .inventory-num {
             font-size: 18px;

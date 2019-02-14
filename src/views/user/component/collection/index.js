@@ -1,37 +1,39 @@
 export default {
   data () {
     return {
-      goods: [
-        {
-          imgUrl: 'https://www.youzixy.com/Uploads/salebuy/2019-01-12/5c39fab6eb474.jpg',
-          name: '我是商品哇哈哈哈哈哈哈哈嗝哈',
-          status: '出售中',
-          index: 1
-        },
-        {
-          imgUrl: 'https://www.youzixy.com/Uploads/salebuy/2019-01-12/5c39fab6eb474.jpg',
-          name: '我是商品哇哈哈哈哈哈哈哈嗝哈',
-          status: '出售中',
-          index: 2
-        }
-      ],
+      u_id: '',
+      commodityInfo: '',
+      c_state: '',
       isHide: true // 隐藏未收藏信息
     }
   },
   methods: {
-    cancelCollect (index) {
-      this.goods.splice(index, 1)
-      if (this.goods.length === 0) {
-        this.isHide = false
-      } else {
-        this.isHide = true
-      }
+    cancelCollect (id) {
+      this.$api(this.$SERVER.GET_COLLECTIONDEL, {
+        params: { id: id }
+      }).then(data => {
+        this.getCollectionList()
+      })
     },
-    mounted () {
-      if (this.goods.length === 0) {
-        this.isHide = false
-      } else {
-        this.isHide = true
+    getCollectionList () {
+      this.$api(this.$SERVER.GET_COLLECTIONLIST, {
+        params: { u_id: this.u_id }
+      }).then(data => {
+        this.commodityInfo = data.data.list
+      })
+    }
+  },
+  created () {
+    this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+      .then(data => {
+        this.u_id = data.data._id
+        this.getCollectionList()
+      })
+  },
+  watch: {
+    $route: {
+      handler () {
+
       }
     }
   }

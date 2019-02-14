@@ -9,8 +9,10 @@ import './sass/fonticon/iconfont.js'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // 引入swiper（轮播图）
-import 'swiper/dist/css/swiper.min.css'
-import 'swiper/dist/js/swiper.min.js'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
+Vue.use(VueAwesomeSwiper)
+
 // 引入iview
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'

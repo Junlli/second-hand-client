@@ -1,711 +1,780 @@
 export default {
   data () {
     return {
-      columns1: [
-        {
-          title: '商品名称',
-          align: 'center',
-          key: 'name',
-          width: 240,
-          render: (h, params) => {
-            return h('div', [
-              h('img', {
-                attrs: {
-                  src: params.row.goods.img
-                },
-                style: {
-                  display: 'block',
-                  width: '40px',
-                  height: '40px',
-                  marginTop: '10px',
-                  float: 'left'
-                }
-              }),
-              h('a', {
-                style: {
-                  display: 'block',
-                  marginLeft: '50px',
-                  height: '40px',
-                  textAlign: 'left'
-                }
-              }, params.row.goods.name),
-              h('span', {
-                style: {
-                  display: 'block',
-                  width: '200px',
-                  marginLeft: '50px',
-                  textAlign: 'left'
-                }
-              }, 'id:' + params.row.goods.id)
-            ])
-          }
-        },
-        {
-          title: '价格',
-          align: 'center',
-          key: 'price',
-          width: 100,
-          render: (h, params) => {
-            return h('span', {
-              style: {
-                color: '#f00'
-              }
-            }, params.row.price)
-          }
-        },
-        {
-          title: '库存',
-          align: 'center',
-          key: 'inventory'
-        },
-        {
-          title: '总销量',
-          align: 'center',
-          key: 'sales'
-        },
-        {
-          title: '发布时间',
-          align: 'center',
-          key: 'datetime'
-        },
-        {
-          title: '操作',
-          align: 'center',
-          key: 'action',
-          render: (h, params) => {
-            return h('div', [
-              h('Button', {
-                props: {
-                  type: 'primary',
-                  size: 'small'
-                },
-                style: {
-                  marginRight: '5px'
-                },
-                on: {
-                  click: () => {
-                    this.show(params.index)
-                  }
-                }
-              }, '编辑'),
-              h('Button', {
-                props: {
-                  type: 'primary',
-                  size: 'small'
-                },
-                style: {
-                  marginRight: '5px'
-                },
-                on: {
-                  click: () => {
-                    this.show(params.index)
-                  }
-                }
-              }, '下架'),
-              h('Button', {
-                props: {
-                  type: 'error',
-                  size: 'small'
-                },
-                style: {
-                  marginRight: '5px'
-                },
-                on: {
-                  click: () => {
-                    this.remove1(params.index)
-                  }
-                }
-              }, '删除')
-            ])
-          }
-        }
-      ],
-      data1: [
-        {
-          goods: {
-            img: 'https://www.youzixy.com/Public/images/icon/mkhead_hover.png',
-            name: '我是商品哇哈哈哈哈哈哈哈哈嗝哈',
-            id: '12361481248971289'
-          },
-          age: 18,
-          price: '45.00',
-          inventory: 100,
-          sales: 50,
-          datetime: '2018-03-31 19:14'
-        }
-      ],
-      columns2: [
-        {
-          title: '商品名称',
-          align: 'center',
-          key: 'name',
-          width: 240,
-          render: (h, params) => {
-            return h('div', [
-              h('img', {
-                attrs: {
-                  src: params.row.goods.img
-                },
-                style: {
-                  display: 'block',
-                  width: '40px',
-                  height: '40px',
-                  marginTop: '10px',
-                  float: 'left'
-                }
-              }),
-              h('a', {
-                style: {
-                  display: 'block',
-                  marginLeft: '50px',
-                  height: '40px',
-                  textAlign: 'left'
-                }
-              }, params.row.goods.name),
-              h('span', {
-                style: {
-                  display: 'block',
-                  width: '200px',
-                  marginLeft: '50px',
-                  textAlign: 'left'
-                }
-              }, 'id:' + params.row.goods.id)
-            ])
-          }
-        },
-        {
-          title: '价格',
-          align: 'center',
-          key: 'price',
-          width: 100,
-          render: (h, params) => {
-            return h('span', {
-              style: {
-                color: '#f00'
-              }
-            }, params.row.price)
-          }
-        },
-        {
-          title: '库存',
-          align: 'center',
-          key: 'inventory'
-        },
-        {
-          title: '总销量',
-          align: 'center',
-          key: 'sales'
-        },
-        {
-          title: '发布时间',
-          align: 'center',
-          key: 'datetime'
-        },
-        {
-          title: '操作',
-          align: 'center',
-          key: 'action',
-          render: (h, params) => {
-            return h('div', [
-              h('Button', {
-                props: {
-                  type: 'primary',
-                  size: 'small'
-                },
-                style: {
-                  marginRight: '5px'
-                },
-                on: {
-                  click: () => {
-                    this.show(params.index)
-                  }
-                }
-              }, '编辑'),
-              h('Button', {
-                props: {
-                  type: 'primary',
-                  size: 'small'
-                },
-                style: {
-                  marginRight: '5px'
-                },
-                on: {
-                  click: () => {
-                    this.show(params.index)
-                  }
-                }
-              }, '上架'),
-              h('Button', {
-                props: {
-                  type: 'error',
-                  size: 'small'
-                },
-                style: {
-                  marginRight: '5px'
-                },
-                on: {
-                  click: () => {
-                    this.remove2(params.index)
-                  }
-                }
-              }, '删除')
-            ])
-          }
-        }
-      ],
-      data2: [
-        {
-          goods: {
-            img: 'https://www.youzixy.com/Public/images/icon/mkhead_hover.png',
-            name: '我是商品哇哈哈哈哈哈哈哈哈嗝哈',
-            id: '12361481248971289'
-          },
-          age: 18,
-          price: '45.00',
-          inventory: 100,
-          sales: 50,
-          datetime: '2018-03-31 19:14'
-        }
-      ],
-      columns3: [
-        {
-          title: '成交时间',
-          align: 'center',
-          key: 'datetime',
-          width: 110
-        },
-        {
-          title: '商品',
-          align: 'center',
-          key: 'name',
-          width: 240,
-          render: (h, params) => {
-            return h('div', [
-              h('img', {
-                attrs: {
-                  src: params.row.goods.img
-                },
-                style: {
-                  display: 'block',
-                  width: '40px',
-                  height: '40px',
-                  marginTop: '10px',
-                  float: 'left'
-                }
-              }),
-              h('a', {
-                style: {
-                  display: 'block',
-                  marginLeft: '50px',
-                  height: '40px',
-                  textAlign: 'left'
-                }
-              }, params.row.goods.name),
-              h('span', {
-                style: {
-                  display: 'block',
-                  width: '200px',
-                  marginLeft: '50px',
-                  textAlign: 'left'
-                }
-              }, '订单号:' + params.row.goods.no)
-            ])
-          }
-        },
-        {
-          title: '单价',
-          align: 'center',
-          key: 'price',
-          width: 100,
-          render: (h, params) => {
-            return h('span', {
-              style: {
-                color: '#f00'
-              }
-            }, params.row.price)
-          }
-        },
-        {
-          title: '数量',
-          align: 'center',
-          key: 'num'
-        },
-        {
-          title: '实收款',
-          align: 'center',
-          key: 'total',
-          width: 80
-        },
-        {
-          title: '交易状态',
-          align: 'center',
-          key: 'status',
-          render: (h, params) => {
-            return h('a', '订单详情')
-          }
-        },
-        {
-          title: '操作',
-          align: 'center',
-          key: 'action',
-          render: (h, params) => {
-            return h('div', [
-              h('Button', {
-                props: {
-                  type: 'primary',
-                  size: 'large'
-                },
-                style: {
-                  marginRight: '5px'
-                },
-                on: {
-                  click: () => {
-                    this.show(params.index)
-                  }
-                }
-              }, '发货')
-            ])
-          }
-        }
-      ],
-      data3: [
-        {
-          goods: {
-            img: 'https://www.youzixy.com/Public/images/icon/mkhead_hover.png',
-            name: '我是商品哇哈哈哈哈哈哈哈哈嗝哈',
-            no: '12361481248971289'
-          },
-          price: '45.00',
-          num: 1,
-          total: '45.00',
-          // status: '订单详情',
-          datetime: '2018-03-31 19:14'
-        }
-      ],
-      columns4: [
-        {
-          title: '成交时间',
-          align: 'center',
-          key: 'datetime',
-          width: 110
-        },
-        {
-          title: '商品',
-          align: 'center',
-          key: 'name',
-          width: 240,
-          render: (h, params) => {
-            return h('div', [
-              h('img', {
-                attrs: {
-                  src: params.row.goods.img
-                },
-                style: {
-                  display: 'block',
-                  width: '40px',
-                  height: '40px',
-                  marginTop: '10px',
-                  float: 'left'
-                }
-              }),
-              h('a', {
-                style: {
-                  display: 'block',
-                  marginLeft: '50px',
-                  height: '40px',
-                  textAlign: 'left'
-                }
-              }, params.row.goods.name),
-              h('span', {
-                style: {
-                  display: 'block',
-                  width: '200px',
-                  marginLeft: '50px',
-                  textAlign: 'left'
-                }
-              }, '订单号:' + params.row.goods.no)
-            ])
-          }
-        },
-        {
-          title: '单价',
-          align: 'center',
-          key: 'price',
-          width: 100,
-          render: (h, params) => {
-            return h('span', {
-              style: {
-                color: '#f00'
-              }
-            }, params.row.price)
-          }
-        },
-        {
-          title: '数量',
-          align: 'center',
-          key: 'num'
-        },
-        {
-          title: '实收款',
-          align: 'center',
-          key: 'total',
-          width: 80
-        },
-        {
-          title: '买家',
-          align: 'center',
-          key: 'buyer',
-          render: (h, params) => {
-            return h('a', params.row.buyer)
-          }
-        },
-        {
-          title: '交易状态',
-          align: 'center',
-          key: 'status',
-          render: (h, params) => {
-            return h('div', [
-              h('span', '已发货'),
-              h('br'),
-              h('a', '订单详情')
-            ])
-          }
-        }
-      ],
-      data4: [
-        {
-          goods: {
-            img: 'https://www.youzixy.com/Public/images/icon/mkhead_hover.png',
-            name: '我是商品哇哈哈哈哈哈哈哈哈嗝哈',
-            no: '12361481248971289'
-          },
-          price: '45.00',
-          num: 1,
-          total: '45.00',
-          buyer: 'junlli',
-          datetime: '2018-03-31 19:14'
-        }
-      ],
-      columns5: [
-        {
-          title: '成交时间',
-          align: 'center',
-          key: 'datetime',
-          width: 110
-        },
-        {
-          title: '商品',
-          align: 'center',
-          key: 'name',
-          width: 240,
-          render: (h, params) => {
-            return h('div', [
-              h('img', {
-                attrs: {
-                  src: params.row.goods.img
-                },
-                style: {
-                  display: 'block',
-                  width: '40px',
-                  height: '40px',
-                  marginTop: '10px',
-                  float: 'left'
-                }
-              }),
-              h('a', {
-                style: {
-                  display: 'block',
-                  marginLeft: '50px',
-                  height: '40px',
-                  textAlign: 'left'
-                }
-              }, params.row.goods.name),
-              h('span', {
-                style: {
-                  display: 'block',
-                  width: '200px',
-                  marginLeft: '50px',
-                  textAlign: 'left'
-                }
-              }, '订单号:' + params.row.goods.no)
-            ])
-          }
-        },
-        {
-          title: '单价',
-          align: 'center',
-          key: 'price',
-          width: 100,
-          render: (h, params) => {
-            return h('span', {
-              style: {
-                color: '#f00'
-              }
-            }, params.row.price)
-          }
-        },
-        {
-          title: '数量',
-          align: 'center',
-          key: 'num'
-        },
-        {
-          title: '实收款',
-          align: 'center',
-          key: 'total',
-          width: 80
-        },
-        {
-          title: '买家',
-          align: 'center',
-          key: 'buyer',
-          render: (h, params) => {
-            return h('a', params.row.buyer)
-          }
-        },
-        {
-          title: '交易状态',
-          align: 'center',
-          key: 'status',
-          render: (h, params) => {
-            return h('div', [
-              h('span', '交易成功'),
-              h('br'),
-              h('a', '订单详情')
-            ])
-          }
-        }
-      ],
-      data5: [
-        {
-          goods: {
-            img: 'https://www.youzixy.com/Public/images/icon/mkhead_hover.png',
-            name: '我是商品哇哈哈哈哈哈哈哈哈嗝哈',
-            no: '12361481248971289'
-          },
-          price: '45.00',
-          num: 1,
-          total: '45.00',
-          buyer: 'junlli',
-          datetime: '2018-03-31 19:14'
-        }
-      ],
-      columns6: [
-        {
-          title: '成交时间',
-          align: 'center',
-          key: 'datetime',
-          width: 110
-        },
-        {
-          title: '商品',
-          align: 'center',
-          key: 'name',
-          width: 240,
-          render: (h, params) => {
-            return h('div', [
-              h('img', {
-                attrs: {
-                  src: params.row.goods.img
-                },
-                style: {
-                  display: 'block',
-                  width: '40px',
-                  height: '40px',
-                  marginTop: '10px',
-                  float: 'left'
-                }
-              }),
-              h('a', {
-                style: {
-                  display: 'block',
-                  marginLeft: '50px',
-                  height: '40px',
-                  textAlign: 'left'
-                }
-              }, params.row.goods.name),
-              h('span', {
-                style: {
-                  display: 'block',
-                  width: '200px',
-                  marginLeft: '50px',
-                  textAlign: 'left'
-                }
-              }, '订单号:' + params.row.goods.no)
-            ])
-          }
-        },
-        {
-          title: '单价',
-          align: 'center',
-          key: 'price',
-          width: 100,
-          render: (h, params) => {
-            return h('span', {
-              style: {
-                color: '#f00'
-              }
-            }, params.row.price)
-          }
-        },
-        {
-          title: '数量',
-          align: 'center',
-          key: 'num'
-        },
-        {
-          title: '实收款',
-          align: 'center',
-          key: 'total',
-          width: 80
-        },
-        {
-          title: '买家',
-          align: 'center',
-          key: 'buyer',
-          render: (h, params) => {
-            return h('a', params.row.buyer)
-          }
-        },
-        {
-          title: '交易状态',
-          align: 'center',
-          key: 'status',
-          render: (h, params) => {
-            return h('div', [
-              h('span', '交易关闭'),
-              h('br'),
-              h('a', '订单详情')
-            ])
-          }
-        }
-      ],
-      data6: [
-        {
-          goods: {
-            img: 'https://www.youzixy.com/Public/images/icon/mkhead_hover.png',
-            name: '我是商品哇哈哈哈哈哈哈哈哈嗝哈',
-            no: '12361481248971289'
-          },
-          price: '45.00',
-          num: 1,
-          total: '45.00',
-          buyer: 'junlli',
-          datetime: '2018-03-31 19:14'
-        }
-      ]
+      b_id: '',
+      unsendApiData: '',
+      columns1: [],
+      data1: [],
+      columns2: [],
+      data2: [],
+      columns3: [],
+      data3: [],
+      columns4: [],
+      data4: [],
+      columns5: [],
+      data5: []
     }
   },
   methods: {
-    // handleClearCurrentRow () {
-    //   this.$refs.currentRowTable.clearCurrentRow()
-    // },
-    // 删除商品
     remove1 (index) {
       this.data1.splice(index, 1)
     },
     remove2 (index) {
       this.data2.splice(index, 1)
+    },
+    getUserInfo () {
+      this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+        .then(data => {
+          this.b_id = data.data._id
+          this.getAllOrders()
+          this.getUnsend()
+          this.getSended()
+          this.getSuccessOrder()
+          this.getClosedOrder()
+        })
+    },
+    // 所有订单
+    getAllOrders () {
+      this.$api(this.$SERVER.GET_ORDERLIST, {
+        params: { b_id: this.b_id }
+      })
+        .then(data => {
+          this.data1 = data.data.list
+          for (let i = 0; i < this.data1.length; i++) {
+            this.columns1 = [
+              {
+                title: '下单时间',
+                align: 'center',
+                width: 105,
+                render: (h, params) => {
+                  return h('span', params.row.create_date)
+                }
+              },
+              {
+                title: '商品',
+                align: 'center',
+                key: 'name',
+                width: 270,
+                render: (h, params) => {
+                  return h('div',
+                    [
+                      h('img', {
+                        attrs: {
+                          src: this.$SERVER.FILEURL + params.row.commodity.c_images[0]
+                        },
+                        style: {
+                          display: 'block',
+                          width: '40px',
+                          height: '40px',
+                          marginTop: '10px',
+                          float: 'left'
+                        }
+                      }),
+                      h('a', {
+                        style: {
+                          display: 'block',
+                          marginLeft: '50px',
+                          height: '40px',
+                          textAlign: 'left',
+                          paddingTop: '10px'
+                        },
+                        on: {
+                          click: () => {
+                            this.$router.push({
+                              name: 'detail',
+                              params: { id: params.row.c_id }
+                            })
+                          }
+                        }
+                      }, params.row.commodity.c_title),
+                      h('span', {
+                        style: {
+                          display: 'block',
+                          width: '200px',
+                          marginLeft: '50px',
+                          textAlign: 'left',
+                          marginTop: '-5px'
+                        }
+                      }, 'id:' + params.row.commodity._id)
+                    ]
+                  )
+                }
+              },
+              {
+                title: '单价',
+                align: 'center',
+                width: 100,
+                render: (h, params) => {
+                  return h('span', params.row.o_price / 100)
+                }
+              },
+              {
+                title: '数量',
+                align: 'center',
+                render: (h, params) => {
+                  return h('span', params.row.o_num)
+                }
+              },
+              {
+                title: '实付款',
+                align: 'center',
+                render: (h, params) => {
+                  return h('span', {
+                    style: {
+                      color: '#f00'
+                    }
+                  }, params.row.o_price / 100 * params.row.o_num)
+                }
+              },
+              {
+                title: '卖家',
+                align: 'center',
+                render: (h, params) => {
+                  return h('a', {
+                    on: {
+                      click: () => {
+                        this.$router.push({
+                          name: 'userInfo',
+                          params: { id: params.row.s_id }
+                        })
+                      }
+                    }
+                  }, params.row.s_name)
+                }
+              },
+              {
+                title: '操作',
+                align: 'center',
+                key: 'action',
+                render: (h, params) => {
+                  if (params.row.o_state === 1) {
+                    return h('div', [
+                      h('Button', {
+                        props: {
+                          type: 'primary',
+                          size: 'small'
+                        },
+                        style: {
+                          marginRight: '5px'
+                        },
+                        on: {
+                          click: () => {
+                            this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
+                              id: params.row._id, o_state: 0
+                            }).then(data => {
+                              console.log(data)
+                              this.$api(this.$SERVER.GET_ORDERLIST, {
+                                params: { s_id: this.u_id, o_state: 1 }
+                              }).then(data => {
+                                this.data1 = data.data.list
+                              })
+                            })
+                          }
+                        }
+                      }, '取消订单')
+                    ])
+                  } else if (params.row.o_state === 2) {
+                    return h('Button', {
+                      props: {
+                        type: 'primary',
+                        size: 'large'
+                      },
+                      style: {
+                        marginRight: '5px'
+                      },
+                      on: {
+                        click: () => {
+
+                        }
+                      }
+                    }, '评价')
+                  }
+                }
+              }
+            ]
+          }
+        })
+    },
+    // 未发货
+    getUnsend () {
+      this.$api(this.$SERVER.GET_ORDERLIST, {
+        params: { b_id: this.b_id, o_state: 1 }
+      })
+        .then(data => {
+          this.data2 = data.data.list
+          for (let i = 0; i < this.data2.length; i++) {
+            this.columns2 = [
+              {
+                title: '下单时间',
+                align: 'center',
+                width: 105,
+                render: (h, params) => {
+                  return h('span', params.row.create_date)
+                }
+              },
+              {
+                title: '商品',
+                align: 'center',
+                key: 'name',
+                width: 270,
+                render: (h, params) => {
+                  return h('div',
+                    [
+                      h('img', {
+                        attrs: {
+                          src: this.$SERVER.FILEURL + params.row.commodity.c_images[0]
+                        },
+                        style: {
+                          display: 'block',
+                          width: '40px',
+                          height: '40px',
+                          marginTop: '10px',
+                          float: 'left'
+                        }
+                      }),
+                      h('a', {
+                        style: {
+                          display: 'block',
+                          marginLeft: '50px',
+                          height: '40px',
+                          textAlign: 'left',
+                          paddingTop: '10px'
+                        },
+                        on: {
+                          click: () => {
+                            this.$router.push({
+                              name: 'detail',
+                              params: { id: params.row.c_id }
+                            })
+                          }
+                        }
+                      }, params.row.commodity.c_title),
+                      h('span', {
+                        style: {
+                          display: 'block',
+                          width: '200px',
+                          marginLeft: '50px',
+                          textAlign: 'left',
+                          marginTop: '-5px'
+                        }
+                      }, 'id:' + params.row.commodity._id)
+                    ]
+                  )
+                }
+              },
+              {
+                title: '单价',
+                align: 'center',
+                width: 100,
+                render: (h, params) => {
+                  return h('span', params.row.o_price / 100)
+                }
+              },
+              {
+                title: '数量',
+                align: 'center',
+                render: (h, params) => {
+                  return h('span', params.row.o_num)
+                }
+              },
+              {
+                title: '实付款',
+                align: 'center',
+                render: (h, params) => {
+                  return h('span', {
+                    style: {
+                      color: '#f00'
+                    }
+                  }, params.row.o_price / 100 * params.row.o_num)
+                }
+              },
+              {
+                title: '卖家',
+                align: 'center',
+                render: (h, params) => {
+                  return h('a', {
+                    on: {
+                      click: () => {
+                        this.$router.push({
+                          name: 'userInfo',
+                          params: { id: params.row.s_id }
+                        })
+                      }
+                    }
+                  }, params.row.s_name)
+                }
+              },
+              {
+                title: '操作',
+                align: 'center',
+                key: 'action',
+                render: (h, params) => {
+                  return h('div', [
+                    h('Button', {
+                      props: {
+                        type: 'primary',
+                        size: 'large'
+                      },
+                      style: {
+                        marginRight: '5px'
+                      },
+                      on: {
+                        click: () => {
+                          this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
+                            id: params.row._id, o_state: 0
+                          }).then(data => {
+                            console.log(data)
+                            this.$api(this.$SERVER.GET_ORDERLIST, {
+                              params: { s_id: this.u_id, o_state: 1 }
+                            }).then(data => {
+                              this.data1 = data.data.list
+                            })
+                          })
+                        }
+                      }
+                    }, '取消订单')
+                  ])
+                }
+              }
+            ]
+          }
+        })
+    },
+    // 已发货
+    getSended () {
+      this.$api(this.$SERVER.GET_ORDERLIST, {
+        params: { b_id: this.b_id, o_state: 2 }
+      }).then(data => {
+        this.data3 = data.data.list
+        for (let i = 0; i < this.data3.length; i++) {
+          this.columns3 = [
+            {
+              title: '下单时间',
+              align: 'center',
+              width: 105,
+              render: (h, params) => {
+                return h('span', params.row.create_date)
+              }
+            },
+            {
+              title: '商品',
+              align: 'center',
+              key: 'name',
+              width: 270,
+              render: (h, params) => {
+                return h('div',
+                  [
+                    h('img', {
+                      attrs: {
+                        src: this.$SERVER.FILEURL + params.row.commodity.c_images[0]
+                      },
+                      style: {
+                        display: 'block',
+                        width: '40px',
+                        height: '40px',
+                        marginTop: '10px',
+                        float: 'left'
+                      }
+                    }),
+                    h('a', {
+                      style: {
+                        display: 'block',
+                        marginLeft: '50px',
+                        height: '40px',
+                        textAlign: 'left',
+                        paddingTop: '10px'
+                      },
+                      on: {
+                        click: () => {
+                          this.$router.push({
+                            name: 'detail',
+                            params: { id: params.row.c_id }
+                          })
+                        }
+                      }
+                    }, params.row.commodity.c_title),
+                    h('span', {
+                      style: {
+                        display: 'block',
+                        width: '200px',
+                        marginLeft: '50px',
+                        textAlign: 'left',
+                        marginTop: '-5px'
+                      }
+                    }, 'id:' + params.row.commodity._id)
+                  ]
+                )
+              }
+            },
+            {
+              title: '单价',
+              align: 'center',
+              width: 100,
+              render: (h, params) => {
+                return h('span', params.row.o_price / 100)
+              }
+            },
+            {
+              title: '数量',
+              align: 'center',
+              render: (h, params) => {
+                return h('span', params.row.o_num)
+              }
+            },
+            {
+              title: '实付款',
+              align: 'center',
+              render: (h, params) => {
+                return h('span', {
+                  style: {
+                    color: '#f00'
+                  }
+                }, params.row.o_price / 100 * params.row.o_num)
+              }
+            },
+            {
+              title: '卖家',
+              align: 'center',
+              render: (h, params) => {
+                return h('a', {
+                  on: {
+                    click: () => {
+                      this.$router.push({
+                        name: 'userInfo',
+                        params: { id: params.row.s_id }
+                      })
+                    }
+                  }
+                }, params.row.s_name)
+              }
+            },
+            {
+              title: '操作',
+              align: 'center',
+              key: 'action',
+              render: (h, params) => {
+                return h('div', [
+                  h('Button', {
+                    props: {
+                      type: 'primary',
+                      size: 'large'
+                    },
+                    style: {
+                      marginRight: '5px'
+                    },
+                    on: {
+                      click: () => {
+                        this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
+                          id: params.row._id, o_state: 3
+                        }).then(data => {
+                          this.$api(this.$SERVER.GET_ORDERLIST, {
+                            params: { s_id: this.u_id, o_state: 2 }
+                          }).then(data => {
+                            this.data3 = data.data.list
+                          })
+                        })
+                      }
+                    }
+                  }, '确认收货')
+                ])
+              }
+            }
+          ]
+        }
+      })
+    },
+    // 成功的订单
+    getSuccessOrder () {
+      this.$api(this.$SERVER.GET_ORDERLIST, {
+        params: { b_id: this.b_id, o_state: 3 }
+      }).then(data => {
+        this.data4 = data.data.list
+        for (let i = 0; i < this.data4.length; i++) {
+          this.columns4 = [
+            {
+              title: '下单时间',
+              align: 'center',
+              width: 105,
+              render: (h, params) => {
+                return h('span', params.row.create_date)
+              }
+            },
+            {
+              title: '商品',
+              align: 'center',
+              key: 'name',
+              width: 270,
+              render: (h, params) => {
+                return h('div',
+                  [
+                    h('img', {
+                      attrs: {
+                        src: this.$SERVER.FILEURL + params.row.commodity.c_images[0]
+                      },
+                      style: {
+                        display: 'block',
+                        width: '40px',
+                        height: '40px',
+                        marginTop: '10px',
+                        float: 'left'
+                      }
+                    }),
+                    h('a', {
+                      style: {
+                        display: 'block',
+                        marginLeft: '50px',
+                        height: '40px',
+                        textAlign: 'left',
+                        paddingTop: '10px'
+                      },
+                      on: {
+                        click: () => {
+                          this.$router.push({
+                            name: 'detail',
+                            params: { id: params.row.c_id }
+                          })
+                        }
+                      }
+                    }, params.row.commodity.c_title),
+                    h('span', {
+                      style: {
+                        display: 'block',
+                        width: '200px',
+                        marginLeft: '50px',
+                        textAlign: 'left',
+                        marginTop: '-5px'
+                      }
+                    }, 'id:' + params.row.commodity._id)
+                  ]
+                )
+              }
+            },
+            {
+              title: '单价',
+              align: 'center',
+              width: 100,
+              render: (h, params) => {
+                return h('span', params.row.o_price / 100)
+              }
+            },
+            {
+              title: '数量',
+              align: 'center',
+              render: (h, params) => {
+                return h('span', params.row.o_num)
+              }
+            },
+            {
+              title: '实付款',
+              align: 'center',
+              render: (h, params) => {
+                return h('span', {
+                  style: {
+                    color: '#f00'
+                  }
+                }, params.row.o_price / 100 * params.row.o_num)
+              }
+            },
+            {
+              title: '卖家',
+              align: 'center',
+              render: (h, params) => {
+                return h('a', {
+                  on: {
+                    click: () => {
+                      this.$router.push({
+                        name: 'userInfo',
+                        params: { id: params.row.s_id }
+                      })
+                    }
+                  }
+                }, params.row.s_name)
+              }
+            },
+            {
+              title: '操作',
+              align: 'center',
+              key: 'action',
+              render: (h, params) => {
+                return h('div', [
+                  h('Button', {
+                    props: {
+                      type: 'primary',
+                      size: 'large'
+                    },
+                    style: {
+                      marginRight: '5px'
+                    },
+                    on: {
+                      click: () => {
+                        this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
+                          id: params.row._id, o_state: 3
+                        }).then(data => {
+                          this.$api(this.$SERVER.GET_ORDERLIST, {
+                            params: { s_id: this.u_id, o_state: 2 }
+                          }).then(data => {
+                            this.data3 = data.data.list
+                          })
+                        })
+                      }
+                    }
+                  }, '评价')
+                ])
+              }
+            }
+          ]
+        }
+      })
+    },
+    // 关闭的订单
+    getClosedOrder () {
+      this.$api(this.$SERVER.GET_ORDERLIST, {
+        params: { b_id: this.b_id, o_state: 0 }
+      }).then(data => {
+        this.data5 = data.data.list
+        for (let i = 0; i < this.data5.length; i++) {
+          this.columns4 = [
+            {
+              title: '下单时间',
+              align: 'center',
+              width: 105,
+              render: (h, params) => {
+                return h('span', params.row.create_date)
+              }
+            },
+            {
+              title: '商品',
+              align: 'center',
+              key: 'name',
+              width: 270,
+              render: (h, params) => {
+                return h('div',
+                  [
+                    h('img', {
+                      attrs: {
+                        src: this.$SERVER.FILEURL + params.row.commodity.c_images[0]
+                      },
+                      style: {
+                        display: 'block',
+                        width: '40px',
+                        height: '40px',
+                        marginTop: '10px',
+                        float: 'left'
+                      }
+                    }),
+                    h('a', {
+                      style: {
+                        display: 'block',
+                        marginLeft: '50px',
+                        height: '40px',
+                        textAlign: 'left',
+                        paddingTop: '10px'
+                      },
+                      on: {
+                        click: () => {
+                          this.$router.push({
+                            name: 'detail',
+                            params: { id: params.row.c_id }
+                          })
+                        }
+                      }
+                    }, params.row.commodity.c_title),
+                    h('span', {
+                      style: {
+                        display: 'block',
+                        width: '200px',
+                        marginLeft: '50px',
+                        textAlign: 'left',
+                        marginTop: '-5px'
+                      }
+                    }, 'id:' + params.row.commodity._id)
+                  ]
+                )
+              }
+            },
+            {
+              title: '单价',
+              align: 'center',
+              width: 100,
+              render: (h, params) => {
+                return h('span', {
+                  style: {
+                    color: '#f00'
+                  }
+                }, params.row.o_price / 100)
+              }
+            },
+            {
+              title: '数量',
+              align: 'center',
+              render: (h, params) => {
+                return h('span', params.row.o_num)
+              }
+            },
+            {
+              title: '实付款',
+              align: 'center',
+              render: (h, params) => {
+                return h('span', {
+                  style: {
+                    color: '#f00'
+                  }
+                }, params.row.o_price / 100 * params.row.o_num)
+              }
+            },
+            {
+              title: '卖家',
+              align: 'center',
+              render: (h, params) => {
+                return h('a', {
+                  on: {
+                    click: () => {
+                      this.$router.push({
+                        name: 'userInfo',
+                        params: { id: params.row.s_id }
+                      })
+                    }
+                  }
+                }, params.row.s_name)
+              }
+            },
+            {
+              title: '操作',
+              align: 'center',
+              key: 'action',
+              render: (h, params) => {
+                return h('div', [
+                  h('Button', {
+                    props: {
+                      type: 'primary',
+                      size: 'large'
+                    },
+                    style: {
+                      marginRight: '5px'
+                    },
+                    on: {
+                      click: () => {
+                        this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
+                          id: params.row._id, o_state: 3
+                        }).then(data => {
+                          this.$api(this.$SERVER.GET_ORDERLIST, {
+                            params: { s_id: this.u_id, o_state: 2 }
+                          }).then(data => {
+                            this.data3 = data.data.list
+                          })
+                        })
+                      }
+                    }
+                  }, '评价')
+                ])
+              }
+            }
+          ]
+        }
+      })
     }
+  },
+  created () {
+    this.getUserInfo()
   }
 }

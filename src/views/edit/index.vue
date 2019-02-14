@@ -5,23 +5,23 @@
       <div class="edit-title">
         <h1>编辑个人信息</h1>
       </div>
-      <el-form :model="userInfo" label-width="80px">
+      <el-form :model="apiData" label-width="80px">
         <el-form-item label="用户名">
-          <el-input v-model="userInfo.u_name"></el-input>
+          <el-input v-model="apiData.u_name"></el-input>
         </el-form-item>
         <el-form-item label="邮箱">
-          <el-input v-model="userInfo.u_mail"></el-input>
+          <el-input v-model="apiData.u_mail"></el-input>
         </el-form-item>
         <el-form-item label="省市">
           <province
-            :province="userInfo.u_province"
+            :province="apiData.u_province"
             :provinces="provinceList"
             @change="setCityList"
             style="width:130px"
           >
           </province>
           <el-select
-            v-model="userInfo.u_city"
+            v-model="apiData.u_city"
             style="width:130px"
             placeholder="请选择城市"
             class="selectCity">
@@ -37,10 +37,19 @@
         <el-form-item label="学校">
           <school
             @list="getSchoolList"
-            :school="userInfo.u_school"
+            :school="apiData.u_school"
             :schools="schoolList"
             @change="setSchool"
           ></school>
+        </el-form-item>
+        <el-form-item label="手机号">
+          <el-input v-model="apiData.u_tel"></el-input>
+        </el-form-item>
+        <el-form-item label="微信号">
+          <el-input v-model="apiData.u_wx"></el-input>
+        </el-form-item>
+        <el-form-item label="QQ">
+          <el-input v-model="apiData.u_qq"></el-input>
         </el-form-item>
         <el-button type="primary" @click="save">保存</el-button>
         <el-button type="info" plain @click="cancel">取消</el-button>

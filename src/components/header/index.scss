@@ -33,8 +33,23 @@
       margin-top: 2px;
       cursor: pointer;
     }
+    .school {
+      display: inline-block;
+      float: left;
+      color: #fff;
+      font-size: 18px;
+      margin: 2px 0 0 10px;
+      .location {
+        font-size: 18px;
+        margin-right: 5px;
+      }
+      .change {
+        color: gainsboro;
+        margin-left: 2px;
+      }
+    }
     .search {
-      float: right;
+      float: right!important;
       width: 268px;
       height: 50px;
       .search-filed {
@@ -99,4 +114,17 @@
 
 .toLogin {
   text-align: center;
+}
+
+.vertical-center-modal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .ivu-modal{
+    top: 0;
+    .ivu-modal-header, .ivu-modal-body {
+      text-align: center;
+    }
+  }
 }

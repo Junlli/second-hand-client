@@ -4,28 +4,28 @@
     width: 1200px;
     margin: 0 auto;
     .swiper-container {
-      width: 950px;
-      height: 250px;
+      width: 900px;
+      height: 300px;
       float: left;
       .swiper-img {
-        width: 950px;
+        width: 900px;
         height: 300px;
       }
     }
     .login-box {
-      width: 200px;
-      height: 250px;
+      width: 250px;
+      height: 300px;
       background-color: #fff;
       float: right;
       text-align: center;
       .profile {
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
         border-radius: 50%;
         margin: 20px auto;
         .profile-photo {
-          width: 100px;
-          height: 100px;
+          width: 150px;
+          height: 150px;
         }
       }
       .register {
@@ -36,7 +36,7 @@
         font-size: 14px;
       }
       .account {
-        font-size: 20px;
+        font-size: 24px;
         font-weight: 700;
       }
       .personal {

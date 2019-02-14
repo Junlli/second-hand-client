@@ -22,7 +22,7 @@
         </div>
         <div id="user_msg">
           <div class="name">{{userInfo.u_name}}</div>
-          <p class="has_sell">共有<span class="all">0</span>件商品，已卖出<span>0</span>件商品</p>
+          <p class="has_sell">共有<span class="all">{{ count }}</span>件商品</p>
           <ul class="seller_attr">
             <li>学校：&nbsp;&nbsp;<span>{{userInfo.u_school}}</span></li>
             <li>认证：&nbsp;&nbsp;<span>未认证</span></li>
@@ -35,7 +35,7 @@
         theme="light"
         :active-name="this.$route.path.slice(1)"
       >
-        <MenuItem name="user" to="/user">
+        <MenuItem name="user/personal" to="/user/personal">
           <Icon type="ios-paper" />
           个人资料
         </MenuItem>

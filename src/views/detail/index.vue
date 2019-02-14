@@ -6,8 +6,8 @@
         <div class="picture">
           <div class="bigImg">
             <pic-zoom
-              v-if="commidityInfo"
-              :url="$SERVER.FILEURL + commidityInfo.c_images[isShow]"
+              v-if="commodityInfo"
+              :url="$SERVER.FILEURL + commodityInfo.c_images[isShow]"
               :scale="2"
             ></pic-zoom>
           </div>
@@ -16,7 +16,7 @@
               class="small-img"
               @click="handleClick(index)"
               :class="{active: isShow === index}"
-              v-for="(item, index) of commidityInfo.c_images"
+              v-for="(item, index) of commodityInfo.c_images"
             >
               <img :src="$SERVER.FILEURL + item" alt="" class="pic">
             </li>
@@ -24,16 +24,15 @@
         </div>
         <div class="info">
           <ul>
-            <li class="title">{{ commidityInfo.c_title }}</li>
+            <li class="title">{{ commodityInfo.c_title }}</li>
             <li class="price">
               <i class="iconfont">&#xe616;</i>
-              <span class="jiage">{{ commidityInfo.c_price/100 }}元</span>
+              <span class="jiage">{{ commodityInfo.c_price/100 }}元</span>
             </li>
             <li class="user">
-              <a href="#">
+              <a @click="toUserInfo(commodityInfo.u_id)">
                 <i class="iconfont">&#xe600;</i>
-                <span class="username">{{ commidityInfo.u_name }}</span>
-                <!--<Rate v-model="value" count="1" />-->
+                <span class="username">{{ commodityInfo.u_name }}</span>
                 <div class="rate">
                   <svg class="register-form-account" aria-hidden="true">
                     <use xlink:href="#icon-icon-test"></use>
@@ -44,26 +43,28 @@
             </li>
             <li class="school">
               <i class="iconfont">&#xe676;</i>
-              <span>{{ commidityInfo.u_school }}</span>
+              <span>{{ commodityInfo.u_school }}</span>
             </li>
             <li class="inventory">
               <i class="iconfont">&#xe677;</i>
-              <el-input-number v-model="inventory" :min="1" :max="commidityInfo.c_num" label="描述文字"></el-input-number>
-              <span class="inventory-num">(库存{{ commidityInfo.c_num }}件)</span>
+              <el-input-number v-model="inventory" :min="1" :max="commodityInfo.c_num" label="描述文字"></el-input-number>
+              <span class="inventory-num">(库存{{ commodityInfo.c_num }}件)</span>
             </li>
-            <!--<li class="identify">-->
-              <!--<i class="iconfont">&#xe6ac;</i>-->
-              <!--<span>未认证</span>-->
-            <!--</li>-->
             <li class="datetime">
               <i class="iconfont">&#xe672;</i>
-              <span>{{ commidityInfo.create_date }}</span>
+              <span v-if="commodityInfo">{{ commodityInfo.create_date.split(' ')[0] }}</span>
             </li>
           </ul>
-          <router-link to="/order">
-            <Button type="primary">购买商品</Button>
-          </router-link>
-          <Button type="success" @click="modal1 = true">联系卖家</Button>
+          <Button
+            type="primary"
+            @click="handleBuy(c_id)"
+            v-if="userInfo.u_name !== commodityInfo.u_name"
+          >购买商品</Button>
+          <Button
+            type="success"
+            @click="modal1 = true"
+            v-if="userInfo.u_name !== commodityInfo.u_name"
+          >联系卖家</Button>
           <Modal
             v-model="modal1"
             width="400"
@@ -78,22 +79,27 @@
                 <ul class="connect">
                   <li class="phone">
                     <i class="iconfont">&#xe613;</i>
-                    <span>13562458754</span>
+                    <span>{{ userInfo.u_tel }}</span>
                   </li>
                   <li class="wechat">
                     <i class="iconfont">&#xe82c;</i>
-                    <span>weixinhao</span>
+                    <span>{{ userInfo.u_wx }}</span>
                   </li>
                   <li class="qq">
                     <i class="iconfont">&#xe629;</i>
-                    <span>5426849</span>
+                    <span>{{ userInfo.u_qq }}</span>
                   </li>
                 </ul>
 
             </div>
             <div slot="footer" style="border:none"></div>
           </Modal>
-          <Button type="primary" ghost @click="handleCollect">
+          <Button
+            type="primary"
+            ghost
+            @click="handleCollect(commodityInfo.c_col)"
+            v-if="userInfo.u_name !== commodityInfo.u_name"
+          >
             <Icon type="md-heart" :class="{changeColor: ischange === 1}" />
             收藏
           </Button>
@@ -103,13 +109,7 @@
         <div class="description-title">
           <span>商品详情</span>
         </div>
-        <div class="description-body">
-          <p>
-            笔记本电脑 笔记本电脑是联想的初一买的现在上大学换电脑出售！
-            配置:120g的金士顿固态硬盘最近才换的 500g的机械硬盘 主板是17年换的七彩虹的新主板  双显卡 i5的处理器 鼠标  鼠标垫  1.5的网线  打游戏的话   lol  cf   dnf 毫无压力！现在出售！有意者可联系我15136209633
-            本交易支持自提、当面交易、邮寄
-          </p>
-        </div>
+        <div class="description-body" v-html="commodityInfo.c_detail"></div>
       </div>
     </div>
     <home-footer></home-footer>

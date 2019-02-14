@@ -1,11 +1,19 @@
 import { mapState, mapGetters, mapMutations } from 'vuex'
+import School from '@/components/school/index.vue'
 
 export default {
   props: ['unLogin'],
   data () {
     return {
-      login: false
+      login: false,
+      modal: false, // 显示对话框
+      u_school: '',
+      changeSchoolName: '',
+      schoolList: []
     }
+  },
+  components: {
+    School
   },
   computed: {
     ...mapState(['userInfo'])
@@ -14,7 +22,7 @@ export default {
     ...mapMutations(['setUserInfo']),
     handleQuit () {
       this.$api(this.$SERVER.GET_QUIT)
-        .then (data => {
+        .then(data => {
           console.log(data)
           this.setUserInfo()
           this.$router.push('/')
@@ -22,7 +30,7 @@ export default {
     },
     // 点击头像进入个人中心
     toUser () {
-      this.$router.push('/user')
+      this.$router.push('/user/personal')
     },
     handleRelease () {
       if (this.userInfo.u_avatar) {
@@ -37,14 +45,32 @@ export default {
     },
     getUserInfo () {
       this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-        .then(data => this.setUserInfo(data.data))
+        .then(data => {
+          this.setUserInfo(data.data)
+          this.u_school = data.data.u_school
+          this.changeSchoolName = this.u_school
+        })
     },
     isLogin () {
       this.$api(this.$SERVER.GET_ISLOGIN)
         .then(data => data.state && this.getUserInfo())
+    },
+    getSchoolList (data) {
+      this.schoolList = data
+    },
+    setSchool (val) {
+      this.changeSchoolName = val
+    },
+    changeSchool () {
+      this.u_school = this.changeSchoolName
+      this.modal = false
+    },
+    cancel () {
+      this.modal = false
     }
   },
   created () {
     this.isLogin()
+    this.getUserInfo()
   }
 }

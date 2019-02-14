@@ -1,10 +1,11 @@
-import Swiper from 'swiper'
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import HomeHeader from '@/components/header/index.vue'
 import HomeFooter from '@/components/footer/index.vue'
 import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
-  data() {
+  data () {
     return {
       isShow: false,
       second: null,
@@ -20,19 +21,33 @@ export default {
         c_type: '',
         c_type2: '',
         pageSize: 20,
-        pageIndex: 1
+        pageIndex: 1,
+        c_state: 1
       },
       dataList: {
         count: 1,
         list: []
       },
       typeList: [],
-      commidityList: []
+      commidityList: [],
+      bannerImg: [],
+      // 轮播图
+      swiperOption: {
+        loop: true,
+        autoplay: 3000,
+        autoplayDisableOnInteraction : false,
+        prevButton:'.swiper-button-prev',
+        nextButton:'.swiper-button-next',
+        pagination: '.swiper-pagination',
+        paginationClickable :true
+      }
     }
   },
   components: {
     HomeHeader,
-    HomeFooter
+    HomeFooter,
+    swiper,
+    swiperSlide
   },
   computed: {
     ...mapState(['userInfo']),
@@ -47,14 +62,17 @@ export default {
     moveDown () {
       this.show = false
     },
+    // 退出登录
     quit () {
       this.$api(this.$SERVER.GET_QUIT)
         .then(data => this.setUserInfo())
     },
+    // 获取当前用户信息
     getUserInfo () {
       this.$api(this.$SERVER.GET_CURRENTUSERINFO)
         .then(data => this.setUserInfo(data.data))
     },
+    // 是否登录
     isLogin () {
       this.$api(this.$SERVER.GET_ISLOGIN)
         .then(data => data.state && this.getUserInfo())
@@ -73,9 +91,7 @@ export default {
         params: this.getApiData
       })
         .then(data => {
-          // this.commidityList = data.data.list
           this.dataList = data.data
-          // console.log(this.dataList)
         })
     },
     // 显示对应商品
@@ -106,6 +122,23 @@ export default {
     handlePage (val) {
       this.getApiData.pageIndex = val
       this.getCommidity()
+    },
+    // 获取轮播图
+    getBanner () {
+      this.$api(this.$SERVER.GET_BANNERLIST, {
+        params: { b_state: 1 }
+      }).then(data => {
+        this.bannerImg = data.data.list
+        console.log(this.bannerImg)
+      })
+    },
+    // 点击一级分类显示分类的所有商品
+    clickSubmenu (type1) {
+      this.$api(this.$SERVER.GET_COMMODITYLIST, {
+        params: { c_type: type1, c_state: 1 }
+      }).then(data => {
+        this.dataList = data.data
+      })
     }
   },
   created () {
@@ -113,19 +146,26 @@ export default {
     this.getTypeList()
     // 获取商品列表
     this.getCommidity()
+    // 获取轮播图
+    this.getBanner()
+    // let mySwiper = new Swiper('.swiper-container', {
+    //   // autoplay: true,
+    //   // autoplay: {
+    //   //   disableOnInteraction: false,  //点击后继续轮播(这个很重要)
+    //   //   delay: 1000,                       //自动轮播的每次的时间 可以不设置 会有个默认值
+    //   // },
+    //   loop: true,
+    //   navigation: {
+    //     nextEl: '.swiper-button-next',
+    //     prevEl: '.swiper-button-prev'
+    //   },
+    //   pagination: {
+    //     el: '.swiper-pagination'
+    //   }
+    // })
   },
   mounted () {
-    var mySwiper = new Swiper('.swiper-container', {
-      autoplay: true,
-      loop: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
-      pagination: {
-        el: '.swiper-pagination'
-      }
-    })
+
   },
   watch: {
     $route: {

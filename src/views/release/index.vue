@@ -2,8 +2,11 @@
   <div class="bg">
     <home-header></home-header>
     <div class="type-page">
-      <div class="release-title">
+      <div class="release-title" v-if="!this.$route.query.id">
         <h1>发布商品</h1>
+      </div>
+      <div class="release-title" v-else>
+        <h1>编辑商品</h1>
       </div>
       <el-form ref="form" :model="apiData" label-width="80px">
         <el-form-item label="商品标题">
@@ -12,17 +15,6 @@
         <el-form-item label="商品详情">
           <el-input type="textarea" v-model="apiData.c_detail"></el-input>
         </el-form-item>
-        <!--<el-form-item label="封面">-->
-          <!--<el-upload-->
-            <!--class="avatar-uploader"-->
-            <!--action="https://jsonplaceholder.typicode.com/posts/"-->
-            <!--:show-file-list="false"-->
-            <!--:on-success="handleAvatarSuccess"-->
-            <!--:before-upload="beforeAvatarUpload">-->
-            <!--<img v-if="imageUrl" :src="imageUrl" class="avatar">-->
-            <!--<i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
-          <!--</el-upload>-->
-        <!--</el-form-item>-->
         <el-form-item label="相册">
           <el-upload
             :action="$SERVER.URL + $SERVER.PATH + $SERVER.POST_UPIMG"
@@ -32,11 +24,12 @@
             :limit="4"
             :on-success="handleSuccess"
             :class="{disabled: isShow}"
+            :file-list="filePath"
           >
             <i class="el-icon-plus"></i>
           </el-upload>
           <el-dialog :visible.sync="dialogVisible">
-            <img width="100%" :src="dialogImageUrl" alt="">
+            <img width="100%" :src="dialogImageUrl">
           </el-dialog>
           <span>(最多上传4张)</span>
         </el-form-item>

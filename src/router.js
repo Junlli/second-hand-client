@@ -46,7 +46,7 @@ const router = new Router({
       },
       children: [
         {
-          path: '/',
+          path: 'personal',
           name: 'personal',
           component: resolve => {
             require(['./views/user/component/personal/index.vue'], resolve)
@@ -97,7 +97,7 @@ const router = new Router({
       }
     },
     {
-      path: '/order',
+      path: '/order/:id',
       name: 'order',
       component: resolve => {
         require(['./views/order/index.vue'], resolve)
@@ -109,7 +109,14 @@ const router = new Router({
       component: resolve => {
         require(['./views/edit/index.vue'], resolve)
       }
-    }
+    },
+    {
+      path: '/userInfo/:id',
+      name: 'userInfo',
+      component: resolve => {
+        require(['./views/userinfo/index.vue'], resolve)
+      }
+    },
   ]
 })
 

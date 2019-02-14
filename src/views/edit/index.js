@@ -16,7 +16,10 @@ export default {
         u_province: '',
         u_city: '',
         u_school: '',
-        u_password: ''
+        u_password: '',
+        u_tel: '',
+        u_wx: '',
+        u_qq: ''
       },
       schoolList: []
     }
@@ -37,21 +40,33 @@ export default {
       this.schoolList = data
     },
     setSchool (val) {
-      this.userInfo.u_school = val
+      this.apiData.u_school = val
     },
     cancel () {
-      this.$router.push('/user')
+      this.$router.push('/user/personal')
     },
     save () {
-      this.userInfo.u_password = ''
-      console.log(this.userInfo._id)
-      this.$api.post(this.$SERVER.POST_UPUSERINFO, { ...this.userInfo, id: this.userInfo._id })
+      // this.userInfo.u_password = ''
+      this.$api.post(this.$SERVER.POST_UPUSERINFO, { ...this.apiData, id: this.userInfo._id })
         .then(data => this.thenSubmit('修改'))
     },
     thenSubmit (str) {
       this.$message.success(str + '成功')
-      this.$router.push('/user')
+      this.$router.push('/user/personal')
+    },
+    getUserInfo () {
+      this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+        .then(data => {
+          let info = data.data
+          info.u_password = ''
+          this.apiData = info
+          console.log(this.apiData)
+          this.getCityList()
+        })
     }
+  },
+  created () {
+    this.getUserInfo()
   },
   watch: {
     $route: {

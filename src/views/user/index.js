@@ -19,7 +19,8 @@ export default {
         u_name: '',
         u_school: ''
       },
-      unLogin: false
+      unLogin: false,
+      count: '' // 拥有的商品数
     }
   },
   components: {
@@ -46,12 +47,6 @@ export default {
       this.userInfo.u_avatar = this.imageUrl
       this.userInfo.u_password = ''
       this.$api.post(this.$SERVER.POST_UPUSERINFO, { ...this.userInfo, id: this.userInfo._id })
-        .then(data => {
-          // this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-          //   .then(data => {
-          //     this.setUserInfo(data.data)
-          //   })
-        })
     },
     beforeAvatarUpload (file) {
       const isJPG = file.type === 'image/jpeg'
@@ -64,9 +59,18 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isJPG && isLt2M
+    },
+    // 获取商品列表
+    getCommodity () {
+      this.$api(this.$SERVER.GET_COMMODITYLIST, {
+        params: { u_id: this.userInfo._id }
+      }).then(data => {
+        this.count = data.data.count
+      })
     }
   },
   created () {
+    this.getCommodity()
   },
   mounted () {
     this.$api(this.$SERVER.GET_CURRENTUSERINFO)

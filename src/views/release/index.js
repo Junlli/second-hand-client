@@ -18,13 +18,14 @@ export default {
         c_address: '',
         c_detail: '',
         c_num: 1,
-        c_state: 1,
+        c_state: 1
       },
       imageUrl: '',
       dialogImageUrl: '',
       dialogVisible: false,
       imgCount: 0,
-      isShow: false
+      isShow: false,
+      fileList: [] // 图片
     }
   },
   components: {
@@ -32,7 +33,12 @@ export default {
     HomeFooter
   },
   computed: {
-    ...mapState(['userInfo'])
+    ...mapState(['userInfo']),
+    filePath () {
+      if (this.apiData.c_images !== undefined) {
+        return this.apiData.c_images.map(file => ({url: this.$SERVER.FILEURL + file}))
+      }
+    }
   },
   methods: {
     handleAvatarSuccess (res, file) {
@@ -73,7 +79,6 @@ export default {
       this.$api(this.$SERVER.GET_TYPELIST)
         .then(data => {
           this.c_type = data.data.list
-          console.log(this.c_type)
           this.getType2()
         })
     },
@@ -87,7 +92,11 @@ export default {
     },
     // 发布商品
     onSubmit () {
-      this.addInfo()
+      if (this.$route.query.id) {
+        this.upInfo()
+      } else {
+        this.addInfo()
+      }
     },
     addInfo () {
       let apiData = newJson(this.apiData)
@@ -97,16 +106,42 @@ export default {
     },
     thenSubmit (str) {
       this.$message.success(str + '成功')
-      this.$router.push('/user')
+      this.$router.push('/user/sale')
+    },
+    upInfo () {
+      let apiData = newJson(this.apiData)
+      apiData.c_price *= 100
+      this.$api.post(this.$SERVER.POST_COMMODITYUPINFO, { ...apiData, c_id: this.$route.query.id })
+        .then(data => data.state ? this.thenSubmit('编辑') : this.$message.error(data.mes))
+    },
+    getUserInfo () {
+      this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+        .then(data => {
+          this.apiData.u_id = data.data._id
+        })
+    },
+    getCommodity () {
+      this.$api(this.$SERVER.GET_COMMODITYINFO, {
+        params: { id: this.$route.query.id }
+      }).then(data => {
+        this.apiData = data.data
+        this.apiData.c_price /= 100
+      })
     }
   },
   created () {
     this.getTypeList()
+    this.getUserInfo()
+    this.getCommodity()
   },
   watch: {
     $route: {
       handler () {
-        this.apiData.u_id = this.userInfo._id
+        if (this.$route.query.id) {
+          this.getCommodity()
+        } else {
+          this.apiData = {}
+        }
       }
     }
   }

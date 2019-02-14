@@ -1,0 +1,94 @@
+.bg {
+  background: #e3eeec;
+  .type-page {
+    width: 1200px;
+    margin: 0 auto;
+    .top {
+      height: 220px;
+      margin-top: 50px;
+      padding-left: 220px;
+      #user_photo {
+        background: #f6f9f9 none repeat scroll 0 0;
+        height: 220px;
+        padding: 20px;
+        position: relative;
+        text-align: center;
+        width: 220px;
+        margin-left: -220px;
+        float: left;
+        img {
+          border-radius: 100%;
+          cursor: pointer;
+          left: 20px;
+          position: absolute;
+          top: 20px;
+          height: 180px;
+          width: 180px;
+          border: 0 none;
+        }
+      }
+      #user_msg {
+        background: #fff none repeat scroll 0 0;
+        height: 220px;
+        position: relative;
+        font-size: 18px;
+        .name {
+          font: 26px "Microsoft YaHei";
+          padding: 20px 0 0 20px;
+        }
+        .has_sell {
+          color: #878787;
+          line-height: 120%;
+          margin-left: 20px;
+          margin-top: 10px;
+        }
+        .seller_attr {
+          border-left: 4px solid rgb(58, 58, 58);
+          margin-left: 20px;
+          margin-top: 30px;
+          padding-left: 20px;
+        }
+        .ivu-btn {
+          margin-left: 20px;
+          margin-top: 30px;
+        }
+      }
+    }
+    #my_products {
+      background: #fff;
+      padding: 15px;
+      margin-top: 40px;
+      .enshr_each {
+        padding-left: 120px;
+        margin-top: 30px;
+        .enshr_ph {
+          float: left;
+          margin-left: -120px;
+          img {
+            width: 120px;
+            height: 125px;
+          }
+        }
+        .enshr_info {
+          margin-left: 20px;
+          h2 {
+            margin-top: 10px;
+            font-size: 24px;
+          }
+          p {
+            margin: 0 0 10px;
+          }
+          .enshr_state {
+            margin: 10px 0;
+            span {
+              font-size: 18px;
+            }
+          }
+          .num {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}

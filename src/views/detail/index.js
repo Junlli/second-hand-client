@@ -11,7 +11,9 @@ export default {
       modal1: false,
       value: 1,
       ischange: 0, // 爱心颜色
-      commidityInfo: ''
+      commodityInfo: '',
+      u_id: '',
+      c_id: ''
     }
   },
   components: {
@@ -20,22 +22,36 @@ export default {
     PicZoom
   },
   computed: {
-    ...mapState(['userInfo']),
+    ...mapState(['userInfo', 'o_num']),
     ...mapGetters([])
   },
   methods: {
-    ...mapMutations(['setUserInfo']),
+    ...mapMutations(['setUserInfo', 'setCommodityNum']),
     handleClick (index) {
       this.isShow = index
     },
     handleLogin () {
       this.modal1 = false
     },
-    handleCollect () {
-      if (this.ischange === 1) {
+    handleBuy (id) {
+      this.setCommodityNum(this.inventory)
+      this.$router.push({
+        name: 'order',
+        params: id
+      })
+    },
+    handleCollect (col) {
+      if (col === 1) {
         this.ischange = 0
+        this.$api(this.$SERVER.GET_COLLECTIONDEL, {
+          params: { id: this.commodityInfo.col_id }
+        }).then(data => {
+          console.log(data)
+        })
       } else {
         this.ischange = 1
+        this.$api.post(this.$SERVER.POST_COLLECTIONADD, {
+          u_id: this.u_id, c_id: this.$route.params.id })
       }
     },
     getUserInfo () {
@@ -45,21 +61,38 @@ export default {
     isLogin () {
       this.$api(this.$SERVER.GET_ISLOGIN)
         .then(data => data.state && this.getUserInfo())
+    },
+    getCommodity () {
+      this.$api(this.$SERVER.GET_COMMODITYINFO, {
+        params: { id: this.$route.params.id }
+      }).then(data => {
+        this.commodityInfo = data.data
+        console.log(this.commodityInfo)
+        if (this.commodityInfo.c_col === 1) {
+          this.ischange = 1
+        } else {
+          this.ischange = 0
+        }
+      })
+    },
+    toUserInfo (id) {
+      this.$router.push({
+        name: 'userInfo',
+        params: { id }
+      })
     }
   },
   created () {
-    console.log(this.$route.params)
-    this.$api(this.$SERVER.GET_COMMODITYINFO, {
-      params: { id: this.$route.params.id}
-    }).then(data => {
-      this.commidityInfo = data.data
-      console.log(this.commidityInfo)
-    })
+    this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+      .then(data => {
+        this.u_id = data.data._id
+      })
   },
   watch: {
     $route: {
       handler () {
         this.isLogin()
+        this.getCommodity()
       },
       immediate: true
     }

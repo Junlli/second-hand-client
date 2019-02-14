@@ -4,22 +4,14 @@
     <home-header></home-header>
     <div class="type-page clearfix">
       <div class="banner clearfix">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://www.youzixy.com/Uploads/ad/2017-05-31/592eced4d71ec.png" alt="轮播图" class="swiper-img">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://www.youzixy.com/Uploads/ad/2017-05-31/592eced4d71ec.png" alt="轮播图" class="swiper-img">
-            </div>
-            <div class="swiper-slide">Slide 3</div>
-          </div>
-          <!-- 如果需要分页器 -->
-          <div class="swiper-pagination"></div>
-          <!-- 如果需要导航按钮 -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
+        <swiper :options="swiperOption" v-if="bannerImg.length">
+          <swiper-slide v-for="(item, index) in bannerImg" :key="index">
+            <img :src="$SERVER.FILEURL + item.b_image" alt="轮播图" class="swiper-img">
+          </swiper-slide>
+          <div class="swiper-pagination "  slot="pagination"></div>
+          <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
+        </swiper>
         <div class="login-box" v-if="!userInfo.u_avatar">
           <div class="profile">
             <img src="~@/assets/img/home/profile.jpg" alt="登录头像" class="profile-photo">
@@ -34,7 +26,7 @@
             <img :src="$SERVER.FILEURL + userInfo.u_avatar" alt="登录头像" class="profile-photo">
           </div>
           <span class="account">{{ userInfo.u_name }}</span>
-          <router-link to="/user" class="personal">个人中心</router-link>
+          <router-link to="/user/personal" class="personal">个人中心</router-link>
           <div class="quit" @click="quit">退出</div>
         </div>
       </div>
@@ -44,10 +36,11 @@
             width="200px"
             :theme="theme2"
             v-for="(item, index) in typeList"
+            :key=index
+            @on-open-change="clickSubmenu(item.t_name)"
           >
             <Submenu :name= index>
               <template slot="title">
-                <!--<Icon type="ios-book-outline" />-->
                 {{ item.t_name }}
               </template>
               <MenuItem
@@ -62,6 +55,14 @@
           </Menu>
         </Col>
       </Row>
+      <!--<swiper :options="swiperOption" v-if="bannerImg.length">-->
+        <!--<swiper-slide v-for="(item, index) in bannerImg" :key="index">-->
+          <!--<img :src="$SERVER.FILEURL + item.b_image" alt="轮播图" class="swiper-img">-->
+        <!--</swiper-slide>-->
+        <!--<div class="swiper-pagination "  slot="pagination"></div>-->
+        <!--<div class="swiper-button-prev" slot="button-prev"></div>-->
+        <!--<div class="swiper-button-next" slot="button-next"></div>-->
+      <!--</swiper>-->
       <div class="main">
         <div class="clearfix">
           <div

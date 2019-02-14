@@ -28,14 +28,18 @@
       height: 140px;
       float: left;
     }
-    .title {
+    .title, .price {
       float: left;
       margin: 20px;
       font-size: 24px;
       color: rgb(58,58,58);
     }
+    .price {
+      color: #FF0036;
+    }
     .status {
       position: absolute;
+      font-size: 18px;
       left: 160px;
       bottom: 20px;
       color: #859aff;

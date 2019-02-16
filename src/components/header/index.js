@@ -24,6 +24,8 @@ export default {
       this.$api(this.$SERVER.GET_QUIT)
         .then(data => {
           this.setUserInfo()
+          this.setCommoditySchool('')
+          console.log(typeof this.u_school)
           this.$router.push('/')
         })
     },
@@ -61,7 +63,6 @@ export default {
     },
     setSchool (val) {
       this.changeSchoolName = val
-      console.log(this.changeSchoolName)
     },
     changeSchool () {
       this.setCommoditySchool(this.changeSchoolName)

@@ -33,6 +33,17 @@ export default {
           this.getClosedOrder()
         })
     },
+    orderUpdate (params, state1, state2, del, datas) {
+      this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
+        id: params.row._id, o_state: state1
+      }).then(data => {
+        this.$api(this.$SERVER.GET_ORDERLIST, {
+          params: { s_id: this.u_id, o_state: state2, o_del: del }
+        }).then(data => {
+          datas = data.data.list
+        })
+      })
+    },
     // 所有订单
     getAllOrders () {
       this.$api(this.$SERVER.GET_ORDERLIST, {
@@ -40,6 +51,7 @@ export default {
       })
         .then(data => {
           this.data1 = data.data.list
+          console.log(this.data1)
           for (let i = 0; i < this.data1.length; i++) {
             this.columns1 = [
               {
@@ -173,6 +185,31 @@ export default {
                       }, '取消订单')
                     ])
                   } else if (params.row.o_state === 2) {
+                    return h('div', [
+                      h('Button', {
+                        props: {
+                          type: 'primary',
+                          size: 'large'
+                        },
+                        style: {
+                          marginRight: '5px'
+                        },
+                        on: {
+                          click: () => {
+                            this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
+                              id: params.row._id, o_state: 3
+                            }).then(data => {
+                              this.$api(this.$SERVER.GET_ORDERLIST, {
+                                params: { s_id: this.u_id, o_state: 2 }
+                              }).then(data => {
+                                this.data3 = data.data.list
+                              })
+                            })
+                          }
+                        }
+                      }, '确认收货')
+                    ])
+                  } else if (params.row.o_state === 3) {
                     return h('Button', {
                       props: {
                         type: 'primary',
@@ -187,6 +224,32 @@ export default {
                         }
                       }
                     }, '评价')
+                  } else if (params.row.o_state === 0) {
+                    return h('div', [
+                      h('Button', {
+                        props: {
+                          type: 'error',
+                          size: 'large'
+                        },
+                        style: {
+                          marginRight: '5px'
+                        },
+                        on: {
+                          click: () => {
+                            this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
+                              id: params.row._id, o_del: true
+                            }).then(data => {
+                              this.$api(this.$SERVER.GET_ORDERLIST, {
+                                params: { s_id: this.u_id, o_state: 0, o_del: false }
+                              }).then(data => {
+                                console.log(data)
+                                this.data5 = data.data.list
+                              })
+                            })
+                          }
+                        }
+                      }, '删除')
+                    ])
                   }
                 }
               }
@@ -319,16 +382,7 @@ export default {
                       },
                       on: {
                         click: () => {
-                          this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
-                            id: params.row._id, o_state: 0
-                          }).then(data => {
-                            console.log(data)
-                            this.$api(this.$SERVER.GET_ORDERLIST, {
-                              params: { s_id: this.u_id, o_state: 1 }
-                            }).then(data => {
-                              this.data1 = data.data.list
-                            })
-                          })
+                          this.orderUpdate(params, 0, 1, false, this.data2)
                         }
                       }
                     }, '取消订单')
@@ -342,7 +396,7 @@ export default {
     // 已发货
     getSended () {
       this.$api(this.$SERVER.GET_ORDERLIST, {
-        params: { b_id: this.b_id, o_state: 2 }
+        params: { b_id: this.b_id, o_state: 2, o_del: false }
       }).then(data => {
         this.data3 = data.data.list
         for (let i = 0; i < this.data3.length; i++) {
@@ -463,15 +517,7 @@ export default {
                     },
                     on: {
                       click: () => {
-                        this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
-                          id: params.row._id, o_state: 3
-                        }).then(data => {
-                          this.$api(this.$SERVER.GET_ORDERLIST, {
-                            params: { s_id: this.u_id, o_state: 2 }
-                          }).then(data => {
-                            this.data3 = data.data.list
-                          })
-                        })
+                        this.orderUpdate(params, 3, 2, false, this.data3)
                       }
                     }
                   }, '确认收货')
@@ -485,7 +531,7 @@ export default {
     // 成功的订单
     getSuccessOrder () {
       this.$api(this.$SERVER.GET_ORDERLIST, {
-        params: { b_id: this.b_id, o_state: 3 }
+        params: { b_id: this.b_id, o_state: 3, o_del: false }
       }).then(data => {
         this.data4 = data.data.list
         for (let i = 0; i < this.data4.length; i++) {
@@ -606,15 +652,15 @@ export default {
                     },
                     on: {
                       click: () => {
-                        this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
-                          id: params.row._id, o_state: 3
-                        }).then(data => {
-                          this.$api(this.$SERVER.GET_ORDERLIST, {
-                            params: { s_id: this.u_id, o_state: 2 }
-                          }).then(data => {
-                            this.data3 = data.data.list
-                          })
-                        })
+                        // this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
+                        //   id: params.row._id, o_state: 3
+                        // }).then(data => {
+                        //   this.$api(this.$SERVER.GET_ORDERLIST, {
+                        //     params: { s_id: this.u_id, o_state: 2 }
+                        //   }).then(data => {
+                        //     this.data4 = data.data.list
+                        //   })
+                        // })
                       }
                     }
                   }, '评价')

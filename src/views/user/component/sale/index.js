@@ -154,7 +154,8 @@ export default {
                     },
                     on: {
                       click: () => {
-                        this.$router.push('/release?id=' + params.row._id)                      }
+                        this.$router.push('/release?id=' + params.row._id)
+                      }
                     }
                   }, '编辑'),
                   h('Button', {
@@ -765,7 +766,7 @@ export default {
     // 关闭的订单
     getClosedOrder () {
       this.$api(this.$SERVER.GET_ORDERLIST, {
-        params: { s_id: this.u_id, o_state: 0 }
+        params: { s_id: this.u_id, o_state: 0, o_del: false }
       }).then(data => {
         this.data6 = data.data.list
         for (let i = 0; i < this.data6.length; i++) {
@@ -868,15 +869,28 @@ export default {
               key: 'status',
               render: (h, params) => {
                 return h('div', [
-                  h('span', '已发货'),
-                  h('br'),
-                  h('a', {
+                  h('Button', {
+                    props: {
+                      type: 'error',
+                      size: 'large'
+                    },
+                    style: {
+                      marginRight: '5px'
+                    },
                     on: {
                       click: () => {
-                        this.getOrderInfo(params.row)
+                        this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
+                          id: params.row._id, o_del: true
+                        }).then(data => {
+                          this.$api(this.$SERVER.GET_ORDERLIST, {
+                            params: { s_id: this.u_id, o_state: 0, o_del: false }
+                          }).then(data => {
+                            this.data6 = data.data.list
+                          })
+                        })
                       }
                     }
-                  }, '订单详情')
+                  }, '删除')
                 ])
               }
             }

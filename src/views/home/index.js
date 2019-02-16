@@ -55,7 +55,7 @@ export default {
     ...mapGetters(['updateSchool'])
   },
   methods: {
-    ...mapMutations(['setUserInfo']),
+    ...mapMutations(['setUserInfo', 'setCommoditySchool']),
     // 动画
     moveUp (index) {
       this.show = index
@@ -66,7 +66,10 @@ export default {
     // 退出登录
     quit () {
       this.$api(this.$SERVER.GET_QUIT)
-        .then(data => this.setUserInfo())
+        .then(data => {
+          this.setCommoditySchool('')
+          this.setUserInfo()
+        })
     },
     // 获取当前用户信息
     getUserInfo () {

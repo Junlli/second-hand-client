@@ -36,7 +36,7 @@ export default {
     // 所有订单
     getAllOrders () {
       this.$api(this.$SERVER.GET_ORDERLIST, {
-        params: { b_id: this.b_id }
+        params: { b_id: this.b_id, o_del: false }
       })
         .then(data => {
           this.data1 = data.data.list
@@ -162,9 +162,8 @@ export default {
                             this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
                               id: params.row._id, o_state: 0
                             }).then(data => {
-                              console.log(data)
                               this.$api(this.$SERVER.GET_ORDERLIST, {
-                                params: { s_id: this.u_id, o_state: 1 }
+                                params: { s_id: this.u_id, o_state: 1, o_del: false }
                               }).then(data => {
                                 this.data1 = data.data.list
                               })
@@ -198,7 +197,7 @@ export default {
     // 未发货
     getUnsend () {
       this.$api(this.$SERVER.GET_ORDERLIST, {
-        params: { b_id: this.b_id, o_state: 1 }
+        params: { b_id: this.b_id, o_state: 1, o_del: false }
       })
         .then(data => {
           this.data2 = data.data.list
@@ -629,11 +628,11 @@ export default {
     // 关闭的订单
     getClosedOrder () {
       this.$api(this.$SERVER.GET_ORDERLIST, {
-        params: { b_id: this.b_id, o_state: 0 }
+        params: { b_id: this.b_id, o_state: 0, o_del: false }
       }).then(data => {
         this.data5 = data.data.list
         for (let i = 0; i < this.data5.length; i++) {
-          this.columns4 = [
+          this.columns5 = [
             {
               title: '下单时间',
               align: 'center',
@@ -746,7 +745,7 @@ export default {
                 return h('div', [
                   h('Button', {
                     props: {
-                      type: 'primary',
+                      type: 'error',
                       size: 'large'
                     },
                     style: {
@@ -755,17 +754,18 @@ export default {
                     on: {
                       click: () => {
                         this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
-                          id: params.row._id, o_state: 3
+                          id: params.row._id, o_del: true
                         }).then(data => {
                           this.$api(this.$SERVER.GET_ORDERLIST, {
-                            params: { s_id: this.u_id, o_state: 2 }
+                            params: { s_id: this.u_id, o_state: 0, o_del: false }
                           }).then(data => {
-                            this.data3 = data.data.list
+                            console.log(data)
+                            this.data5 = data.data.list
                           })
                         })
                       }
                     }
-                  }, '评价')
+                  }, '删除')
                 ])
               }
             }

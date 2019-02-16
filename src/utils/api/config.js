@@ -42,5 +42,8 @@ export default {
   POST_ORDERUPDATE: 'order/upInfo', // 更新订单
 
   // 轮播图
-  GET_BANNERLIST: 'banner/list' // 轮播图列表
+  GET_BANNERLIST: 'banner/list', // 轮播图列表
+
+  // 认证中心
+  POST_PROVEADD: 'prove/add' // 添加认证
 }

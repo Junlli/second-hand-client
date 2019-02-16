@@ -79,15 +79,15 @@
                 <ul class="connect">
                   <li class="phone">
                     <i class="iconfont">&#xe613;</i>
-                    <span>{{ userInfo.u_tel }}</span>
+                    <span>{{ commodityInfo.c_tel }}</span>
                   </li>
                   <li class="wechat">
                     <i class="iconfont">&#xe82c;</i>
-                    <span>{{ userInfo.u_wx }}</span>
+                    <span>{{ commodityInfo.c_wx }}</span>
                   </li>
                   <li class="qq">
                     <i class="iconfont">&#xe629;</i>
-                    <span>{{ userInfo.u_qq }}</span>
+                    <span>{{ commodityInfo.c_qq }}</span>
                   </li>
                 </ul>
 

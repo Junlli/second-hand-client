@@ -13,7 +13,16 @@
           <el-input v-model="apiData.c_title" placeholder="请输入标题"></el-input>
         </el-form-item>
         <el-form-item label="商品详情">
-          <el-input type="textarea" v-model="apiData.c_detail"></el-input>
+          <!--<el-input type="textarea" v-model="apiData.c_detail"></el-input>-->
+          <quill-editor
+            v-model="apiData.c_detail"
+            ref="myQuillEditor"
+            :options="editorOption"
+            @blur="onEditorBlur($event)"
+            @focus="onEditorFocus($event)"
+            @change="onEditorChange($event)"
+          >
+          </quill-editor>
         </el-form-item>
         <el-form-item label="相册">
           <el-upload
@@ -59,13 +68,13 @@
           <el-input v-model="apiData.c_price" placeholder="请输入价格（最多两位小数）"></el-input>
         </el-form-item>
         <el-form-item label="手机号">
-          <el-input v-model="apiData.u_tel" placeholder="请输入手机号"></el-input>
+          <el-input v-model="apiData.c_tel" placeholder="请输入手机号"></el-input>
         </el-form-item>
         <el-form-item label="QQ">
-          <el-input v-model="apiData.u_qq" placeholder="请输入QQ"></el-input>
+          <el-input v-model="apiData.c_qq" placeholder="请输入QQ"></el-input>
         </el-form-item>
         <el-form-item label="微信">
-          <el-input v-model="apiData.u_wx" placeholder="请输入微信号"></el-input>
+          <el-input v-model="apiData.c_wx" placeholder="请输入微信号"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit" class="submit-btn">提交</el-button>

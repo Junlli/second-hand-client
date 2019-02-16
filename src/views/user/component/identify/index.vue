@@ -38,32 +38,56 @@
               <div class="std_input_info">
                 <div class="std_input field">
                   <span>姓名</span>
-                  <input value="" id="Name" name="name" type="text" placeholder="请输入真实姓名" data-validate="required:姓名是个必填项哦~">
+                  <input
+                    id="Name"
+                    name="name"
+                    type="text"
+                    placeholder="请输入真实姓名"
+                    data-validate="required:姓名是个必填项哦~"
+                    v-model="getApiData.p_name"
+                  >
                 </div>
                 <div class="std_input field">
-                  <span>证件号</span>
-                  <input name="cardnum" id="StudentId" value="" type="text" placeholder="例201012913" data-validate="required:证件号是必填项哦~">
+                  <span>身份证号或学号</span>
+                  <input
+                    name="cardnum"
+                    id="StudentId"
+                    type="text"
+                    placeholder="例15251103222"
+                    data-validate="required:证件号是必填项哦~"
+                    v-model="getApiData.p_prove"
+                  >
                 </div>
                 <div class="std_input field">
                   <span>学校</span>
-                  <input name="school" id="School" value="" type="text" placeholder="例桂林电子科技大学" data-validate="required:学校是个必填项哦~">
+                  <input
+                    name="school"
+                    id="School"
+                    type="text"
+                    placeholder="例桂林电子科技大学"
+                    data-validate="required:学校是个必填项哦~"
+                    v-model="getApiData.p_school"
+                  >
                 </div>
               </div>
               <Alert type="warning" show-icon>请上传学生证，或学生卡，或身份证</Alert>
               <el-upload
                 class="avatar-uploader"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                :action="$SERVER.URL + $SERVER.PATH + $SERVER.POST_UPIMG"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload">
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                >
+                <img v-if="getApiData.p_image" :src="$SERVER.FILEURL + getApiData.p_image" class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
-              <Button type="primary" size="large">提交认证</Button>
+              <Button type="primary" size="large" @click="onSubmit">提交认证</Button>
             </form>
           </div>
         </div>
       </div>
+    </div>
+    <div class="result" :class="{show: isResult}">
+      <p>您的资料已经提交，请等待审核...</p>
     </div>
   </div>
 </template>

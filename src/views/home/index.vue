@@ -1,7 +1,7 @@
 <script src="index.js"></script>
 <template>
   <div class="bg">
-    <home-header></home-header>
+    <home-header @getCommodity="getCommodityList"></home-header>
     <div class="type-page clearfix">
       <div class="banner clearfix">
         <swiper :options="swiperOption" v-if="bannerImg.length">

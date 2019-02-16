@@ -7,23 +7,22 @@ export default {
     return {
       login: false,
       modal: false, // 显示对话框
-      u_school: '',
       changeSchoolName: '',
-      schoolList: []
+      schoolList: [],
+      searchKey: ''
     }
   },
   components: {
     School
   },
   computed: {
-    ...mapState(['userInfo'])
+    ...mapState(['userInfo', 'u_school'])
   },
   methods: {
-    ...mapMutations(['setUserInfo']),
+    ...mapMutations(['setUserInfo', 'setCommoditySchool']),
     handleQuit () {
       this.$api(this.$SERVER.GET_QUIT)
         .then(data => {
-          console.log(data)
           this.setUserInfo()
           this.$router.push('/')
         })
@@ -47,7 +46,9 @@ export default {
       this.$api(this.$SERVER.GET_CURRENTUSERINFO)
         .then(data => {
           this.setUserInfo(data.data)
-          this.u_school = data.data.u_school
+          if (this.u_school === '') {
+            this.setCommoditySchool(data.data.u_school)
+          }
           this.changeSchoolName = this.u_school
         })
     },
@@ -60,13 +61,18 @@ export default {
     },
     setSchool (val) {
       this.changeSchoolName = val
+      console.log(this.changeSchoolName)
     },
     changeSchool () {
-      this.u_school = this.changeSchoolName
+      this.setCommoditySchool(this.changeSchoolName)
       this.modal = false
     },
     cancel () {
       this.modal = false
+    },
+    // 搜索关键词匹配
+    searchResult () {
+      this.$emit('getCommodity', this.searchKey)
     }
   },
   created () {

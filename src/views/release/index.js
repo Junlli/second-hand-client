@@ -2,6 +2,10 @@ import HomeHeader from '@/components/header/index.vue'
 import HomeFooter from '@/components/footer/index.vue'
 import {mapState, mapGetters, mapMutations} from 'vuex'
 import { newJson } from '@/utils/js/index'
+import { quillEditor } from 'vue-quill-editor' //调用编辑器
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 
 export default {
   data () {
@@ -18,19 +22,24 @@ export default {
         c_address: '',
         c_detail: '',
         c_num: 1,
-        c_state: 1
+        c_state: 1,
+        c_tel: '',
+        c_qq: '',
+        c_wx: ''
       },
       imageUrl: '',
       dialogImageUrl: '',
       dialogVisible: false,
       imgCount: 0,
       isShow: false,
-      fileList: [] // 图片
+      fileList: [], // 图片
+      content: '' // 文本内容
     }
   },
   components: {
     HomeHeader,
-    HomeFooter
+    HomeFooter,
+    quillEditor
   },
   computed: {
     ...mapState(['userInfo']),
@@ -38,24 +47,12 @@ export default {
       if (this.apiData.c_images !== undefined) {
         return this.apiData.c_images.map(file => ({url: this.$SERVER.FILEURL + file}))
       }
+    },
+    editor () {
+      return this.$refs.myQuillEditor.quill
     }
   },
   methods: {
-    handleAvatarSuccess (res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw)
-    },
-    beforeAvatarUpload (file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
-      }
-      return isJPG && isLt2M
-    },
     handleRemove (file, fileList) {
       this.imgCount--
       if (this.imgCount < 4) {
@@ -127,7 +124,11 @@ export default {
         this.apiData = data.data
         this.apiData.c_price /= 100
       })
-    }
+    },
+    onEditorReady (editor) {}, // 准备编辑器
+    onEditorBlur () {}, // 失去焦点事件
+    onEditorFocus () {}, // 获得焦点事件
+    onEditorChange () {} // 内容改变事件
   },
   created () {
     this.getTypeList()

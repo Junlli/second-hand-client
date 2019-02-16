@@ -22,7 +22,8 @@ export default {
         c_type2: '',
         pageSize: 20,
         pageIndex: 1,
-        c_state: 1
+        c_state: 1,
+        u_school: ''
       },
       dataList: {
         count: 1,
@@ -50,8 +51,8 @@ export default {
     swiperSlide
   },
   computed: {
-    ...mapState(['userInfo']),
-    ...mapGetters([])
+    ...mapState(['userInfo', 'u_school']),
+    ...mapGetters(['updateSchool'])
   },
   methods: {
     ...mapMutations(['setUserInfo']),
@@ -81,18 +82,43 @@ export default {
     getTypeList () {
       this.$api(this.$SERVER.GET_TYPELIST)
         .then(data => {
-          // console.log(data.data.list)
           this.typeList = data.data.list
         })
     },
     // 获取商品列表
-    getCommidity () {
-      this.$api(this.$SERVER.GET_COMMODITYLIST, {
-        params: this.getApiData
-      })
-        .then(data => {
-          this.dataList = data.data
+    getCommodity () {
+      if (this.u_school !== '') {
+        this.getApiData.u_school = this.u_school
+        this.getCommodityList()
+      } else {
+        this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+          .then(data => {
+            this.getApiData.u_school = data.data.u_school
+            this.getCommodityList()
+          })
+      }
+    },
+    getCommodityList (val) {
+      if (val) {
+        this.$api(this.$SERVER.GET_COMMODITYLIST, {
+          params: this.getApiData
+        }).then(data => {
+          this.dataList.list = []
+          for (let i = 0; i < data.data.list.length; i++) {
+            let reg = new RegExp('.*' + val + '.*')
+            if (reg.test(data.data.list[i].c_title)) {
+              this.dataList.list.push(data.data.list[i])
+            }
+          }
         })
+      } else {
+        this.$api(this.$SERVER.GET_COMMODITYLIST, {
+          params: this.getApiData
+        })
+          .then(data => {
+            this.dataList = data.data
+          })
+      }
     },
     // 显示对应商品
     showCommidity (type1, type2) {
@@ -129,7 +155,6 @@ export default {
         params: { b_state: 1 }
       }).then(data => {
         this.bannerImg = data.data.list
-        console.log(this.bannerImg)
       })
     },
     // 点击一级分类显示分类的所有商品
@@ -145,34 +170,26 @@ export default {
     // 获取商品分类列表
     this.getTypeList()
     // 获取商品列表
-    this.getCommidity()
+    this.getCommodity()
     // 获取轮播图
     this.getBanner()
-    // let mySwiper = new Swiper('.swiper-container', {
-    //   // autoplay: true,
-    //   // autoplay: {
-    //   //   disableOnInteraction: false,  //点击后继续轮播(这个很重要)
-    //   //   delay: 1000,                       //自动轮播的每次的时间 可以不设置 会有个默认值
-    //   // },
-    //   loop: true,
-    //   navigation: {
-    //     nextEl: '.swiper-button-next',
-    //     prevEl: '.swiper-button-prev'
-    //   },
-    //   pagination: {
-    //     el: '.swiper-pagination'
-    //   }
-    // })
   },
   mounted () {
 
   },
   watch: {
-    $route: {
-      handler () {
-        this.isLogin()
-      },
-      immediate: true
+    // $route: {
+    //   handler () {
+    //     this.isLogin()
+    //     // console.log(this.$route.state.u_school)
+    //   },
+    //   immediate: true
+    // },
+    // 学校变化时刷新商品列表
+    updateSchool: function (newVal) {
+      if (newVal) {
+        this.getCommodity()
+      }
     }
   }
 }

@@ -69,10 +69,15 @@
           <a class="register">注册</a>
         </router-link>
       </ul>
-      <form class="search">
-        <input type="text" placeholder="搜索" class="search-filed">
-        <button type="submit" class="search-btn">搜索</button>
-      </form>
+      <div class="search">
+        <input
+          type="text"
+          placeholder="搜索"
+          class="search-filed"
+          v-model="searchKey"
+        >
+        <button class="search-btn" @click="searchResult">搜索</button>
+      </div>
     </div>
   </div>
 </template>

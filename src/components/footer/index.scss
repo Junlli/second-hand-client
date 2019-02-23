@@ -22,13 +22,16 @@
           font-size: 40px;
         }
       }
-      .api {
-        width: 150px;
-        height: 150px;
-        img {
+      .connect {
+        display: inline-block;
+        .api {
           width: 150px;
-          height: 146px;
-          border: none;
+          height: 150px;
+          img {
+            width: 150px;
+            height: 146px;
+            border: none;
+          }
         }
       }
     }

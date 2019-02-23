@@ -25,7 +25,8 @@
           <p class="has_sell">共有<span class="all">{{ count }}</span>件商品</p>
           <ul class="seller_attr">
             <li>学校：&nbsp;&nbsp;<span>{{userInfo.u_school}}</span></li>
-            <li>认证：&nbsp;&nbsp;<span>未认证</span></li>
+            <li v-if="!userInfo.u_static">认证：&nbsp;&nbsp;<span>未认证</span></li>
+            <li v-else>认证：&nbsp;&nbsp;<span>已认证</span></li>
           </ul>
           <Button type="primary" @click="edit()">编辑个人信息</Button>
         </div>

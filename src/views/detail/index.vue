@@ -60,9 +60,20 @@
             @click="handleBuy(c_id)"
             v-if="userInfo.u_name !== commodityInfo.u_name"
           >购买商品</Button>
+          <Modal v-model="login" width="360">
+            <p slot="header" style="color:#f60;text-align:center">
+              <Icon type="ios-information-circle"></Icon>
+              <span>您还未登录</span>
+            </p>
+            <div class="toLogin">
+              <Button type="primary" @click="handleLogin">请先登录</Button>
+            </div>
+            <div slot="footer">
+            </div>
+          </Modal>
           <Button
             type="success"
-            @click="modal1 = true"
+            @click="handleConnect"
             v-if="userInfo.u_name !== commodityInfo.u_name"
           >联系卖家</Button>
           <Modal
@@ -73,9 +84,6 @@
               <span>联系方式</span>
             </p>
             <div style="text-align:center">
-              <router-link to="/login">
-                <!--<Button type="success" size="large" @click="handleLogin">请先登录</Button>-->
-              </router-link>
                 <ul class="connect">
                   <li class="phone">
                     <i class="iconfont">&#xe613;</i>
@@ -97,7 +105,7 @@
           <Button
             type="primary"
             ghost
-            @click="handleCollect(commodityInfo.c_col)"
+            @click="handleCollect(ischange)"
             v-if="userInfo.u_name !== commodityInfo.u_name"
           >
             <Icon type="md-heart" :class="{changeColor: ischange === 1}" />

@@ -1,4 +1,4 @@
-//数组里面最小间隔
+// 数组里面最小间隔
 export let minInterval = arr => {
   let min = Number.MAX_VALUE;
   if(arr.length){

@@ -13,7 +13,8 @@ export default {
       ischange: 0, // 爱心颜色
       commodityInfo: '',
       u_id: '',
-      c_id: ''
+      c_id: '',
+      login: false
     }
   },
   components: {
@@ -30,19 +31,36 @@ export default {
     handleClick (index) {
       this.isShow = index
     },
-    handleLogin () {
-      this.modal1 = false
-    },
+    // handleLogin () {
+    //   this.modal1 = false
+    // },
     handleBuy (id) {
-      this.setCommodityNum(this.inventory)
-      this.$router.push({
-        name: 'order',
-        params: id
-      })
+      if (this.userInfo) {
+        this.setCommodityNum(this.inventory)
+        this.$router.push({
+          name: 'order',
+          params: id
+        })
+      } else {
+        this.login = true
+      }
     },
-    handleCollect (col) {
-      if (col === 1) {
+    handleConnect () {
+      if (this.userInfo) {
+        this.modal1 = true
+      } else {
+        this.login = true
+      }
+    },
+    handleLogin () {
+      this.login = false
+      this.$router.push('/login')
+    },
+    handleCollect (ischange) {
+      console.log(ischange)
+      if (ischange === 1) {
         this.ischange = 0
+        console.log(this.commodityInfo.col_id)
         this.$api(this.$SERVER.GET_COLLECTIONDEL, {
           params: { id: this.commodityInfo.col_id }
         }).then(data => {
@@ -52,6 +70,12 @@ export default {
         this.ischange = 1
         this.$api.post(this.$SERVER.POST_COLLECTIONADD, {
           u_id: this.u_id, c_id: this.$route.params.id })
+        // this.$api(this.$SERVER.GET_COMMODITYINFO, {
+        //   params: { id: this.$route.params.id }
+        // }).then(data => {
+        //   console.log(data.data)
+        //   this.commodityInfo = data.data
+        // })
       }
     },
     getUserInfo () {

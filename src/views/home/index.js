@@ -96,8 +96,12 @@ export default {
       } else {
         this.$api(this.$SERVER.GET_CURRENTUSERINFO)
           .then(data => {
-            this.getApiData.u_school = data.data.u_school
-            this.getCommodityList()
+            if (data.data !== null) {
+              this.getApiData.u_school = data.data.u_school
+              this.getCommodityList()
+            } else {
+              this.getCommodityList()
+            }
           })
       }
     },
@@ -119,6 +123,7 @@ export default {
           params: this.getApiData
         })
           .then(data => {
+            console.log(data)
             this.dataList = data.data
           })
       }
@@ -163,7 +168,7 @@ export default {
     // 点击一级分类显示分类的所有商品
     clickSubmenu (type1) {
       this.$api(this.$SERVER.GET_COMMODITYLIST, {
-        params: { c_type: type1, c_state: 1 }
+        params: { c_type: type1, c_state: 1, u_school: this.u_school }
       }).then(data => {
         this.dataList = data.data
       })

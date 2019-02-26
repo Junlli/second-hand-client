@@ -41,7 +41,8 @@ export default {
         nextButton:'.swiper-button-next',
         pagination: '.swiper-pagination',
         paginationClickable :true
-      }
+      },
+      searchKey: ''
     }
   },
   components: {
@@ -68,7 +69,9 @@ export default {
       this.$api(this.$SERVER.GET_QUIT)
         .then(data => {
           this.setCommoditySchool('')
+          this.getApiData.u_school = ''
           this.setUserInfo()
+          this.getCommodityList()
         })
     },
     // 获取当前用户信息
@@ -107,6 +110,7 @@ export default {
     },
     getCommodityList (val) {
       if (val) {
+        this.searchKey = val
         this.$api(this.$SERVER.GET_COMMODITYLIST, {
           params: this.getApiData
         }).then(data => {
@@ -132,11 +136,7 @@ export default {
     showCommidity (type1, type2) {
       this.getApiData.c_type = type1
       this.getApiData.c_type2 = type2
-      this.$api(this.$SERVER.GET_COMMODITYLIST, {
-        params: this.getApiData
-      }).then(data => {
-        this.dataList = data.data
-      })
+      this.getCommodityList(this.searchKey)
     },
     // 跳转到商品详情页
     toCommidityDetail (id) {
@@ -167,11 +167,9 @@ export default {
     },
     // 点击一级分类显示分类的所有商品
     clickSubmenu (type1) {
-      this.$api(this.$SERVER.GET_COMMODITYLIST, {
-        params: { c_type: type1, c_state: 1, u_school: this.u_school }
-      }).then(data => {
-        this.dataList = data.data
-      })
+      this.getApiData.c_type = type1
+      this.getApiData.c_type2 = ''
+      this.getCommodityList(this.searchKey)
     }
   },
   created () {

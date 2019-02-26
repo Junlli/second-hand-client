@@ -1,4 +1,5 @@
 import { newJson } from '@/utils/js/index'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -15,6 +16,9 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState(['userInfo'])
+  },
   methods: {
     // 认证按钮操作
     handleClick () {
@@ -24,7 +28,6 @@ export default {
     // 上传操作
     handleAvatarSuccess (res, file) {
       // this.imageUrl = URL.createObjectURL(file.response.data.url)
-      // console.log(this.imageUrl)
       this.getApiData.p_image = file.response.data.url
       // console.log(this.getApiData.p_image)
     },
@@ -48,5 +51,8 @@ export default {
       this.isShow = true
       this.isResult = false
     }
+  },
+  created () {
+    console.log(this.userInfo)
   }
 }

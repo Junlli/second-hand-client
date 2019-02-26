@@ -35,7 +35,7 @@ export default {
     //   this.modal1 = false
     // },
     handleBuy (id) {
-      if (this.userInfo) {
+      if (this.userInfo.u_avatar) {
         this.setCommodityNum(this.inventory)
         this.$router.push({
           name: 'order',
@@ -46,7 +46,8 @@ export default {
       }
     },
     handleConnect () {
-      if (this.userInfo) {
+      console.log(this.userInfo)
+      if (this.userInfo.u_avatar) {
         this.modal1 = true
       } else {
         this.login = true
@@ -57,35 +58,40 @@ export default {
       this.$router.push('/login')
     },
     handleCollect (ischange) {
-      console.log(ischange)
-      if (ischange === 1) {
-        this.ischange = 0
-        console.log(this.commodityInfo.col_id)
-        this.$api(this.$SERVER.GET_COLLECTIONDEL, {
-          params: { id: this.commodityInfo.col_id }
-        }).then(data => {
-          console.log(data)
-        })
+      if (this.userInfo.u_avatar) {
+        if (ischange === 1) {
+          this.ischange = 0
+          this.$api(this.$SERVER.GET_COLLECTIONDEL, {
+            params: { u_id: this.u_id, c_id: this.$route.params.id }
+          }).then(data => {
+            console.log(data)
+          })
+        } else {
+          this.ischange = 1
+          this.$api.post(this.$SERVER.POST_COLLECTIONADD, {
+            u_id: this.u_id, c_id: this.$route.params.id })
+          // this.$api(this.$SERVER.GET_COMMODITYINFO, {
+          //   params: { id: this.$route.params.id }
+          // }).then(data => {
+          //   console.log(data.data)
+          //   this.commodityInfo = data.data
+          // })
+        }
       } else {
-        this.ischange = 1
-        this.$api.post(this.$SERVER.POST_COLLECTIONADD, {
-          u_id: this.u_id, c_id: this.$route.params.id })
-        // this.$api(this.$SERVER.GET_COMMODITYINFO, {
-        //   params: { id: this.$route.params.id }
-        // }).then(data => {
-        //   console.log(data.data)
-        //   this.commodityInfo = data.data
-        // })
+        this.login = true
       }
     },
     getUserInfo () {
       this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-        .then(data => this.setUserInfo(data.data))
+        .then(data => {
+          this.setUserInfo(data.data)
+          this.u_id = data.data._id
+        })
     },
-    isLogin () {
-      this.$api(this.$SERVER.GET_ISLOGIN)
-        .then(data => data.state && this.getUserInfo())
-    },
+    // isLogin () {
+    //   this.$api(this.$SERVER.GET_ISLOGIN)
+    //     .then(data => data.state && this.getUserInfo())
+    // },
     getCommodity () {
       this.$api(this.$SERVER.GET_COMMODITYINFO, {
         params: { id: this.$route.params.id }
@@ -107,15 +113,12 @@ export default {
     }
   },
   created () {
-    this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-      .then(data => {
-        this.u_id = data.data._id
-      })
+    this.getUserInfo()
   },
   watch: {
     $route: {
       handler () {
-        this.isLogin()
+        // this.isLogin()
         this.getCommodity()
       },
       immediate: true

@@ -14,23 +14,5 @@ export default {
   },
   computed: {
     ...mapState(['userInfo'])
-  },
-  methods: {
-    getUserInfo () {
-      this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-        .then(data => {
-          console.log(data)
-        })
-    }
-  },
-  created () {
-    this.getUserInfo()
-  },
-  watch: {
-    $route: {
-      handler () {
-        this.getUserInfo()
-      }
-    }
   }
 }

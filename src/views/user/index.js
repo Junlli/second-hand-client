@@ -1,5 +1,6 @@
 import HomeHeader from '@/components/header/index.vue'
 import HomeFooter from '@/components/footer/index.vue'
+import crypto from 'crypto'
 import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -20,7 +21,13 @@ export default {
         u_school: ''
       },
       unLogin: false,
-      count: '' // 拥有的商品数
+      count: '', // 拥有的商品数
+      modal: false, // 修改密码弹窗
+      formItem: {
+        old_pwd: '',
+        new_pwd: '',
+        confirm_pwd: ''
+      }
     }
   },
   components: {
@@ -32,7 +39,7 @@ export default {
     ...mapGetters([])
   },
   methods: {
-    ...mapMutations(['setUserInfo']),
+    ...mapMutations(['setUserInfo', 'setCommoditySchool']),
     edit () {
       this.$router.push('/userDetail')
     },
@@ -67,16 +74,39 @@ export default {
       }).then(data => {
         this.count = data.data.count
       })
+    },
+    // 修改密码
+    changePwd () {
+      this.modal = true
+    },
+    ok () {
+      let md5 = crypto.createHash('md5')
+      md5.update(this.formItem.old_pwd)
+      if (md5.digest('hex') !== this.userInfo.u_password) {
+        this.$message.error('原始密码错误')
+      } else if (this.formItem.new_pwd !== this.formItem.confirm_pwd) {
+        this.$message.error('两次密码输入不一致')
+      } else if (this.formItem.old_pwd === '' || this.formItem.new_pwd === '' || this.formItem.confirm_pwd === '') {
+        this.$message.error('请将信息填写完整')
+      } else {
+        this.$api.post(this.$SERVER.POST_UPUSERINFO, {
+          id: this.userInfo._id, u_password: this.formItem.new_pwd
+        }).then(data => {
+          this.modal = false
+          this.$api(this.$SERVER.GET_QUIT)
+            .then(data => {
+              this.setCommoditySchool('')
+              this.$router.push('/')
+            })
+        })
+      }
+    },
+    cancel () {
+      this.modal = false
     }
   },
   created () {
     this.getCommodity()
-  },
-  mounted () {
-    this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-      .then(data => {
-        this.setUserInfo(data.data)
-      })
   },
   watch: {
     $route: {

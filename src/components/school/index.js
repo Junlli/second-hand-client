@@ -10,6 +10,7 @@ export default {
   methods: {
     getSchoolList (e) {
       if (e !== '') {
+        console.log(e)
         this.schoolLoading = true
         this.$api(`${this.$SERVER.GET_SCHOOILIST}?name=${e}`)
           .then(data => {

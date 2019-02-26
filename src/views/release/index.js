@@ -33,7 +33,8 @@ export default {
       imgCount: 0,
       isShow: false,
       fileList: [], // 图片
-      content: '' // 文本内容
+      content: '', // 文本内容
+      editorOption: {}
     }
   },
   components: {
@@ -99,7 +100,7 @@ export default {
       let apiData = newJson(this.apiData)
       apiData.c_price *= 100
       this.$api.post(this.$SERVER.POST_COMMODITYADD, apiData)
-        .then( data => data.state ? this.thenSubmit('新增') : this.$message.error(data.mes))
+        .then( data => data.state ? this.thenSubmit('发布') : this.$message.error(data.mes))
     },
     thenSubmit (str) {
       this.$message.success(str + '成功')
@@ -118,12 +119,14 @@ export default {
         })
     },
     getCommodity () {
-      this.$api(this.$SERVER.GET_COMMODITYINFO, {
-        params: { id: this.$route.query.id }
-      }).then(data => {
-        this.apiData = data.data
-        this.apiData.c_price /= 100
-      })
+      if (this.$route.query.id) {
+        this.$api(this.$SERVER.GET_COMMODITYINFO, {
+          params: { id: this.$route.query.id }
+        }).then(data => {
+          this.apiData = data.data
+          this.apiData.c_price /= 100
+        })
+      }
     },
     onEditorReady (editor) {}, // 准备编辑器
     onEditorBlur () {}, // 失去焦点事件

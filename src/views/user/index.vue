@@ -28,7 +28,28 @@
             <li v-if="!userInfo.u_static">认证：&nbsp;&nbsp;<span>未认证</span></li>
             <li v-else>认证：&nbsp;&nbsp;<span>已认证</span></li>
           </ul>
-          <Button type="primary" @click="edit()">编辑个人信息</Button>
+          <Button type="primary" @click="edit">编辑个人信息</Button>
+          <Button type="primary" @click="changePwd">修改密码</Button>
+          <Modal
+            v-model="modal"
+            title="修改密码"
+            >
+            <Form :model="formItem" :label-width="80">
+              <FormItem label="原始密码">
+                <Input v-model="formItem.old_pwd" type="password" placeholder="请输入原始密码" style="width: 200px"></Input>
+              </FormItem>
+              <FormItem label="新密码">
+                <Input v-model="formItem.new_pwd" type="password" placeholder="请输入新密码" style="width: 200px"></Input>
+              </FormItem>
+              <FormItem label="确认密码">
+                <Input v-model="formItem.confirm_pwd" type="password" placeholder="再次填写确认" style="width: 200px"></Input>
+              </FormItem>
+            </Form>
+            <div slot="footer">
+              <Button type="primary" size="large" @click="ok">确认</Button>
+              <Button type="default" size="large" @click="cancel">取消</Button>
+            </div>
+          </Modal>
         </div>
       </div>
       <Menu

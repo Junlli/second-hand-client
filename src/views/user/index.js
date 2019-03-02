@@ -79,6 +79,7 @@ export default {
     changePwd () {
       this.modal = true
     },
+    // 确认修改密码
     ok () {
       let md5 = crypto.createHash('md5')
       md5.update(this.formItem.old_pwd)
@@ -101,8 +102,18 @@ export default {
         })
       }
     },
+    // 取消修改密码
     cancel () {
       this.modal = false
+    },
+    // 清除消息数
+    clearNews () {
+      this.$api(this.$SERVER.GET_NEWSEMPTY, {
+        params: { u_id: this.userInfo._id }
+      }).then(data => {
+        console.log(this.userInfo.u_news)
+        console.log(data)
+      })
     }
   },
   created () {

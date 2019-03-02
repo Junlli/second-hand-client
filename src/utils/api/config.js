@@ -45,5 +45,10 @@ export default {
   GET_BANNERLIST: 'banner/list', // 轮播图列表
 
   // 认证中心
-  POST_PROVEADD: 'prove/add' // 添加认证
+  POST_PROVEADD: 'prove/add', // 添加认证
+
+  // 消息中心
+  GET_NEWSLIST: 'news/list', // 消息列表
+  GET_NEWSINFO: 'news/info', // 消息详情
+  GET_NEWSEMPTY: 'news/empty', // 清空消息提示
 }

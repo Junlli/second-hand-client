@@ -1,0 +1,100 @@
+.module-box {
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  background: #fff;
+  margin-top: 20px;
+  .module-body {
+    padding: 20px;
+    a{
+      color: #333;
+    }
+    .letter-list {
+      margin: -10px -20px 0;
+      padding: 0 40px;
+      li {
+        padding: 20px 10px;
+        overflow: hidden;
+        margin: 0 10px;
+        position: relative;
+        .letter-link {
+          display: block;
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 1;
+        }
+        .letter-info {
+          float: right;
+          text-align: right;
+          color: #999;
+          .l-time {
+            position: absolute;
+            right: 10px;
+            top: 20px;
+            z-index: 2;
+            white-space: nowrap;
+          }
+          .l-operate-bar {
+            white-space: nowrap;
+            position: absolute;
+            right: 10px;
+            bottom: 20px;
+            z-index: 2;
+            margin-right: 20px;
+          }
+        }
+        .chat-headbox {
+          position: relative;
+          float: left;
+          z-index: 2;
+          .list-head {
+            display: block;
+            float: left;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            border: 1px solid #ededed;
+            margin-right: 20px;
+            border-radius: 50%;
+            img {
+              width: 100%;
+              display: block;
+            }
+          }
+        }
+        .letter-detail {
+          float: left;
+          font-size: 14px;
+          line-height: 1em;
+          width: 320px;
+          .letter-name-wrap {
+            position: absolute;
+            left: 80px;
+            top: 20px;
+            z-index: 2;
+            a {
+              vertical-align: middle;
+              display: inline-block;
+            }
+          }
+          .letter-brief {
+            position: absolute;
+            left: 80px;
+            top: 50px;
+            z-index: 2;
+            color: #666;
+            float: left;
+            font-size: 14px;
+            width: 300px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            word-wrap: normal;
+          }
+        }
+      }
+    }
+  }
+}

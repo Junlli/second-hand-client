@@ -73,9 +73,12 @@
         <Icon type="ios-construct" />
         我的收藏
         </MenuItem>
-        <MenuItem name="5">
+        <MenuItem name="user/message" to="/user/message" @click.native="clearNews">
           <Icon type="ios-construct" />
           消息中心
+          <Badge :count="userInfo.u_news" v-if="userInfo.u_news !== 0">
+            <a class="demo-badge"></a>
+          </Badge>
         </MenuItem>
         <MenuItem name="user/identify" to="/user/identify">
           <Icon type="ios-construct" />

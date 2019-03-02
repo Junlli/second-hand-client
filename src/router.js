@@ -86,6 +86,13 @@ const router = new Router({
           component: resolve => {
             require(['./views/user/component/identify/index.vue'], resolve)
           }
+        },
+        {
+          path: 'message',
+          name: 'message',
+          component: resolve => {
+            require(['./views/user/component/message/index.vue'], resolve)
+          }
         }
       ]
     },

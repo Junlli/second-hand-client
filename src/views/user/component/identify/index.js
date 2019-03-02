@@ -4,8 +4,8 @@ import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      isHide: false,
       isShow: true,
+      isHide: false,
       isResult: true,
       imageUrl: '',
       getApiData: {
@@ -13,7 +13,8 @@ export default {
         p_prove: '',
         p_school: '',
         p_image: ''
-      }
+      },
+      u_static: 0
     }
   },
   computed: {
@@ -50,6 +51,7 @@ export default {
         })
       this.isShow = true
       this.isResult = false
+      this.u_static = 1
     }
   },
   created () {

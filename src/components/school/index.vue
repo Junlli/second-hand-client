@@ -3,10 +3,12 @@
     v-model="val"
     filterable
     remote
+    clearable
     placeholder="学校"
     :remote-method="getSchoolList"
     :loading="schoolLoading"
     @change="setVal"
+    @clear="setVal"
     >
     <el-option
       v-for="item in schools"

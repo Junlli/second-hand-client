@@ -61,6 +61,7 @@ export default {
       this.schoolList = data
     },
     setSchool (val) {
+      console.log('setSchool')
       this.changeSchoolName = val
     },
     changeSchool () {

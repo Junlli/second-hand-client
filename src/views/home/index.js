@@ -109,6 +109,7 @@ export default {
       }
     },
     getCommodityList (val) {
+      console.log(val)
       if (val) {
         this.searchKey = val
         this.$api(this.$SERVER.GET_COMMODITYLIST, {
@@ -193,9 +194,7 @@ export default {
     // },
     // 学校变化时刷新商品列表
     updateSchool: function (newVal) {
-      if (newVal) {
-        this.getCommodity()
-      }
+      this.getCommodity()
     }
   }
 }

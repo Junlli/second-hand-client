@@ -1,6 +1,6 @@
 <template>
   <div id="identify">
-    <div id="student_id" class="id_ways clearfix" v-if="userInfo.u_apply.u_static == 0 && userInfo.u_static == false">
+    <div id="student_id" class="id_ways clearfix" v-if="userInfo.u_apply.u_static == 0 && userInfo.u_static == false" :class="{show:isHide}">
       <div class="id_right_part">
           <a class="id_it" @click="handleClick">立即认证</a>
       </div>
@@ -86,10 +86,10 @@
         </div>
       </div>
     </div>
-    <div class="result" v-if="userInfo.u_apply.u_static == 1 && userInfo.u_static == false">
+    <div class="result" v-if="this.u_static == 1 && userInfo.u_static == false">
       <p>您的资料已经提交，请等待审核...</p>
     </div>
-    <div class="success" v-if="userInfo.u_apply.u_static == 1 && userInfo.u_static == true">
+    <div class="success" v-if="userInfo.u_apply.u_static == 0 && userInfo.u_static == true">
       <p>您的认证已通过！</p>
     </div>
   </div>

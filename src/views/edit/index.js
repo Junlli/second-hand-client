@@ -57,10 +57,9 @@ export default {
     getUserInfo () {
       this.$api(this.$SERVER.GET_CURRENTUSERINFO)
         .then(data => {
-          let info = data.data
+          let info = this.userInfo
           info.u_password = ''
           this.apiData = info
-          console.log(this.apiData)
           this.getCityList()
         })
     }

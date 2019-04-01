@@ -56,16 +56,11 @@ export default {
       this.$api.post(this.$SERVER.POST_UPUSERINFO, { ...this.userInfo, id: this.userInfo._id })
     },
     beforeAvatarUpload (file) {
-      const isJPG = file.type === 'image/jpeg'
       const isLt2M = file.size / 1024 / 1024 < 2
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
-      }
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
-      return isJPG && isLt2M
+      return isLt2M
     },
     // 获取商品列表
     getCommodity () {
@@ -118,16 +113,5 @@ export default {
   },
   created () {
     this.getCommodity()
-  },
-  watch: {
-    $route: {
-      handler () {
-        this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-          .then(data => {
-            this.setUserInfo(data.data)
-          })
-      },
-      immediate: true
-    }
   }
 }

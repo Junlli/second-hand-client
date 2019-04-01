@@ -17,6 +17,7 @@
               @click="handleClick(index)"
               :class="{active: isShow === index}"
               v-for="(item, index) of commodityInfo.c_images"
+              :key="index"
             >
               <img :src="$SERVER.FILEURL + item" alt="" class="pic">
             </li>
@@ -33,13 +34,19 @@
               <a @click="toUserInfo(commodityInfo.u_id)">
                 <i class="iconfont">&#xe600;</i>
                 <span class="username">{{ commodityInfo.u_name }}</span>
-                <div class="rate">
-                  <svg class="register-form-account" aria-hidden="true">
-                    <use xlink:href="#icon-icon-test"></use>
-                  </svg>
-                  <span class="rate-num">5.0</span>
-                </div>
               </a>
+            </li>
+            <li class="evaluate">
+              <div v-if="count !== 0">
+                <i class="iconfont">&#xe661;</i>
+                <span>商品与描述相符： {{description}}</span>
+                <br/>
+                <span class="service">卖家的服务态度： {{service}}</span>
+              </div>
+              <div v-else>
+                <i class="iconfont">&#xe661;</i>
+                <span>该商家暂时没有评分</span>
+              </div>
             </li>
             <li class="school">
               <i class="iconfont">&#xe676;</i>
@@ -81,6 +88,12 @@
       <div class="description">
         <div class="description-title">
           <span>商品详情</span>
+        </div>
+        <div class="description-body" v-html="commodityInfo.c_detail"></div>
+      </div>
+      <div class="description">
+        <div class="description-title">
+          <span>商品留言</span>
         </div>
         <div class="description-body" v-html="commodityInfo.c_detail"></div>
       </div>

@@ -34,7 +34,7 @@
           </div>
 
           <div class="idtf-upload">
-            <form action="/home/user/docert" method="post" id="certform">
+            <form id="certform">
               <div class="std_input_info">
                 <div class="std_input field">
                   <span>姓名</span>
@@ -86,7 +86,7 @@
         </div>
       </div>
     </div>
-    <div class="result" v-if="this.u_static == 1 && userInfo.u_static == false">
+    <div class="result" v-if="(u_static == 1 || userInfo.u_apply.u_static == 1) && userInfo.u_static == false">
       <p>您的资料已经提交，请等待审核...</p>
     </div>
     <div class="success" v-if="userInfo.u_apply.u_static == 0 && userInfo.u_static == true">

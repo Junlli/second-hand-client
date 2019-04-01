@@ -1,6 +1,6 @@
-<script src="index.js"></script>
+﻿<script src="index.js"></script>
 <template>
-  <div class="bg">
+  <div class="bg clearfix">
     <home-header @getCommodity="getCommodityList"></home-header>
     <div class="type-page clearfix">
       <div class="banner clearfix">
@@ -76,7 +76,7 @@
             <div class="class-bg-layer"></div>
             <div class="class-item-bg">
               <a class="class-img">
-                <img class="img-responsive" :src="$SERVER.FILEURL + item.c_images[0]" alt="36码mm猛戳啦！" data-original="/Uploads/salebuy/2016-01-13/thumb_5695e0a4885a1.jpg" style="display: block;">
+                <img class="img-responsive" :src="$SERVER.FILEURL + item.c_images[0]"  style="display: block;">
               </a>
               <div class="pricehot clearfix">
                 <span class="price">￥&nbsp;<span>{{item.c_price/100}}</span></span>

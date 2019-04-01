@@ -32,6 +32,7 @@ export default {
     toUser () {
       this.$router.push('/user/personal')
     },
+    // 发布商品
     handleRelease () {
       if (this.userInfo.u_avatar) {
         this.$router.push('/release')
@@ -39,19 +40,18 @@ export default {
         this.login = true
       }
     },
+    // 跳转至登录页面
     handleLogin () {
       this.login = false
       this.$router.push('/login')
     },
+    // 获取用户信息
     getUserInfo () {
-      this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-        .then(data => {
-          this.setUserInfo(data.data)
-          if (data.data !== null) {
-            this.setCommoditySchool(data.data.u_school)
-          }
-          this.changeSchoolName = this.u_school
-        })
+      // if (!this.u_school) {
+      //   this.setCommoditySchool(this.userInfo.u_school)
+      // }
+      this.setCommoditySchool(this.userInfo.u_school)
+      this.changeSchoolName = this.userInfo.u_school
     },
     isLogin () {
       this.$api(this.$SERVER.GET_ISLOGIN)
@@ -61,9 +61,9 @@ export default {
       this.schoolList = data
     },
     setSchool (val) {
-      console.log('setSchool')
       this.changeSchoolName = val
     },
+    // 切换学校
     changeSchool () {
       this.setCommoditySchool(this.changeSchoolName)
       this.modal = false
@@ -78,6 +78,6 @@ export default {
   },
   created () {
     this.isLogin()
-    this.getUserInfo()
+    // this.getUserInfo()
   }
 }

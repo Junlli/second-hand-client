@@ -1,8 +1,8 @@
 <template>
   <div class="question">
-    <Form :model="formItem" :label-width="150" class="question-form">
+    <Form :model="apiData" :label-width="150" class="question-form">
       <FormItem label="反馈内容关于" class="form-label">
-        <RadioGroup v-model="formItem.radio">
+        <RadioGroup v-model="apiData.f_type">
           <Radio label="界面视觉"></Radio>
           <Radio label="功能相关"></Radio>
           <Radio label="内容错误"></Radio>
@@ -10,16 +10,18 @@
         </RadioGroup>
       </FormItem>
       <FormItem label="反馈内容">
-        <Input v-model="formItem.textarea" type="textarea" :autosize="{minRows: 3,maxRows: 5}" placeholder="Enter something..." :maxlength="250"></Input>
-        <span class="word-num">(250字以内)</span>
-      </FormItem>
-      <FormItem label="上传截图">
-        <Upload action="//jsonplaceholder.typicode.com/posts/">
-          <Button :size="buttonSize" icon="ios-cloud-upload-outline" type="primary">上传</Button>
-        </Upload>
+        <quill-editor
+          v-model="apiData.f_content"
+          ref="myQuillEditor"
+          :options="editorOption"
+          @blur="onEditorBlur($event)"
+          @focus="onEditorFocus($event)"
+          @change="onEditorChange($event)"
+        >
+        </quill-editor>
       </FormItem>
       <FormItem class="submit">
-        <Button :size="buttonSize" type="primary">提交</Button>
+        <Button :size="buttonSize" type="primary" @click="submitQuestion">提交</Button>
       </FormItem>
     </Form>
   </div>

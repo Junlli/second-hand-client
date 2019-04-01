@@ -1,3 +1,5 @@
+import { mapState, mapGetters, mapMutations } from 'vuex'
+
 export default {
   data () {
     return {
@@ -15,6 +17,9 @@ export default {
       data5: []
     }
   },
+  computed: {
+    ...mapState(['userInfo'])
+  },
   methods: {
     remove1 (index) {
       this.data1.splice(index, 1)
@@ -23,22 +28,22 @@ export default {
       this.data2.splice(index, 1)
     },
     getUserInfo () {
-      this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-        .then(data => {
-          this.b_id = data.data._id
-          this.getAllOrders()
-          this.getUnsend()
-          this.getSended()
-          this.getSuccessOrder()
-          this.getClosedOrder()
-        })
+      // this.$api(this.$SERVER.GET_CURRENTUSERINFO)
+      //   .then(data => {
+      this.b_id = this.userInfo._id
+      this.getAllOrders()
+      this.getUnsend()
+      this.getSended()
+      this.getSuccessOrder()
+      this.getClosedOrder()
+      // })
     },
     orderUpdate (params, state1, state2, del, datas) {
       this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
         id: params.row._id, o_state: state1
       }).then(data => {
         this.$api(this.$SERVER.GET_ORDERLIST, {
-          params: { s_id: this.u_id, o_state: state2, o_del: del }
+          params: { s_id: this.u_id, o_state: state2 }
         }).then(data => {
           datas = data.data.list
         })
@@ -531,7 +536,7 @@ export default {
     // 成功的订单
     getSuccessOrder () {
       this.$api(this.$SERVER.GET_ORDERLIST, {
-        params: { b_id: this.b_id, o_state: 3, o_del: false }
+        params: { b_id: this.b_id, o_state: 3 }
       }).then(data => {
         this.data4 = data.data.list
         for (let i = 0; i < this.data4.length; i++) {
@@ -641,30 +646,29 @@ export default {
               align: 'center',
               key: 'action',
               render: (h, params) => {
-                return h('div', [
-                  h('Button', {
-                    props: {
-                      type: 'primary',
-                      size: 'large'
-                    },
-                    style: {
-                      marginRight: '5px'
-                    },
-                    on: {
-                      click: () => {
-                        // this.$api.post(this.$SERVER.POST_ORDERUPDATE, {
-                        //   id: params.row._id, o_state: 3
-                        // }).then(data => {
-                        //   this.$api(this.$SERVER.GET_ORDERLIST, {
-                        //     params: { s_id: this.u_id, o_state: 2 }
-                        //   }).then(data => {
-                        //     this.data4 = data.data.list
-                        //   })
-                        // })
+                if (params.row.o_evaluate === false) {
+                  return h('div', [
+                    h('Button', {
+                      props: {
+                        type: 'primary',
+                        size: 'large'
+                      },
+                      style: {
+                        marginRight: '5px'
+                      },
+                      on: {
+                        click: () => {
+                          this.$router.push({
+                            name: 'evaluate',
+                            params: {id: params.row._id}
+                          })
+                        }
                       }
-                    }
-                  }, '评价')
-                ])
+                    }, '评价')
+                  ])
+                } else {
+                  return h('span', '已评价')
+                }
               }
             }
           ]

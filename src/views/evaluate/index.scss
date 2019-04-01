@@ -1,0 +1,42 @@
+.bg {
+  background: #e3eeec;
+  height: 100%;
+  position: relative;
+  .evaluate {
+    width: 800px;
+    height: 360px;
+    background: #fff;
+    margin: 100px auto;
+    border-radius: 20px;
+    .head {
+      display: flex;
+      justify-content: space-between;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 20px;
+      background: #efefef;
+      border-radius: 20px 20px 0 0;
+      .seller {
+        font-size: 16px;
+      }
+    }
+    .ivu-input-wrapper {
+      width: 700px;
+      margin: 30px 50px;
+    }
+    .rate {
+      margin-left: 50px;
+      font-size: 16px;
+      .ivu-rate {
+        margin-left: 10px;
+      }
+    }
+    .ivu-btn {
+      display: block;
+      margin: 20px auto;
+    }
+  }
+  .footer {
+    bottom: 0;
+  }
+}

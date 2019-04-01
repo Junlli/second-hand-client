@@ -14,7 +14,10 @@ export default {
       commodityInfo: '',
       u_id: '',
       c_id: '',
-      login: false
+      login: false,
+      description: '',
+      service: '',
+      count: ''
     }
   },
   components: {
@@ -31,9 +34,6 @@ export default {
     handleClick (index) {
       this.isShow = index
     },
-    // handleLogin () {
-    //   this.modal1 = false
-    // },
     handleBuy (id) {
       if (this.userInfo.u_avatar) {
         this.setCommodityNum(this.inventory)
@@ -46,7 +46,6 @@ export default {
       }
     },
     handleConnect () {
-      console.log(this.userInfo)
       if (this.userInfo.u_avatar) {
         this.modal1 = true
       } else {
@@ -70,12 +69,6 @@ export default {
           this.ischange = 1
           this.$api.post(this.$SERVER.POST_COLLECTIONADD, {
             u_id: this.u_id, c_id: this.$route.params.id })
-          // this.$api(this.$SERVER.GET_COMMODITYINFO, {
-          //   params: { id: this.$route.params.id }
-          // }).then(data => {
-          //   console.log(data.data)
-          //   this.commodityInfo = data.data
-          // })
         }
       } else {
         this.login = true
@@ -88,16 +81,13 @@ export default {
           this.u_id = data.data._id
         })
     },
-    // isLogin () {
-    //   this.$api(this.$SERVER.GET_ISLOGIN)
-    //     .then(data => data.state && this.getUserInfo())
-    // },
     getCommodity () {
       this.$api(this.$SERVER.GET_COMMODITYINFO, {
         params: { id: this.$route.params.id }
       }).then(data => {
         this.commodityInfo = data.data
-        console.log(this.commodityInfo)
+        this.getCommentList()
+        // console.log(this.commodityInfo)
         if (this.commodityInfo.c_col === 1) {
           this.ischange = 1
         } else {
@@ -110,15 +100,34 @@ export default {
         name: 'userInfo',
         params: { id }
       })
+    },
+    // 获取商家评分
+    getCommentList () {
+      this.$api(this.$SERVER.GET_COMMENTLIST, {
+        params: { u_id: this.commodityInfo.u_id }
+      }).then(data => {
+        this.count = data.data.count
+        if (this.count !== 0) {
+          let list = data.data.list
+          let descriptions = 0
+          let service = 0
+          for (let i = 0; i < list.length; i++) {
+            descriptions += list[i].l_fine
+            service += list[i].l_reliable
+          }
+          this.description = descriptions / list.length
+          this.service = service / list.length
+        }
+      })
     }
   },
   created () {
-    this.getUserInfo()
+    // this.getUserInfo()
+    // this.getCommentList()
   },
   watch: {
     $route: {
       handler () {
-        // this.isLogin()
         this.getCommodity()
       },
       immediate: true

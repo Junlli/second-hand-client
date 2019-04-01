@@ -1,5 +1,6 @@
 .bg {
   background: #e3eeec;
+  height: 100vh;
   .type-page {
     width: 1200px;
     margin: 0 auto;
@@ -65,6 +66,9 @@
         margin: 0 0 12px 10px;
       }
     }
+  }
+  .footer {
+    bottom: 0;
   }
 }
 .clearfix {

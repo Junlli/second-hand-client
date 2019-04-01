@@ -119,9 +119,6 @@ export default {
     },
     confirm () {
       this.$api.post(this.$SERVER.POST_ORDERADD, { ...this.getApiData })
-        .then(data => {
-          console.log(data)
-        })
       this.modal = false
       this.$message.success('购买成功')
       this.$router.push('/user/buy')
@@ -141,7 +138,6 @@ export default {
           this.getApiData.c_id = this.$route.params.id
           this.getApiData.o_price = data.data.c_price
           this.getApiData.o_num = this.o_num
-          console.log(this.getApiData.o_num)
         })
     },
     getUserInfo () {

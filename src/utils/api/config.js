@@ -14,9 +14,9 @@ export default {
   GET_QUIT: 'user/quit', // 退出登录
   GET_CURRENTUSERINFO: 'user/currentInfo', // 拿到当前登录人信息
   POST_ADDUSER: 'user/add', // 添加用户
-  GET_USERLIST: 'user/list',//查询用户列表
+  GET_USERLIST: 'user/list', //查询用户列表
   GET_USERINFO: 'user/info', // 用户信息
-  POST_UPUSERINFO: 'user/upInfo',//更新用户信息
+  POST_UPUSERINFO: 'user/upInfo', //更新用户信息
 
   //商品分类
   GET_TYPELIST: 'type/list',//分类列表
@@ -40,6 +40,7 @@ export default {
   POST_ORDERADD: 'order/add', // 创建订单
   GET_ORDERLIST: 'order/list', // 订单列表
   POST_ORDERUPDATE: 'order/upInfo', // 更新订单
+  GET_ORDERINFO: 'order/info', // 订单信息
 
   // 轮播图
   GET_BANNERLIST: 'banner/list', // 轮播图列表
@@ -51,4 +52,12 @@ export default {
   GET_NEWSLIST: 'news/list', // 消息列表
   GET_NEWSINFO: 'news/info', // 消息详情
   GET_NEWSEMPTY: 'news/empty', // 清空消息提示
+
+  // 问题反馈
+  POST_FEEDBACKADD: 'feedback/add', // 增加问题反馈
+  GET_FEEDBACKLIST: 'feedback/list', // 反馈列表
+
+  // 评价
+  POST_COMMENTADD: 'comment/add', // 提交评价
+  GET_COMMENTLIST: 'comment/list' // 商品列表
 }

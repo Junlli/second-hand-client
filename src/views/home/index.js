@@ -103,13 +103,13 @@ export default {
               this.getApiData.u_school = data.data.u_school
               this.getCommodityList()
             } else {
+              this.getApiData.u_school = ''
               this.getCommodityList()
             }
           })
       }
     },
     getCommodityList (val) {
-      console.log(val)
       if (val) {
         this.searchKey = val
         this.$api(this.$SERVER.GET_COMMODITYLIST, {
@@ -124,6 +124,7 @@ export default {
           }
         })
       } else {
+        console.log(this.getApiData.u_school)
         this.$api(this.$SERVER.GET_COMMODITYLIST, {
           params: this.getApiData
         })
@@ -150,7 +151,7 @@ export default {
     // 返回切换后的每页条数
     handleSizeChange (val) {
       this.getApiData.pageSize = val
-      console.log(this.getApiData.pageSize)
+      // console.log(this.getApiData.pageSize)
       this.getCommidity()
     },
     // 返回页码

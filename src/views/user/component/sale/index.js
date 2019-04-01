@@ -1,3 +1,5 @@
+import { mapState, mapGetters, mapMutations } from 'vuex'
+
 export default {
   data () {
     return {
@@ -20,6 +22,9 @@ export default {
       orderInfo: []
     }
   },
+  computed: {
+    ...mapState(['userInfo'])
+  },
   methods: {
     remove1 (index) {
       this.data1.splice(index, 1)
@@ -39,14 +44,11 @@ export default {
       console.log(this.orderInfo)
     },
     getUserInfo () {
-      this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-        .then(data => {
-          this.u_id = data.data._id
-          this.getCommodity()
-          this.getOnSale()
-          this.getOffSale()
-          this.getUnSend()
-        })
+      this.u_id = this.userInfo._id
+      this.getCommodity()
+      this.getOnSale()
+      this.getOffSale()
+      this.getUnSend()
     },
     // 正在出售
     getOnSale () {
@@ -747,7 +749,7 @@ export default {
               key: 'status',
               render: (h, params) => {
                 return h('div', [
-                  h('span', '已发货'),
+                  h('span', '交易成功'),
                   h('br'),
                   h('a', {
                     on: {

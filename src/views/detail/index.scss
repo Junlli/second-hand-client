@@ -1,8 +1,10 @@
 .detail-page {
   background: #e3eeec;
+  position: relative;
+  //height: 100%;
   .main {
     width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto 0;
     background: #fff;
     padding: 20px;
     .detail {
@@ -92,6 +94,11 @@
                 margin-left: 0;
               }
             }
+          }
+        }
+        .evaluate {
+          .service {
+            margin-left: 48px;
           }
         }
         .inventory {

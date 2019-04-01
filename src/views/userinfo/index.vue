@@ -11,26 +11,17 @@
           <p class="has_sell">共有<span class="all">{{ count }}</span>件商品</p>
           <ul class="seller_attr">
             <li>学校：&nbsp;&nbsp;<span>{{apiData.u_school}}</span></li>
-            <li>认证：&nbsp;&nbsp;<span>未认证</span></li>
+            <li v-if="apiData.power === true">认证：&nbsp;&nbsp;<span>已认证</span></li>
+            <li v-else>认证：&nbsp;&nbsp;<span>未认证</span></li>
           </ul>
         </div>
       </div>
-      <div id="my_products" v-for="(item, index) in commodity" :key="index">
-        <div id="onsale_pro">
-          <div class="enshr_each clearfix">
-            <a class="enshr_ph">
-              <img :src="$SERVER.FILEURL + item.c_images[0]">
-            </a>
-            <div class="enshr_info">
-              <h2><a @click="toCommidityDetail(item._id)">{{ item.c_title }}</a></h2>
-              <div class="enshr_state">
-                <span class="enshr_info_price">价格：¥{{ item.c_price / 100}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-              </div>
-              <span class="num">库存：{{ item.c_num }}</span>
-            </div>
-          </div>                <div class="row text-center">
-          <nav><ul class="pagination"></ul></nav>                </div>
+      <div class="description">
+        <div class="description-title">
+          <span @click="tabChange(detail)" :class="{active: 'detail' === currentView}">商品详情</span>
+          <span @click="tabChange(message)" :class="{active: 'message' === currentView}">商家评价</span>
         </div>
+        <div :is="currentView"></div>
       </div>
     </div>
     <home-footer></home-footer>

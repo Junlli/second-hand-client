@@ -30,7 +30,6 @@ export default {
     handleAvatarSuccess (res, file) {
       // this.imageUrl = URL.createObjectURL(file.response.data.url)
       this.getApiData.p_image = file.response.data.url
-      // console.log(this.getApiData.p_image)
     },
     // beforeAvatarUpload (file) {
     //   const isJPG = file.type === 'image/jpeg'
@@ -55,6 +54,6 @@ export default {
     }
   },
   created () {
-    console.log(this.userInfo)
+    console.log(this.u_static)
   }
 }

@@ -1,3 +1,5 @@
+import { mapState, mapGetters, mapMutations } from 'vuex'
+
 export default {
   data () {
     return {
@@ -6,6 +8,9 @@ export default {
       c_state: '',
       isHide: true // 隐藏未收藏信息
     }
+  },
+  computed: {
+    ...mapState(['userInfo'])
   },
   methods: {
     cancelCollect (id) {
@@ -24,17 +29,7 @@ export default {
     }
   },
   created () {
-    this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-      .then(data => {
-        this.u_id = data.data._id
-        this.getCollectionList()
-      })
-  },
-  watch: {
-    $route: {
-      handler () {
-
-      }
-    }
+    this.u_id = this.userInfo._id
+    this.getCollectionList()
   }
 }

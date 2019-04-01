@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from './store'
-import api from '@/utils/api'
-import SERVER from '@/utils/api/config'
 
 Vue.use(Router)
 
@@ -124,6 +121,13 @@ const router = new Router({
         require(['./views/userinfo/index.vue'], resolve)
       }
     },
+    {
+      path: '/evaluate/:id',
+      name: 'evaluate',
+      component: resolve => {
+        require(['./views/evaluate/index.vue'], resolve)
+      }
+    }
   ]
 })
 

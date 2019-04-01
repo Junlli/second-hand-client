@@ -113,10 +113,7 @@ export default {
         .then(data => data.state ? this.thenSubmit('编辑') : this.$message.error(data.mes))
     },
     getUserInfo () {
-      this.$api(this.$SERVER.GET_CURRENTUSERINFO)
-        .then(data => {
-          this.apiData.u_id = data.data._id
-        })
+      this.apiData.u_id = this.userInfo._id
     },
     getCommodity () {
       if (this.$route.query.id) {
